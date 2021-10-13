@@ -21,6 +21,6 @@ link_directories(
         ${GTKMM_LIBRARY_DIRS}
 )
 
-add_executable(untitled2 main.cpp gtk/RadioApp.cpp gtk/RadioApp.h gtk/AppWindow.cpp gtk/AppWindow.h gtk/widgets/StationName/StationName.cpp gtk/widgets/StationName/StationName.h gtk/widgets/WidgetGrid/WidgetGrid.cpp gtk/widgets/WidgetGrid/WidgetGrid.h gtk/widgets/Buttons/ButtonsAll.cpp gtk/widgets/Buttons/ButtonsAll.h gtk/widgets/Buttons/ButtonFactory/ButtonFactory.cpp gtk/widgets/Buttons/ButtonFactory/ButtonFactory.h gst/Player.cpp gst/Player.h)
+add_executable(untitled2 main.cpp gtk/RadioApp.cpp gtk/RadioApp.h gtk/AppWindow.cpp gtk/AppWindow.h gtk/widgets/StationName/StationName.cpp gtk/widgets/StationName/StationName.h gtk/widgets/WidgetGrid/WidgetGrid.cpp gtk/widgets/WidgetGrid/WidgetGrid.h gtk/widgets/Buttons/ButtonsAll.cpp gtk/widgets/Buttons/ButtonsAll.h gtk/widgets/Buttons/ButtonFactory/ButtonFactory.cpp gtk/widgets/Buttons/ButtonFactory/ButtonFactory.h gst/Player.cpp gst/Player.h links/Links.cpp links/Links.h)
 
 target_link_libraries(${PROJECT_NAME} ${GSTREAMER_LIBRARIES} ${GTKMM_LIBRARIES} Threads::Threads)

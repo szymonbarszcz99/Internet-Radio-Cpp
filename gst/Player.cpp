@@ -1,7 +1,7 @@
 #include "Player.h"
 
 Player::Player():pipeline(nullptr),error(nullptr){
-    gst_init(NULL, nullptr);
+    gst_init(nullptr, nullptr);
     GstStateChangeReturn ret;
 
     this->pipeline = gst_parse_launch("playbin uri=https://n08a-eu.rcs.revma.com/ypqt40u0x1zuv?rj-ttl=5&rj-tok=AAABeZK5G1oAJcrQH3ZWEgE4hQ",&this->error);
