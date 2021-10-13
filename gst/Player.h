@@ -3,13 +3,17 @@
 extern "C"{
 #include <gst/gst.h>
 }
-#include "iostream"
+#include <iostream>
+#include "PlayerInterface.h"
 
-class Player {
+class Player : PlayerInterface{
     GstElement* pipeline;
     GError* error;
 public:
-    Player();
+    Player(const std::string& link);
+    void changeStation(const std::string& newLink);
+    void pause();
+    void play();
 };
 
 
