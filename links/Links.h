@@ -4,8 +4,9 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
+#include "LinksInterface.h"
 
-class Links {
+class Links : LinksInterface{
     struct Stations{
         std::string StationName;
         std::string StationLink;
@@ -20,6 +21,7 @@ public:
     const std::string& getCurrentName();
     const std::string& getCurrentLink();
     void setNextStation();
+    void throwError(const std::string& error);
 };
 
 
