@@ -10,3 +10,7 @@ WidgetGrid::WidgetGrid():Gtk::Grid() {
         attach(*it,left++,1,1,1);
     }
 }
+void WidgetGrid::changeText(const std::string& newText){
+    auto label = dynamic_cast<Gtk::Label *>(this->get_child_at(0, 0));
+    label->set_text(newText);
+}

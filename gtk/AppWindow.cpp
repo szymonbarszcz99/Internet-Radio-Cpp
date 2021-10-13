@@ -10,3 +10,7 @@ void AppWindow::attachGrid(){
     add(*(this->grid));
     this->grid->show_all();
 }
+
+void AppWindow::changeTextInLabel(const std::string& newText){
+    this->grid->changeText(newText);
+}
