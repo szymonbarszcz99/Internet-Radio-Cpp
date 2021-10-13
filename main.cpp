@@ -5,7 +5,7 @@
 int main() {
     auto app = RadioApp::create();
     Links links;
-    Player player;
+    Player player(links.getCurrentLink());
 
     return app->run();
 }
