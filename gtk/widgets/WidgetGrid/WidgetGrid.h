@@ -6,6 +6,7 @@
 class WidgetGrid : public Gtk::Grid{
 public:
     WidgetGrid();
+    void changeText(const std::string& newText);
 };
 
 
