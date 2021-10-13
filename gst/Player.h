@@ -2,7 +2,7 @@
 #define UNTITLED2_PLAYER_H
 extern "C"{
 #include <gst/gst.h>
-};
+}
 #include "iostream"
 
 class Player {
