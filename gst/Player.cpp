@@ -1,10 +1,13 @@
 #include "Player.h"
 
-Player::Player():pipeline(nullptr),error(nullptr){
+Player::Player(const std::string& link):pipeline(nullptr),error(nullptr){
     gst_init(nullptr, nullptr);
     GstStateChangeReturn ret;
 
-    this->pipeline = gst_parse_launch("playbin uri=https://n08a-eu.rcs.revma.com/ypqt40u0x1zuv?rj-ttl=5&rj-tok=AAABeZK5G1oAJcrQH3ZWEgE4hQ",&this->error);
+    std::string uri("playbin uri=");
+    uri.append(link);
+
+    this->pipeline = gst_parse_launch(uri.c_str(),&this->error);
 
     if(!this->pipeline){
         std::cout<<"Pipeline creation error\n";
@@ -15,4 +18,20 @@ Player::Player():pipeline(nullptr),error(nullptr){
     if(ret == 0){
         printf("State change failed\n");
     }
+}
+
+void Player::changeStation(const std::string& newLink) {
+    gst_element_set_state(this->pipeline,GST_STATE_READY);
+
+    g_object_set(pipeline,"uri",newLink.c_str());
+
+    gst_element_set_state(this->pipeline,GST_STATE_PLAYING);
+}
+
+void Player::pause() {
+    gst_element_set_state(this->pipeline,GST_STATE_PAUSED);
+}
+
+void Player::play(){
+    gst_element_set_state(this->pipeline,GST_STATE_PLAYING);
 }
