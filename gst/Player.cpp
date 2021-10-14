@@ -23,7 +23,8 @@ Player::Player(const std::string& link):pipeline(nullptr),error(nullptr){
 void Player::changeStation(const std::string& newLink) {
     gst_element_set_state(this->pipeline,GST_STATE_READY);
 
-    g_object_set(pipeline,"uri",newLink.c_str());
+    std::cout<<newLink<<std::endl;
+    g_object_set(this->pipeline,"uri",newLink.c_str(),NULL);
 
     gst_element_set_state(this->pipeline,GST_STATE_PLAYING);
 }

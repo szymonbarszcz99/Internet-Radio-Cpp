@@ -1,13 +1,14 @@
 #ifndef UNTITLED2_APPWINDOW_H
 #define UNTITLED2_APPWINDOW_H
-#include "widgets/WidgetGrid/WidgetGrid.h"
 #include "AppWindowInterface.h"
 
-class AppWindow : public Gtk::ApplicationWindow, AppWindowInterface{
-    WidgetGrid* grid;
+class AppWindow : public AppWindowInterface, public Gtk::ApplicationWindow{
     void attachGrid();
+    WidgetGrid* grid;
 public:
     AppWindow();
+    WidgetGrid* getGrid() override;
+    void updateLabel(const std::string& newStation) override;
 };
 
 

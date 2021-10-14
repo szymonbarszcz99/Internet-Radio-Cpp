@@ -6,7 +6,7 @@
 #include <iostream>
 #include "LinksInterface.h"
 
-class Links : LinksInterface{
+class Links : public LinksInterface{
     struct Stations{
         std::string StationName;
         std::string StationLink;
@@ -21,6 +21,7 @@ public:
     const std::string& getCurrentName();
     const std::string& getCurrentLink();
     void setNextStation();
+    void setPreviousStation();
     void throwError(const std::string& error);
 };
 

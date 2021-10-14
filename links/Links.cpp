@@ -41,7 +41,18 @@ const std::string& Links::getCurrentLink() {
 }
 
 void Links::setNextStation(){
-    this->StationsIterator++;
+    if(++this->StationsIterator == this->StationsVector.end()){
+        this->StationsIterator = this->StationsVector.begin();
+    }
+}
+
+void Links::setPreviousStation() {
+    if(this->StationsIterator == this->StationsVector.begin()){
+        this->StationsIterator = this->StationsVector.end()-1;
+    }
+    else{
+        this->StationsIterator--;
+    }
 }
 
 void Links::throwError(const std::string &error) {

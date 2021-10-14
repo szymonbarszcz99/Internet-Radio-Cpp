@@ -6,7 +6,7 @@ extern "C"{
 #include <iostream>
 #include "PlayerInterface.h"
 
-class Player : PlayerInterface{
+class Player : public PlayerInterface{
     GstElement* pipeline;
     GError* error;
 public:

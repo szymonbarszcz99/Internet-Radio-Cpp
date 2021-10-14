@@ -2,6 +2,7 @@
 #define UNTITLED2_PLAYERINTERFACE_H
 
 class PlayerInterface{
+public:
     virtual void changeStation(const std::string& newLink)=0;
     virtual void pause()=0;
     virtual void play()=0;

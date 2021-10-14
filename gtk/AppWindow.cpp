@@ -11,3 +11,11 @@ void AppWindow::attachGrid(){
     this->grid->show_all();
 }
 
+void AppWindow::updateLabel(const std::string &newStation) {
+    this->grid->getStationName()->set_text(newStation);
+}
+
+WidgetGrid *AppWindow::getGrid() {
+    return this->grid;
+}
+
