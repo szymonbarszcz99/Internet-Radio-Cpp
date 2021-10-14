@@ -4,10 +4,11 @@
 
 class RadioApp : public Gtk::Application {
 private:
+    AppWindow* appWindow;
     RadioApp();
     void on_activate() override;
-    AppWindow* createAppWindow();
-    void on_hide_window(Gtk::Window* window);
+    void createAppWindow();
+    void on_hide_window();
 
 public:
     static Glib::RefPtr<RadioApp> create();

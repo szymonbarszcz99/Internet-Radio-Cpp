@@ -4,9 +4,12 @@
 #include "../Buttons/ButtonsAll.h"
 
 class WidgetGrid : public Gtk::Grid{
+    ButtonsAll* buttonsAllVector;
+    StationName* label;
 public:
     WidgetGrid();
-    void changeText(const std::string& newText);
+    ButtonsAll* getButtonsAllVector();
+    StationName* getStationName();
 };
 
 

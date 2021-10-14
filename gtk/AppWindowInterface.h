@@ -3,7 +3,7 @@
 
 
 class AppWindowInterface {
-    virtual void changeTextInLabel(const std::string& newText)=0;
+
 };
 
 

@@ -43,3 +43,7 @@ const std::string& Links::getCurrentLink() {
 void Links::setNextStation(){
     this->StationsIterator++;
 }
+
+void Links::throwError(const std::string &error) {
+    std::cout<<error<<std::endl;
+}

@@ -1,16 +1,20 @@
 #include "WidgetGrid.h"
 
 WidgetGrid::WidgetGrid():Gtk::Grid() {
-    auto stationName = new StationName();
-    attach(*stationName,0,0,4);
+    this->label = new StationName();
+    attach(*this->label,0,0,4);
 
     int left = 0;
-    auto buttonsAll = new ButtonsAll();
-    for(auto it: buttonsAll->getVector()){
+    this->buttonsAllVector = new ButtonsAll();
+    for(auto it: buttonsAllVector->getVector()){
         attach(*it,left++,1,1,1);
     }
 }
-void WidgetGrid::changeText(const std::string& newText){
-    auto label = dynamic_cast<Gtk::Label *>(this->get_child_at(0, 0));
-    label->set_text(newText);
+
+ButtonsAll* WidgetGrid::getButtonsAllVector() {
+    return this->buttonsAllVector;
+}
+
+StationName* WidgetGrid::getStationName() {
+    return this->label;
 }

@@ -8,7 +8,6 @@ class AppWindow : public Gtk::ApplicationWindow, AppWindowInterface{
     void attachGrid();
 public:
     AppWindow();
-    void changeTextInLabel(const std::string& newText);
 };
 
 
