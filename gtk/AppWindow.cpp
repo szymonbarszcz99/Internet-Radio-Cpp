@@ -9,20 +9,18 @@ AppWindow::AppWindow(EventHandler* eventHandler):Gtk::ApplicationWindow() {
     this->stationName = new StationName();
     this->grid->attach(*this->stationName,0,0,4);
 
-    Event* eventPrevious = new EventClicked(PREVIOUS,eventHandler);
-    this->previousButton = new ButtonFactory("media-seek-backward", eventPrevious);
+    Event* eventClicked = new EventClicked(eventHandler);
+
+    this->previousButton = new ButtonFactory("media-seek-backward", eventClicked, PREVIOUS);
     this->grid->attach(*this->previousButton,0,1,1,1);
 
-    Event* eventPlay = new EventClicked(PLAY,eventHandler);
-    this->playButton = new ButtonFactory("media-playback-start", eventPlay);
+    this->playButton = new ButtonFactory("media-playback-start", eventClicked, PLAY);
     this->grid->attach(*this->playButton,1,1,1,1);
 
-    Event* eventPause = new EventClicked(PAUSE,eventHandler);
-    this->pauseButton = new ButtonFactory("media-playback-pause", eventPause);
+    this->pauseButton = new ButtonFactory("media-playback-pause", eventClicked, PAUSE);
     this->grid->attach(*this->pauseButton,2,1,1,1);
 
-    Event* eventNext = new EventClicked(NEXT,eventHandler);
-    this->nextButton = new ButtonFactory("media-seek-forward", eventNext);
+    this->nextButton = new ButtonFactory("media-seek-forward", eventClicked, NEXT);
     this->grid->attach(*this->nextButton,3,1,1,1);
 
     this->grid->show_all();

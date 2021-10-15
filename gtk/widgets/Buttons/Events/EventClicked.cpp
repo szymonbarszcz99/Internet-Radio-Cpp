@@ -1,11 +1,11 @@
 #include "EventClicked.h"
 
-EventClicked::EventClicked(Actions action,EventHandler* eventHandler):action(action) {
+EventClicked::EventClicked(EventHandler* eventHandler) {
     this->eventHandler = eventHandler;
 }
 
-void EventClicked::Clicked() {
-    switch(this->action){
+void EventClicked::Clicked(Actions action) {
+    switch(action){
         case PLAY:
             this->eventHandler->playEventClicked();
             break;

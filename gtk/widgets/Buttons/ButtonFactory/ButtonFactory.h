@@ -5,8 +5,9 @@
 
 class ButtonFactory : public Gtk::Button {
     Event* eventClicked = nullptr;
+    Actions action;
 public:
-    ButtonFactory(const char* icon, Event* eventClicked);
+    ButtonFactory(const char* icon, Event* eventClicked, Actions action);
     void onClicked();
 };
 

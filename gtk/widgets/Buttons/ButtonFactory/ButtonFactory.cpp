@@ -1,6 +1,6 @@
 #include "ButtonFactory.h"
 
-ButtonFactory::ButtonFactory(const char* icon, Event* eventClicked):Gtk::Button(){
+ButtonFactory::ButtonFactory(const char* icon, Event* eventClicked, Actions action):Gtk::Button(), action(action){
     this->eventClicked = eventClicked;
     this->signal_clicked().connect(sigc::mem_fun(*this,&ButtonFactory::onClicked));
 
@@ -12,5 +12,5 @@ ButtonFactory::ButtonFactory(const char* icon, Event* eventClicked):Gtk::Button(
 }
 
 void ButtonFactory::onClicked() {
-    this->eventClicked->Clicked();
+    this->eventClicked->Clicked(action);
 }

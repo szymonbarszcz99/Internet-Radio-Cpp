@@ -3,19 +3,11 @@
 #include "Event.h"
 #include "../../../../EventHandler.h"
 
-enum Actions{
-    PLAY,
-    PAUSE,
-    NEXT,
-    PREVIOUS
-};
-
 class EventClicked : public Event{
-    Actions action;
     EventHandler* eventHandler;
 public:
-    EventClicked(Actions action, EventHandler* eventHandler);
-    void Clicked() override;
+    EventClicked(EventHandler* eventHandler);
+    void Clicked(Actions action) override;
 };
 
 
