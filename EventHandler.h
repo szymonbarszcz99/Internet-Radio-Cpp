@@ -1,24 +1,22 @@
 #ifndef UNTITLED2_EVENTHANDLER_H
 #define UNTITLED2_EVENTHANDLER_H
-#include "gtk/GuiEventHandler.h"
 #include "gtk/AppWindowInterface.h"
-#include "links/LinksInterface.h"
 #include "gst/PlayerInterface.h"
+#include "links/LinksInterface.h"
+#include <iostream>
 
-class EventHandler : public GuiEventHandler{
-    AppWindowInterface* appWindowInterface = nullptr;
-    LinksInterface& linksInterface;
-    PlayerInterface& playerInterface;
-
-    void onPlayClicked() override;
-    void onPauseClicked() override;
-    void onNextClicked() override;
-    void onPreviousClicked() override;
-    void connectCreatedWindow(AppWindowInterface* appWindowInterface1) override;
-    void setStationNameOnStartup() override;
-
+class EventHandler{
+    AppWindowInterface* appWindowInterface;
+    PlayerInterface* playerInterface = nullptr;
+    LinksInterface* linksInterface = nullptr;
 public:
-    EventHandler(LinksInterface& linksInterface1, PlayerInterface& playerInterface1);
+    void playEventClicked();
+    void pauseEventClicked();
+    void nextEventClicked();
+    void previousEventClicked();
+    void setAppWindowInterface(AppWindowInterface* appWindowInterface);
+    void setPlayerInterface(PlayerInterface *playerInterface);
+    void setLinksInterface(LinksInterface *linksInterface);
 };
 
 

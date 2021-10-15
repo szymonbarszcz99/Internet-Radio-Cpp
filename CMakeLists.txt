@@ -22,7 +22,7 @@ link_directories(
 )
 
 
-add_executable(untitled2 main.cpp gtk/RadioApp.cpp gtk/RadioApp.h gtk/AppWindow.cpp gtk/AppWindow.h gtk/widgets/StationName/StationName.cpp gtk/widgets/StationName/StationName.h gtk/widgets/WidgetGrid/WidgetGrid.cpp gtk/widgets/WidgetGrid/WidgetGrid.h gtk/widgets/Buttons/ButtonsAll.cpp gtk/widgets/Buttons/ButtonsAll.h gtk/widgets/Buttons/ButtonFactory/ButtonFactory.cpp gtk/widgets/Buttons/ButtonFactory/ButtonFactory.h gst/Player.cpp gst/Player.h links/Links.cpp links/Links.h gst/PlayerInterface.h gtk/AppWindowInterface.h links/LinksInterface.h gtk/GuiEventHandler.h EventHandler.cpp EventHandler.h)
+add_executable(untitled2 main.cpp gtk/RadioApp.cpp gtk/RadioApp.h gtk/AppWindow.cpp gtk/AppWindow.h gtk/widgets/StationName/StationName.cpp gtk/widgets/StationName/StationName.h gtk/widgets/WidgetGrid/WidgetGrid.cpp gtk/widgets/WidgetGrid/WidgetGrid.h gtk/widgets/Buttons/ButtonFactory/ButtonFactory.cpp gtk/widgets/Buttons/ButtonFactory/ButtonFactory.h gst/Player.cpp gst/Player.h links/Links.cpp links/Links.h gst/PlayerInterface.h gtk/AppWindowInterface.h links/LinksInterface.h EventHandler.cpp EventHandler.h gtk/widgets/Buttons/Events/Event.h gtk/widgets/Buttons/Events/EventClicked.cpp gtk/widgets/Buttons/Events/EventClicked.h)
 
 
 target_link_libraries(${PROJECT_NAME} ${GSTREAMER_LIBRARIES} ${GTKMM_LIBRARIES} Threads::Threads)
