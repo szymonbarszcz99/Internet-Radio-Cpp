@@ -10,7 +10,7 @@ enum Actions{
 class Event{
 public:
     virtual ~Event(){};
-    virtual void Clicked(Actions action)=0;
+    virtual void Clicked()=0;
 };
 
 #endif //UNTITLED2_EVENT_H

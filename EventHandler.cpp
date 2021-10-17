@@ -35,3 +35,7 @@ void EventHandler::setPlayerInterface(PlayerInterface *playerInterface1) {
 void EventHandler::setLinksInterface(LinksInterface *linksInterface1) {
     this->linksInterface = linksInterface1;
 }
+
+void EventHandler::labelClicked() {
+    std::cout<<"Label clicked"<<std::endl;
+}
