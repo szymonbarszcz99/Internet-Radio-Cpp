@@ -1,8 +1,6 @@
 #include "EventClicked.h"
 
-EventClicked::EventClicked(EventHandler* eventHandler) {
-    this->eventHandler = eventHandler;
-}
+EventClicked::EventClicked(EventHandler *eventHandler): eventHandler(eventHandler) {}
 
 void EventClicked::Clicked(Actions action) {
     switch(action){
@@ -17,5 +15,9 @@ void EventClicked::Clicked(Actions action) {
             break;
         case PREVIOUS:
             this->eventHandler->previousEventClicked();
+            break;
+        case LABEL:
+            this->eventHandler->labelClicked();
+            break;
     }
 }

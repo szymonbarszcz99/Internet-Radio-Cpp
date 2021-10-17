@@ -4,7 +4,8 @@ enum Actions{
     PLAY,
     PAUSE,
     NEXT,
-    PREVIOUS
+    PREVIOUS,
+    LABEL
 };
 
 class Event{

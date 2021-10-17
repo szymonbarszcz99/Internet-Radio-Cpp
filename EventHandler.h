@@ -10,10 +10,16 @@ class EventHandler{
     PlayerInterface* playerInterface = nullptr;
     LinksInterface* linksInterface = nullptr;
 public:
+    //GUI Buttons events
     void playEventClicked();
     void pauseEventClicked();
     void nextEventClicked();
     void previousEventClicked();
+
+    //GUI Label event
+    void labelClicked();
+
+    //Interface setters
     void setAppWindowInterface(AppWindowInterface* appWindowInterface);
     void setPlayerInterface(PlayerInterface *playerInterface);
     void setLinksInterface(LinksInterface *linksInterface);
