@@ -8,7 +8,7 @@ Glib::RefPtr<RadioApp> RadioApp::create() {
 }
 
 void RadioApp::createAppWindow() {
-    this->appWindow = new AppWindow();
+    this->appWindow = new AppWindow(this->eventHandler);
     add_window(*this->appWindow);
 
     this->appWindow->signal_hide().connect(sigc::mem_fun(*this,&RadioApp::on_hide_window));
@@ -16,29 +16,18 @@ void RadioApp::createAppWindow() {
 
 void RadioApp::on_activate(){
     createAppWindow();
+    this->eventHandler->setAppWindowInterface(this->appWindow);
     this->appWindow->present();
-    this->guiEventHandler->connectCreatedWindow(this->appWindow);
-    this->guiEventHandler->setStationNameOnStartup();
-    setButtonCallbacks();
 }
 
 void RadioApp::on_hide_window() {
     delete this->appWindow;
 }
 
-void RadioApp::setHandler(GuiEventHandler* guiEventHandler1) {
-    this->guiEventHandler = guiEventHandler1;
-}
-
-void RadioApp::setButtonCallbacks() {
-    std::vector<Gtk::Button*> buttonsCallbacks = this->appWindow->getGrid()->getButtonsAllVector()->getVector();
-
-    buttonsCallbacks[0]->signal_clicked().connect(sigc::mem_fun(this->guiEventHandler,&GuiEventHandler::onPreviousClicked));
-    buttonsCallbacks[1]->signal_clicked().connect(sigc::mem_fun(this->guiEventHandler,&GuiEventHandler::onPlayClicked));
-    buttonsCallbacks[2]->signal_clicked().connect(sigc::mem_fun(this->guiEventHandler,&GuiEventHandler::onPauseClicked));
-    buttonsCallbacks[3]->signal_clicked().connect(sigc::mem_fun(this->guiEventHandler,&GuiEventHandler::onNextClicked));
-}
-
 AppWindow *RadioApp::getAppWindow() {
     return this->appWindow;
+}
+
+void RadioApp::setEventHandler(EventHandler *eventHandler) {
+    this->eventHandler = eventHandler;
 }
