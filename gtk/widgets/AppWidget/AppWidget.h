@@ -10,6 +10,7 @@ public:
     virtual void onClicked()=0;
     virtual Gtk::Widget* getAppWidget()=0;
     virtual ~AppWidget(){};
+    void applyMargin(Gtk::Widget& widgetToApply);
 };
 
 

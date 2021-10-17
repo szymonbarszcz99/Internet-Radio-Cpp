@@ -7,7 +7,6 @@ class WidgetConstructor : public Gtk::Widget{
 public:
     virtual ~WidgetConstructor(){}
     virtual AppWidget* FactoryMethod(Event* properEvent, Actions action)=0;
-    void applyMargin();
 };
 
 

@@ -5,6 +5,7 @@ AppLabel::AppLabel(Event *properEvent): properEvent(properEvent) {
     //TODO add click on widget to display info
 
     this->appWidget = Gtk::Label();
+    applyMargin(this->appWidget);
 }
 
 void AppLabel::style(std::string styleString) {

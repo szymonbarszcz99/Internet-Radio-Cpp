@@ -10,7 +10,7 @@
 
 class AppWindow : public AppWindowInterface, public Gtk::ApplicationWindow{
     WidgetGrid* grid;
-    AppWidget* appLabel, *playButton1, *pauseButton1;
+    AppWidget* appLabel, *playButton1, *pauseButton1, *nextButton, *previousButton;
 public:
     AppWindow(EventHandler* eventHandler);
     void updateLabel(const std::string& newStation) override;
