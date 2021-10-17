@@ -6,10 +6,11 @@
 class AppButton : public AppWidget{
     Event* properEvent;
     Gtk::Button appWidget;
+    Actions action;
 public:
     void style(std::string styleString) override;
     void onClicked() override;
-    AppButton(Event *properEvent);
+    AppButton(Event *properEvent, Actions action);
     Gtk::Widget* getAppWidget() override;
 };
 

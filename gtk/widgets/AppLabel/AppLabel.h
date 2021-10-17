@@ -6,6 +6,7 @@
 class AppLabel : public AppWidget{
     Event* properEvent;
     Gtk::Label appWidget;
+    Actions action = LABEL;
 public:
     void style(std::string styleString);
     void onClicked() override;

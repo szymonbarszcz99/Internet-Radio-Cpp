@@ -5,7 +5,7 @@
 
 class LabelConstructor : public WidgetConstructor{
 public:
-    AppWidget* FactoryMethod(Event* properEvent) override;
+    AppWidget* FactoryMethod(Event* properEvent, Actions action = LABEL) override;
 };
 
 

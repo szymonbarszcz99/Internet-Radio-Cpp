@@ -12,7 +12,7 @@ void AppLabel::style(std::string styleString) {
 }
 
 void AppLabel::onClicked() {
-    properEvent->Clicked();
+    properEvent->Clicked(this->action);
 }
 
 Gtk::Widget* AppLabel::getAppWidget(){

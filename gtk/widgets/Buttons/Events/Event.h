@@ -4,13 +4,14 @@ enum Actions{
     PLAY,
     PAUSE,
     NEXT,
-    PREVIOUS
+    PREVIOUS,
+    LABEL
 };
 
 class Event{
 public:
     virtual ~Event(){};
-    virtual void Clicked()=0;
+    virtual void Clicked(Actions action)=0;
 };
 
 #endif //UNTITLED2_EVENT_H
