@@ -7,6 +7,8 @@ AppWindow::AppWindow(EventHandler* eventHandler):Gtk::ApplicationWindow() {
     add(*(this->grid));
 
     this->eventForWidgets = new EventClicked(eventHandler);
+
+    this->createLabel()->createButtons()->attachWidgets();
 }
 
 void AppWindow::updateLabel(const std::string &newStation) {
