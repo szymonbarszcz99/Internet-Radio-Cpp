@@ -8,7 +8,7 @@ Glib::RefPtr<RadioApp> RadioApp::create() {
 }
 
 void RadioApp::createAppWindow() {
-    this->appWindow = new AppWindow(this->eventHandler);
+    this->appWindow = (new AppWindowBuilder(this->eventHandler))->getAppWindow();
     add_window(*this->appWindow);
 
     this->appWindow->signal_hide().connect(sigc::mem_fun(*this,&RadioApp::on_hide_window));

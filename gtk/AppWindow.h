@@ -7,13 +7,20 @@
 #include "widgets/AppButton/AppButton.h"
 #include "widgets/AppWidget/AppWidget.h"
 #include "widgets/AppLabel/AppLabel.h"
+#include "widgets/WidgetConstructor/ButtonConstructor.h"
+#include "widgets/WidgetConstructor/LabelConstructor.h"
+#include "widgets/Buttons/Events/EventClicked.h"
 
 class AppWindow : public AppWindowInterface, public Gtk::ApplicationWindow{
     WidgetGrid* grid;
     AppWidget* appLabel, *playButton1, *pauseButton1, *nextButton, *previousButton;
+    Event* eventForWidgets;
 public:
     AppWindow(EventHandler* eventHandler);
     void updateLabel(const std::string& newStation) override;
+    AppWindow* createButtons();
+    AppWindow* createLabel();
+    AppWindow* attachWidgets();
 };
 
 
