@@ -19,5 +19,6 @@ void EventClicked::Clicked(Actions action) {
         case LABEL:
             this->eventHandler->labelClicked();
             break;
+
     }
 }

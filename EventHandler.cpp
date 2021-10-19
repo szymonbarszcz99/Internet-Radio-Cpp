@@ -39,3 +39,7 @@ void EventHandler::setLinksInterface(LinksInterface *linksInterface1) {
 void EventHandler::labelClicked() {
     std::cout<<"Label clicked"<<std::endl;
 }
+
+void EventHandler::sliderValueChanged(double newValue) {
+    std::cout<<"Slider value changed: "<<newValue<<std::endl;
+}

@@ -5,7 +5,8 @@ enum Actions{
     PAUSE,
     NEXT,
     PREVIOUS,
-    LABEL
+    LABEL,
+    SLIDER
 };
 
 class Event{

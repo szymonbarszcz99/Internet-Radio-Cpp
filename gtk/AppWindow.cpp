@@ -8,7 +8,9 @@ AppWindow::AppWindow(EventHandler* eventHandler):Gtk::ApplicationWindow() {
 
     this->eventForWidgets = new EventClicked(eventHandler);
 
-    this->createLabel()->createButtons()->attachWidgets();
+    this->eventForSlider = new EventValueChanged(eventHandler);
+
+    this->createLabel()->createButtons()->createSlider()->attachWidgets();
 }
 
 void AppWindow::updateLabel(const std::string &newStation) {
@@ -50,8 +52,16 @@ AppWindow *AppWindow::attachWidgets() {
     this->grid->attach(*this->playButton1->getAppWidget(),1,1,1);
     this->grid->attach(*this->previousButton->getAppWidget(),0,1,1);
     this->grid->attach(*this->nextButton->getAppWidget(),3,1,1);
+    this->grid->attach(*this->appSlider->getBox(),0,2,4);
 
     this->grid->show_all();
+
+    return this;
+}
+
+AppWindow *AppWindow::createSlider() {
+    this->appSlider = new AppSlider(eventForSlider);
+    this->appSlider->style("audio-volume-high");
 
     return this;
 }

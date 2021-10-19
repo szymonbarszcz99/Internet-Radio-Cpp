@@ -10,17 +10,23 @@
 #include "widgets/WidgetConstructor/ButtonConstructor.h"
 #include "widgets/WidgetConstructor/LabelConstructor.h"
 #include "widgets/Buttons/Events/EventClicked.h"
+#include "widgets/AppSlider/AppSlider.h"
+#include "widgets/Buttons/Events/EventValueChanged.h"
+
 
 class AppWindow : public AppWindowInterface, public Gtk::ApplicationWindow{
     WidgetGrid* grid;
     AppWidget* appLabel, *playButton1, *pauseButton1, *nextButton, *previousButton;
+    AppSlider* appSlider;
     Event* eventForWidgets;
+    EventValueChanged* eventForSlider;
 public:
     AppWindow(EventHandler* eventHandler);
     void updateLabel(const std::string& newStation) override;
     AppWindow* createButtons();
     AppWindow* createLabel();
     AppWindow* attachWidgets();
+    AppWindow* createSlider();
 };
 
 

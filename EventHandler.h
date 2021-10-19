@@ -19,6 +19,9 @@ public:
     //GUI Label event
     void labelClicked();
 
+    //GUI Slider event
+    void sliderValueChanged(double newValue);
+
     //Interface setters
     void setAppWindowInterface(AppWindowInterface* appWindowInterface);
     void setPlayerInterface(PlayerInterface *playerInterface);
