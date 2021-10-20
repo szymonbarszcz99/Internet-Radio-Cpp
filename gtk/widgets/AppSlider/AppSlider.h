@@ -6,19 +6,17 @@
 #include "../AppWidget/AppWidget.h"
 #include "../Buttons/Events/EventValueChanged.h"
 
-class AppSlider{
+class AppSlider: public AppWidget{
     Gtk::Box appWidget;
     Gtk::Image image;
     Gtk::Scale slider;
     EventValueChanged* properEvent;
-    Actions action = SLIDER;
     void pack();
 
 public:
-    AppSlider(EventValueChanged* properEvent, Actions action = SLIDER);
+    AppSlider(EventValueChanged* properEvent);
     void style(std::string styleString);
     void onClicked();
-    Gtk::Box* getBox();
     Gtk::Widget* getAppWidget();
 };
 

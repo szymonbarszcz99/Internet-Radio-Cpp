@@ -16,8 +16,7 @@
 
 class AppWindow : public AppWindowInterface, public Gtk::ApplicationWindow{
     WidgetGrid* grid;
-    AppWidget* appLabel, *playButton1, *pauseButton1, *nextButton, *previousButton;
-    AppSlider* appSlider;
+    AppWidget* appLabel, *playButton1, *pauseButton1, *nextButton, *previousButton, *appSlider;
     Event* eventForWidgets;
     EventValueChanged* eventForSlider;
 public:

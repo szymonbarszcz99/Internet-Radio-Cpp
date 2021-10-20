@@ -14,6 +14,8 @@ Player::Player(const std::string& link):pipeline(nullptr),error(nullptr){
         g_print("%s\n",error->message);
     }
 
+    g_object_set(this->pipeline,"volume",0.5,NULL);
+
     ret = gst_element_set_state(this->pipeline, GST_STATE_PLAYING);
     if(ret == 0){
         printf("State change failed\n");
@@ -35,4 +37,8 @@ void Player::pause() {
 
 void Player::play(){
     gst_element_set_state(this->pipeline,GST_STATE_PLAYING);
+}
+
+void Player::setVolume(double volume) {
+    g_object_set(this->pipeline,"volume",volume/100,NULL);
 }

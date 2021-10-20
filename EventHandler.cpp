@@ -42,4 +42,5 @@ void EventHandler::labelClicked() {
 
 void EventHandler::sliderValueChanged(double newValue) {
     std::cout<<"Slider value changed: "<<newValue<<std::endl;
+    this->playerInterface->setVolume(newValue);
 }

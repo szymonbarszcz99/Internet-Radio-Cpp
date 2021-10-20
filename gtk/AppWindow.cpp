@@ -52,7 +52,7 @@ AppWindow *AppWindow::attachWidgets() {
     this->grid->attach(*this->playButton1->getAppWidget(),1,1,1);
     this->grid->attach(*this->previousButton->getAppWidget(),0,1,1);
     this->grid->attach(*this->nextButton->getAppWidget(),3,1,1);
-    this->grid->attach(*this->appSlider->getBox(),0,2,4);
+    this->grid->attach(*this->appSlider->getAppWidget(),0,2,4);
 
     this->grid->show_all();
 

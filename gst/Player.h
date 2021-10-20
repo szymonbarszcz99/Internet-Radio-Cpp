@@ -14,6 +14,7 @@ public:
     void changeStation(const std::string& newLink);
     void pause();
     void play();
+    void setVolume(double volume) override;
 };
 
 
