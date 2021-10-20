@@ -1,6 +1,8 @@
 #ifndef UNTITLED2_APPWINDOW_H
 #define UNTITLED2_APPWINDOW_H
 #include <gtkmm/applicationwindow.h>
+#include <gtkmm/menubar.h>
+#include <gtkmm/toolbar.h>
 #include "AppWindowInterface.h"
 #include "../EventHandler.h"
 #include "widgets/WidgetGrid/WidgetGrid.h"
@@ -19,6 +21,9 @@ class AppWindow : public AppWindowInterface, public Gtk::ApplicationWindow{
     AppWidget* appLabel, *playButton1, *pauseButton1, *nextButton, *previousButton, *appSlider;
     Event* eventForWidgets;
     EventValueChanged* eventForSlider;
+    Gtk::Box* toolBar;
+    Gtk::Menu* menu;
+    Gtk::MenuButton* menuButton;
 public:
     AppWindow(EventHandler* eventHandler);
     void updateLabel(const std::string& newStation) override;
@@ -26,6 +31,7 @@ public:
     AppWindow* createLabel();
     AppWindow* attachWidgets();
     AppWindow* createSlider();
+    AppWindow* createToolbar();
 };
 
 
