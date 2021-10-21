@@ -68,6 +68,7 @@ AppWindow *AppWindow::createSlider() {
 AppWindow *AppWindow::createMenubar() {
     this->menubar = new Menubar();
     this->menubar->createFileMenuButton(eventForWidgets);
+    this->menubar->createViewStationButton(eventForWidgets);
     return this;
 }
 

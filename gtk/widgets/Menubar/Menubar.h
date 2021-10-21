@@ -1,13 +1,16 @@
 #ifndef UNTITLED2_MENUBAR_H
 #define UNTITLED2_MENUBAR_H
-#include <gtkmm/box.h>
+#include <gtkmm/menubar.h>
 #include "FileMenuButton.h"
+#include "ViewStationsButton.h"
 
-class Menubar : public Gtk::Box{
+class Menubar : public Gtk::MenuBar{
     FileMenuButton* fileMenuButton;
+    ViewStationsButton* viewStationsButton;
 public:
     Menubar();
     void createFileMenuButton(Event* eventValueChanged);
+    void createViewStationButton(Event* event);
 };
 
 

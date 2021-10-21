@@ -8,7 +8,7 @@ enum Actions{
     PAUSE,
     NEXT,
     PREVIOUS,
-    LABEL,
+    LABEL
 };
 
 class Event {

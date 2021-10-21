@@ -4,7 +4,7 @@
 #include <gtkmm/menubutton.h>
 #include "../Buttons/Events/Event.h"
 
-class FileMenuButton : public Gtk::MenuButton{
+class FileMenuButton : public Gtk::MenuItem{
     Event* eventValueChanged;
     void onValueChosen(int valueId);
     Gtk::Menu* fileMenu;

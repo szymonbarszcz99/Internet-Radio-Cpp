@@ -1,7 +1,6 @@
 #include "FileMenuButton.h"
 
-FileMenuButton::FileMenuButton(Event *eventValueChanged): eventValueChanged(eventValueChanged), Gtk::MenuButton(){
-    this->set_label("File");
+FileMenuButton::FileMenuButton(Event *eventValueChanged): eventValueChanged(eventValueChanged), Gtk::MenuItem("File"){
 
     this->fileMenu = new Gtk::Menu();
     auto addStation = new Gtk::MenuItem("Add Station");
@@ -14,8 +13,8 @@ FileMenuButton::FileMenuButton(Event *eventValueChanged): eventValueChanged(even
     fileMenu->append(*deleteStation);
     fileMenu->append(*editStation);
 
-    this->fileMenu->show_all();
-    this->set_popup(*fileMenu);
+
+    this->set_submenu(*fileMenu);this->fileMenu->show_all();
 }
 
 void FileMenuButton::onValueChosen(int valueId) {
