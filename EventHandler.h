@@ -22,6 +22,9 @@ public:
     //GUI Slider event
     void sliderValueChanged(double newValue);
 
+    //GUI Menubar event
+    void menubarClicked(int optionChoosen);
+
     //Interface setters
     void setAppWindowInterface(AppWindowInterface* appWindowInterface);
     void setPlayerInterface(PlayerInterface *playerInterface);

@@ -7,7 +7,7 @@ class Menubar : public Gtk::Box{
     FileMenuButton* fileMenuButton;
 public:
     Menubar();
-    void createFileMenuButton(EventValueChanged* eventValueChanged);
+    void createFileMenuButton(Event* eventValueChanged);
 };
 
 

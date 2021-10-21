@@ -44,3 +44,7 @@ void EventHandler::sliderValueChanged(double newValue) {
     std::cout<<"Slider value changed: "<<newValue<<std::endl;
     this->playerInterface->setVolume(newValue);
 }
+
+void EventHandler::menubarClicked(int optionChoosen) {
+    std::cout<<"Menubar value: "<<optionChoosen<<std::endl;
+}

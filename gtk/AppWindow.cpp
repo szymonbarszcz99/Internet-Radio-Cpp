@@ -6,9 +6,7 @@ AppWindow::AppWindow(EventHandler* eventHandler):Gtk::ApplicationWindow() {
     this->grid = new WidgetGrid();
     add(*(this->grid));
 
-    this->eventForWidgets = new EventClicked(eventHandler);
-
-    this->eventForSlider = new EventValueChanged(eventHandler);
+    this->eventForWidgets = new Event(eventHandler);
 
     this->createLabel()->createButtons()->createSlider()->createMenubar()->attachWidgets();
 }
@@ -61,7 +59,7 @@ AppWindow *AppWindow::attachWidgets() {
 }
 
 AppWindow *AppWindow::createSlider() {
-    this->appSlider = new AppSlider(eventForSlider);
+    this->appSlider = new AppSlider(eventForWidgets);
     this->appSlider->style("audio-volume-high");
 
     return this;
@@ -69,7 +67,7 @@ AppWindow *AppWindow::createSlider() {
 
 AppWindow *AppWindow::createMenubar() {
     this->menubar = new Menubar();
-    this->menubar->createFileMenuButton(eventForSlider);
+    this->menubar->createFileMenuButton(eventForWidgets);
     return this;
 }
 

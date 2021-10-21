@@ -11,7 +11,7 @@ void AppButton::style(std::string styleString) {
 }
 
 void AppButton::onClicked() {
-    this->properEvent->Clicked(this->action);
+    this->properEvent->eventPassArg(this->action);
 }
 
 Gtk::Widget* AppButton::getAppWidget(){

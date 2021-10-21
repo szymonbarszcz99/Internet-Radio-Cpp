@@ -1,18 +1,25 @@
 #ifndef UNTITLED2_EVENT_H
 #define UNTITLED2_EVENT_H
+
+#include "../../../../EventHandler.h"
+
 enum Actions{
     PLAY,
     PAUSE,
     NEXT,
     PREVIOUS,
     LABEL,
-    SLIDER
 };
 
-class Event{
+class Event {
+    EventHandler* eventHandler;
 public:
-    virtual ~Event(){};
-    virtual void Clicked(Actions action)=0;
+    Event(EventHandler* eventHandler):eventHandler(eventHandler){}
+
+    template<class name> void eventPassArg(name arg) {
+        std::cout<<"Unknown value type: "<<arg<<std::endl;
+    }
 };
+
 
 #endif //UNTITLED2_EVENT_H

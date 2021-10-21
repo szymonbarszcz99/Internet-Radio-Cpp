@@ -1,6 +1,6 @@
 #include "AppSlider.h"
 
-AppSlider::AppSlider(EventValueChanged* properEvent): properEvent(properEvent){
+AppSlider::AppSlider(Event* properEvent): properEvent(properEvent){
     //Slider
     this->slider = Gtk::Scale();
     this->slider.set_digits(0);
@@ -22,7 +22,7 @@ void AppSlider::pack() {
 }
 
 void AppSlider::onClicked() {
-    this->properEvent->newValue(this->slider.get_value());
+    this->properEvent->eventPassArg(this->slider.get_value());
 }
 
 void AppSlider::style(std::string styleString) {

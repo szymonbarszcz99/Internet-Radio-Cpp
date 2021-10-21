@@ -9,9 +9,7 @@
 #include "widgets/AppLabel/AppLabel.h"
 #include "widgets/WidgetConstructor/ButtonConstructor.h"
 #include "widgets/WidgetConstructor/LabelConstructor.h"
-#include "widgets/Buttons/Events/EventClicked.h"
 #include "widgets/AppSlider/AppSlider.h"
-#include "widgets/Buttons/Events/EventValueChanged.h"
 #include "widgets/Menubar/Menubar.h"
 
 
@@ -19,7 +17,6 @@ class AppWindow : public AppWindowInterface, public Gtk::ApplicationWindow{
     WidgetGrid* grid;
     AppWidget* appLabel, *playButton1, *pauseButton1, *nextButton, *previousButton, *appSlider;
     Event* eventForWidgets;
-    EventValueChanged* eventForSlider;
     Menubar* menubar;
 
 public:
