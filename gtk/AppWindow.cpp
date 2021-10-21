@@ -1,5 +1,3 @@
-#include <gtkmm/menubutton.h>
-#include <gtkmm/menutoolbutton.h>
 #include "AppWindow.h"
 
 AppWindow::AppWindow(EventHandler* eventHandler):Gtk::ApplicationWindow() {
@@ -12,7 +10,7 @@ AppWindow::AppWindow(EventHandler* eventHandler):Gtk::ApplicationWindow() {
 
     this->eventForSlider = new EventValueChanged(eventHandler);
 
-    this->createLabel()->createButtons()->createSlider()->createToolbar()->attachWidgets();
+    this->createLabel()->createButtons()->createSlider()->createMenubar()->attachWidgets();
 }
 
 void AppWindow::updateLabel(const std::string &newStation) {
@@ -47,7 +45,7 @@ AppWindow *AppWindow::createLabel() {
 }
 
 AppWindow *AppWindow::attachWidgets() {
-    this->grid->attach(*this->toolBar,0,0,4);
+    this->grid->attach(*this->menubar,0,0,4);
 
     this->grid->attach(*this->appLabel->getAppWidget(),0,1,4);
 
@@ -69,30 +67,9 @@ AppWindow *AppWindow::createSlider() {
     return this;
 }
 
-AppWindow *AppWindow::createToolbar() {
-    this->toolBar = new Gtk::Box();
-/*
-    Gtk::ToolButton* fileMenu = new Gtk::ToolButton("File");
-    toolBar->append(*fileMenu);
-
-    Gtk::Menu* menu = new Gtk::Menu();
-    Gtk::MenuItem* addStation = new Gtk::MenuItem("Add Station");
-    Gtk::MenuItem* editStation = new Gtk::MenuItem("Edit Station");
-    Gtk::MenuItem* deleteStation = new Gtk::MenuItem("Delete Station");
-    menu->append(*addStation);
-    menu->append(*editStation);
-    menu->append(*deleteStation);
-*/
-    this->menuButton = new Gtk::MenuButton();
-    menuButton->set_label("File");
-
-    this->menu = new Gtk::Menu();
-    Gtk::MenuItem* addStation = new Gtk::MenuItem("Add Station");
-    this->menu->append(*addStation);
-    this->menu->show_all();
-    this->menuButton->set_popup(*menu);
-    this->toolBar->add(*menuButton);
-
+AppWindow *AppWindow::createMenubar() {
+    this->menubar = new Menubar();
+    this->menubar->createFileMenuButton(eventForSlider);
     return this;
 }
 
