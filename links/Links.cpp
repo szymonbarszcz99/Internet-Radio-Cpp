@@ -1,7 +1,5 @@
 #include "Links.h"
 
-Links::Stations::Stations(char *Name, char *Link) :StationName(Name),StationLink(Link){}
-
 Links::Links() {
     std::ifstream stations("../stations.csv");
     if(!stations.is_open()){
@@ -57,4 +55,8 @@ void Links::setPreviousStation() {
 
 void Links::throwError(const std::string &error) {
     std::cout<<error<<std::endl;
+}
+
+const std::vector<Stations> &Links::getAllStations() {
+    return this->StationsVector;
 }

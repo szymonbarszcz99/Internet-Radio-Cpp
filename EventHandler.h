@@ -6,7 +6,7 @@
 #include <iostream>
 //TODO apply mediator
 class EventHandler{
-    AppWindowInterface* appWindowInterface;
+    AppWindowInterface* appWindowInterface = nullptr;
     PlayerInterface* playerInterface = nullptr;
     LinksInterface* linksInterface = nullptr;
 public:

@@ -10,7 +10,7 @@ class AppLabel : public AppWidget{
 public:
     void style(std::string styleString);
     void onClicked() override;
-    AppLabel(Event* properEvent);
+    AppLabel(Event* properEvent = nullptr);
     Gtk::Widget* getAppWidget() override;
 };
 

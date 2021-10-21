@@ -31,3 +31,5 @@ AppWindow *RadioApp::getAppWindow() {
 void RadioApp::setEventHandler(EventHandler *eventHandler) {
     this->eventHandler = eventHandler;
 }
+
+

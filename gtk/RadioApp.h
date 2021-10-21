@@ -4,7 +4,7 @@
 #include "AppWindow.h"
 #include "../EventHandler.h"
 
-class RadioApp : public Gtk::Application {
+class RadioApp : public Gtk::Application{
 private:
     RadioApp();
     void on_activate() override;

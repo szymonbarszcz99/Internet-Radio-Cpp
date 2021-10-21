@@ -1,4 +1,5 @@
 #include "AppWindow.h"
+#include "PopUpWindow/PopUpWindow.h"
 
 AppWindow::AppWindow(EventHandler* eventHandler):Gtk::ApplicationWindow() {
     set_title("Internet Radio");
@@ -70,6 +71,28 @@ AppWindow *AppWindow::createMenubar() {
     this->menubar->createFileMenuButton(eventForWidgets);
     this->menubar->createViewStationButton(eventForWidgets);
     return this;
+}
+
+void AppWindow::createPopUpWindow(const std::vector<Stations>& stations) {
+    this->popUpWindow = new PopUpWindow();
+    this->popUpWindow->set_title("Stations");
+
+    Gtk::Grid* windowGrid = new Gtk::Grid();
+    this->popUpWindow->add(*windowGrid);
+
+    int i=0;
+    for(auto it: stations){
+        Gtk::Label* name = new Gtk::Label();
+        Gtk::Label* link = new Gtk::Label();
+
+        name->set_text(it.StationName);
+        link->set_text(it.StationLink);
+
+        windowGrid->attach(*name,0,i);
+        windowGrid->attach(*link,1,i++);
+    }
+
+    this->popUpWindow->show_all();
 }
 
 

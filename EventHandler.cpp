@@ -47,4 +47,7 @@ void EventHandler::sliderValueChanged(double newValue) {
 
 void EventHandler::menubarClicked(int optionChoosen) {
     std::cout<<"Menubar value: "<<optionChoosen<<std::endl;
+
+    if(optionChoosen == 4)this->appWindowInterface->createPopUpWindow(linksInterface->getAllStations());
 }
+
