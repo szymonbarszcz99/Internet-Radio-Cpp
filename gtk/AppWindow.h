@@ -12,6 +12,7 @@
 #include "widgets/AppSlider/AppSlider.h"
 #include "widgets/Menubar/Menubar.h"
 #include "PopUpWindow/PopUpWindow.h"
+#include "PopUpWindow/PopUpWindow2.h"
 
 
 class AppWindow : public AppWindowInterface, public Gtk::ApplicationWindow{
@@ -20,6 +21,7 @@ class AppWindow : public AppWindowInterface, public Gtk::ApplicationWindow{
     Event* eventForWidgets;
     Menubar* menubar;
     PopUpWindow* popUpWindow;
+    PopUpWindow2* popUpWindow2;
 
 public:
     AppWindow(EventHandler* eventHandler);
@@ -30,6 +32,7 @@ public:
     AppWindow* createSlider();
     AppWindow* createMenubar();
     void createPopUpWindow(const std::vector<Stations>& stations) override;
+    void createPopUpWindow2() override;
 };
 
 
