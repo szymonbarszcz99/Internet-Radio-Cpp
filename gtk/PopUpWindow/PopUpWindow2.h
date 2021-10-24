@@ -1,0 +1,10 @@
+#ifndef UNTITLED2_POPUPWINDOW2_H
+#define UNTITLED2_POPUPWINDOW2_H
+
+
+class PopUpWindow2 {
+
+};
+
+
+#endif //UNTITLED2_POPUPWINDOW2_H

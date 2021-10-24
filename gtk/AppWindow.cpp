@@ -74,22 +74,15 @@ AppWindow *AppWindow::createMenubar() {
 }
 
 void AppWindow::createPopUpWindow(const std::vector<Stations>& stations) {
-    this->popUpWindow = new PopUpWindow();
-    this->popUpWindow->set_title("Stations");
-
-    Gtk::Grid* windowGrid = new Gtk::Grid();
-    this->popUpWindow->add(*windowGrid);
+    this->popUpWindow = new PopUpWindow("Stations");
 
     int i=0;
     for(auto it: stations){
-        Gtk::Label* name = new Gtk::Label();
-        Gtk::Label* link = new Gtk::Label();
+        Gtk::Label* name = new Gtk::Label(it.StationName);
+        Gtk::Label* link = new Gtk::Label(it.StationLink);
 
-        name->set_text(it.StationName);
-        link->set_text(it.StationLink);
-
-        windowGrid->attach(*name,0,i);
-        windowGrid->attach(*link,1,i++);
+        popUpWindow->populate(name,0,i);
+        popUpWindow->populate(link,1,i++);
     }
 
     this->popUpWindow->show_all();

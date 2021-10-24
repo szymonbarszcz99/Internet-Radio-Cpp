@@ -4,9 +4,14 @@
 #include <gtkmm/grid.h>
 
 class PopUpWindow : public Gtk::Window{
-
+    Gtk::Grid* grid;
 public:
-    PopUpWindow(): Gtk::Window(){};
+    PopUpWindow(std::string windowName): Gtk::Window(){
+        this->grid = new Gtk::Grid();
+        this->add(*this->grid);
+        this->set_title(windowName);
+    };
+    void populate(Gtk::Widget* widget, int left, int top, int width = 1);
 };
 
 
