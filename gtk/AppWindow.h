@@ -32,7 +32,7 @@ public:
     AppWindow* createSlider();
     AppWindow* createMenubar();
     void createPopUpWindow(const std::vector<Stations>& stations) override;
-    void createPopUpWindow2() override;
+    void createPopUpWindow2(std::string nameEntry = "", std::string linkEntry = "") override;
 };
 
 

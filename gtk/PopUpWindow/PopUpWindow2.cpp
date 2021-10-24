@@ -2,13 +2,11 @@
 
 void PopUpWindow2::populate() {
     Gtk::Label* name = new Gtk::Label("Name");
-    this->nameEntry = new Gtk::Entry();
 
     this->grid->attach(*name,0,0);
     this->grid->attach(*nameEntry,0,1);
 
     Gtk::Label* link = new Gtk::Label("Link");
-    this->linkEntry = new Gtk::Entry();
 
     this->grid->attach(*link,0,2);
     this->grid->attach(*linkEntry,0,3);

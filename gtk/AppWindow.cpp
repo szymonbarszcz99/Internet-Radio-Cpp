@@ -88,8 +88,8 @@ void AppWindow::createPopUpWindow(const std::vector<Stations>& stations) {
     this->popUpWindow->show_all();
 }
 
-void AppWindow::createPopUpWindow2() {
-    this->popUpWindow2 = new PopUpWindow2("Add");
+void AppWindow::createPopUpWindow2(std::string nameEntry, std::string linkEntry) {
+    this->popUpWindow2 = new PopUpWindow2("Add",nameEntry,linkEntry);
     this->popUpWindow2->show_all();
 }
 

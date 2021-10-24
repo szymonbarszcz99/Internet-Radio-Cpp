@@ -11,7 +11,7 @@ class PopUpWindow2 : public Gtk::Window{
     Gtk::Entry* nameEntry, *linkEntry;
     Gtk::Button *addButton;
 public:
-    PopUpWindow2(std::string windowName): Gtk::Window(){
+    PopUpWindow2(std::string windowName,std::string nameEntry, std::string linkEntry): Gtk::Window(){
 
         this->grid = new Gtk::Grid();
         this->grid->set_column_spacing(10);
@@ -21,7 +21,14 @@ public:
         this->add(*this->grid);
         this->set_title(windowName);
 
-        this->addButton = new Gtk::Button("Add");
+        this->nameEntry = new Gtk::Entry();
+        this->nameEntry->set_text(nameEntry);
+        this->linkEntry = new Gtk::Entry();
+        this->linkEntry->set_text(linkEntry);
+
+        this->addButton = new Gtk::Button();
+        if(nameEntry != "" && linkEntry != "")this->addButton->set_label("Update");
+        else this->addButton->set_label("Add");
         this->addButton->signal_clicked().connect(sigc::mem_fun(*this, &PopUpWindow2::onAddClicked));
 
         populate();
