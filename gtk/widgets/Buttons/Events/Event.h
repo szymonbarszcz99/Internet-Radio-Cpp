@@ -11,6 +11,11 @@ enum Actions{
     LABEL
 };
 
+enum Purpose{
+    ADD,
+    UPDATE
+};
+
 class Event {
     EventHandler* eventHandler;
 public:

@@ -20,6 +20,7 @@ public:
     void throwError(const std::string& error) override;
     const std::vector<Stations>& getAllStations() override;
     void updateCurrent(std::string name, std::string link) override;
+    void appendStation(std::string name, std::string link) override;
 };
 
 

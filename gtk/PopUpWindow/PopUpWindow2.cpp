@@ -15,5 +15,5 @@ void PopUpWindow2::populate() {
 }
 
 void PopUpWindow2::onAddClicked() {
-    this->event->eventPassArg(std::string(nameEntry->get_text()), std::string(linkEntry->get_text()));
+    this->event->eventPassArg(std::string(nameEntry->get_text()), std::string(linkEntry->get_text()),windowPurpose);
 }

@@ -62,7 +62,7 @@ const std::vector<Stations> &Links::getAllStations() {
 }
 
 void Links::updateCurrent(std::string newName, std::string newLink) {
-    //name = name + "," + link;
+
     std::string temp_line;
     long index = std::distance(this->StationsVector.begin(),this->StationsIterator);
     long i = 0;
@@ -91,6 +91,21 @@ void Links::updateCurrent(std::string newName, std::string newLink) {
 
     remove("../stations.csv");
     rename("../stations_temp.csv", "../stations.csv");
+
+    printStations();
+}
+
+void Links::appendStation(std::string name, std::string link) {
+    int currentIndex = std::distance(this->StationsVector.begin(), this->StationsIterator);
+
+    this->stations.open("../stations.csv",std::fstream::app);
+    this->stations<<std::endl<<name<<","<<link;
+    this->stations.close();
+
+    Stations newOne(name,link);
+    this->StationsVector.push_back(newOne);
+
+    this->StationsIterator = this->StationsVector.begin() + currentIndex;
 
     printStations();
 }

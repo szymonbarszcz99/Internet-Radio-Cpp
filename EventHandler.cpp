@@ -57,3 +57,7 @@ void EventHandler::updateFile(std::string newName, std::string newLink) {
     this->appWindowInterface->updateLabel(linksInterface->getCurrentName());
 }
 
+void EventHandler::addToFile(std::string newName, std::string newLink) {
+    this->linksInterface->appendStation(newName,newLink);
+}
+

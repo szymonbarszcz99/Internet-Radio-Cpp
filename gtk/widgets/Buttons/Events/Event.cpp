@@ -28,6 +28,14 @@ template<> void Event::eventPassArg<int>(int optionsChoosen){
     this->eventHandler->menubarClicked(optionsChoosen);
 }
 
-template<> void Event::eventPassArg<std::string, std::string>(std::string newName, std::string newLink) {
-    this->eventHandler->updateFile(newName,newLink);
+template<> void Event::eventPassArg<std::string, std::string>(std::string newName, std::string newLink, Purpose purpose) {
+    switch(purpose){
+        case ADD:
+            this->eventHandler->addToFile(newName, newLink);
+            break;
+        case UPDATE:
+            this->eventHandler->updateFile(newName,newLink);
+            break;
+    }
+
 }

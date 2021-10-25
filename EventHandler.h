@@ -27,6 +27,7 @@ public:
 
     //GUI Pop up window event
     void updateFile(std::string newName, std::string newLink);
+    void addToFile(std::string newName, std::string newLink);
 
     //Interface setters
     void setAppWindowInterface(AppWindowInterface* appWindowInterface);

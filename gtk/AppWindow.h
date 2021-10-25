@@ -14,7 +14,6 @@
 #include "PopUpWindow/PopUpWindow.h"
 #include "PopUpWindow/PopUpWindow2.h"
 
-
 class AppWindow : public AppWindowInterface, public Gtk::ApplicationWindow{
     WidgetGrid* grid;
     AppWidget* appLabel, *playButton1, *pauseButton1, *nextButton, *previousButton, *appSlider;

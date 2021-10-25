@@ -12,8 +12,11 @@ class PopUpWindow2 : public Gtk::Window{
     Gtk::Entry* nameEntry, *linkEntry;
     Gtk::Button *addButton;
     Event* event;
+    Purpose windowPurpose;
 public:
     PopUpWindow2(std::string windowName,std::string nameEntry, std::string linkEntry, Event* event): Gtk::Window(), event(event){
+        if(nameEntry == "" && linkEntry == "")this->windowPurpose = ADD;
+        else this->windowPurpose = UPDATE;
 
         this->grid = new Gtk::Grid();
         this->grid->set_column_spacing(10);
@@ -29,7 +32,7 @@ public:
         this->linkEntry->set_text(linkEntry);
 
         this->addButton = new Gtk::Button();
-        if(nameEntry != "" && linkEntry != "")this->addButton->set_label("Update");
+        if(this->windowPurpose == UPDATE)this->addButton->set_label("Update");
         else this->addButton->set_label("Add");
         this->addButton->signal_clicked().connect(sigc::mem_fun(*this, &PopUpWindow2::onAddClicked));
 
