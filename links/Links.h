@@ -19,7 +19,7 @@ public:
     void setPreviousStation() override;
     void throwError(const std::string& error) override;
     const std::vector<Stations>& getAllStations() override;
-    void updateCurrent(std::string name, std::string link) override;
+    void updateCurrent(FileLine cmd,std::string name = "", std::string link = "") override;
     void appendStation(std::string name, std::string link) override;
 };
 

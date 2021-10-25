@@ -2,6 +2,11 @@
 #define UNTITLED2_LINKSINTERFACE_H
 #include <vector>
 
+enum FileLine{
+    MODIFY,
+    DELETE
+};
+
 struct Stations{
     std::string StationName;
     std::string StationLink;
@@ -18,7 +23,7 @@ public:
     virtual void setPreviousStation()=0;
     virtual void throwError(const std::string& error)=0;
     virtual const std::vector<Stations>& getAllStations() = 0;
-    virtual void updateCurrent(std::string name, std::string link)=0;
+    virtual void updateCurrent(FileLine cmd,std::string name = "", std::string link = "")=0;
     virtual void appendStation(std::string name, std::string link)=0;
 };
 

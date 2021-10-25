@@ -48,12 +48,16 @@ void EventHandler::sliderValueChanged(double newValue) {
 void EventHandler::menubarClicked(int optionChoosen) {
     std::cout<<"Menubar value: "<<optionChoosen<<std::endl;
     if(optionChoosen == 1)this->appWindowInterface->createPopUpWindow2();
+    else if(optionChoosen == 2){
+        this->linksInterface->updateCurrent(FileLine::DELETE);
+        this->previousEventClicked();
+    }
     else if(optionChoosen == 3)this->appWindowInterface->createPopUpWindow2(linksInterface->getCurrentName(), linksInterface->getCurrentLink());
     else if(optionChoosen == 4)this->appWindowInterface->createPopUpWindow(linksInterface->getAllStations());
 }
 
 void EventHandler::updateFile(std::string newName, std::string newLink) {
-    this->linksInterface->updateCurrent(newName,newLink);
+    this->linksInterface->updateCurrent(MODIFY,newName,newLink );
     this->appWindowInterface->updateLabel(linksInterface->getCurrentName());
 }
 

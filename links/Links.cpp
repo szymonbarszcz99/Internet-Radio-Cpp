@@ -61,7 +61,7 @@ const std::vector<Stations> &Links::getAllStations() {
     return this->StationsVector;
 }
 
-void Links::updateCurrent(std::string newName, std::string newLink) {
+void Links::updateCurrent(FileLine cmd,std::string name, std::string link) {
 
     std::string temp_line;
     long index = std::distance(this->StationsVector.begin(),this->StationsIterator);
@@ -75,9 +75,10 @@ void Links::updateCurrent(std::string newName, std::string newLink) {
     }
 
     while(getline(this->stations, temp_line)){
-        if(i == index){
-            newFile<<newName<<","<<newLink<<std::endl;
+        if(i == index && cmd == MODIFY){
+            newFile<<name<<","<<link<<std::endl;
         }
+        else if(i == index && cmd == DELETE)continue;
         else{
             newFile<<temp_line<<std::endl;
         }
@@ -86,8 +87,14 @@ void Links::updateCurrent(std::string newName, std::string newLink) {
     this->stations.close();
     newFile.close();
 
-    this->StationsIterator->StationName = newName;
-    this->StationsIterator->StationLink = newLink;
+    if(cmd == MODIFY){
+        this->StationsIterator->StationName = name;
+        this->StationsIterator->StationLink = link;
+    }
+    else{
+        StationsIterator = this->StationsVector.erase(StationsIterator);
+    }
+
 
     remove("../stations.csv");
     rename("../stations_temp.csv", "../stations.csv");
