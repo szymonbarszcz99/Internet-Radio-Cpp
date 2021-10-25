@@ -16,8 +16,8 @@ class Event {
 public:
     Event(EventHandler* eventHandler):eventHandler(eventHandler){}
 
-    template<class name> void eventPassArg(name arg) {
-        std::cout<<"Unknown value type: "<<arg<<std::endl;
+    template<typename ... name> void eventPassArg(name ...arg) {
+        std::cout<<"Unknown value type"<<std::endl;
     }
 };
 

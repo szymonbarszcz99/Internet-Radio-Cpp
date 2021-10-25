@@ -1,7 +1,7 @@
 #include "Links.h"
 
 Links::Links() {
-    std::ifstream stations("../stations.csv");
+    this->stations.open("../stations.csv");
     if(!stations.is_open()){
         std::cout<<"Unable to open file!\n";
     }
@@ -59,4 +59,38 @@ void Links::throwError(const std::string &error) {
 
 const std::vector<Stations> &Links::getAllStations() {
     return this->StationsVector;
+}
+
+void Links::updateCurrent(std::string newName, std::string newLink) {
+    //name = name + "," + link;
+    std::string temp_line;
+    long index = std::distance(this->StationsVector.begin(),this->StationsIterator);
+    long i = 0;
+
+    std::fstream newFile("../stations_temp.csv",std::fstream::out);
+    this->stations.open("../stations.csv");
+
+    if(!newFile.is_open() || !this->stations.is_open()){
+        std::cout<<"Unable to open files"<<std::endl;
+    }
+
+    while(getline(this->stations, temp_line)){
+        if(i == index){
+            newFile<<newName<<","<<newLink<<std::endl;
+        }
+        else{
+            newFile<<temp_line<<std::endl;
+        }
+        i++;
+    }
+    this->stations.close();
+    newFile.close();
+
+    this->StationsIterator->StationName = newName;
+    this->StationsIterator->StationLink = newLink;
+
+    remove("../stations.csv");
+    rename("../stations_temp.csv", "../stations.csv");
+
+    printStations();
 }

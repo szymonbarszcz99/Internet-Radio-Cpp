@@ -5,13 +5,15 @@
 #include <gtkmm/button.h>
 #include <gtkmm/grid.h>
 #include <iostream>
+#include "../widgets/Buttons/Events/Event.h"
 
 class PopUpWindow2 : public Gtk::Window{
     Gtk::Grid* grid;
     Gtk::Entry* nameEntry, *linkEntry;
     Gtk::Button *addButton;
+    Event* event;
 public:
-    PopUpWindow2(std::string windowName,std::string nameEntry, std::string linkEntry): Gtk::Window(){
+    PopUpWindow2(std::string windowName,std::string nameEntry, std::string linkEntry, Event* event): Gtk::Window(), event(event){
 
         this->grid = new Gtk::Grid();
         this->grid->set_column_spacing(10);

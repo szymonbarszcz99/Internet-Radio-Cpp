@@ -6,7 +6,7 @@
 #include "LinksInterface.h"
 
 class Links : public LinksInterface{
-
+    std::fstream stations;
     std::vector<Stations> StationsVector;
     std::vector<Stations>::iterator StationsIterator;
 
@@ -19,6 +19,7 @@ public:
     void setPreviousStation() override;
     void throwError(const std::string& error) override;
     const std::vector<Stations>& getAllStations() override;
+    void updateCurrent(std::string name, std::string link) override;
 };
 
 

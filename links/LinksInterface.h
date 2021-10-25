@@ -1,6 +1,7 @@
 #ifndef UNTITLED2_LINKSINTERFACE_H
 #define UNTITLED2_LINKSINTERFACE_H
 #include <vector>
+
 struct Stations{
     std::string StationName;
     std::string StationLink;
@@ -16,6 +17,7 @@ public:
     virtual void setPreviousStation()=0;
     virtual void throwError(const std::string& error)=0;
     virtual const std::vector<Stations>& getAllStations() = 0;
+    virtual void updateCurrent(std::string name, std::string link)=0;
 };
 
 

@@ -89,7 +89,7 @@ void AppWindow::createPopUpWindow(const std::vector<Stations>& stations) {
 }
 
 void AppWindow::createPopUpWindow2(std::string nameEntry, std::string linkEntry) {
-    this->popUpWindow2 = new PopUpWindow2("Add",nameEntry,linkEntry);
+    this->popUpWindow2 = new PopUpWindow2("Add",nameEntry,linkEntry,eventForWidgets);
     this->popUpWindow2->show_all();
 }
 

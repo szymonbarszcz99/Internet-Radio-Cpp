@@ -27,3 +27,7 @@ template<> void Event::eventPassArg<double>(double volumeChanged) {
 template<> void Event::eventPassArg<int>(int optionsChoosen){
     this->eventHandler->menubarClicked(optionsChoosen);
 }
+
+template<> void Event::eventPassArg<std::string, std::string>(std::string newName, std::string newLink) {
+    this->eventHandler->updateFile(newName,newLink);
+}

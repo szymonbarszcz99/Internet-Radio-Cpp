@@ -25,6 +25,9 @@ public:
     //GUI Menubar event
     void menubarClicked(int optionChoosen);
 
+    //GUI Pop up window event
+    void updateFile(std::string newName, std::string newLink);
+
     //Interface setters
     void setAppWindowInterface(AppWindowInterface* appWindowInterface);
     void setPlayerInterface(PlayerInterface *playerInterface);

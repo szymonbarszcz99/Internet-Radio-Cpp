@@ -52,3 +52,8 @@ void EventHandler::menubarClicked(int optionChoosen) {
     else if(optionChoosen == 4)this->appWindowInterface->createPopUpWindow(linksInterface->getAllStations());
 }
 
+void EventHandler::updateFile(std::string newName, std::string newLink) {
+    this->linksInterface->updateCurrent(newName,newLink);
+    this->appWindowInterface->updateLabel(linksInterface->getCurrentName());
+}
+
