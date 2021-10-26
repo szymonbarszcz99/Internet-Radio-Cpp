@@ -3,11 +3,11 @@
 
 //TODO 1. Delete factory. OK
 //TODO 2. Replace AppLabel with ordinary Label that doesn't connect to event. OK
-//TODO 3. Make button with constructor that connects callbacks.
-//TODO 4. Remove that weird,ugly AppWidget interface. It only complicates.
+//TODO 3. Make button with constructor that connects callbacks. OK
+//TODO 4. Remove that weird,ugly AppWidget interface. It only complicates. OK
 //TODO 5. Builder for AppWindow widgets ?
 //TODO 6. Attach ?
-//TODO 7. Make Slider. Just simple Slider.
+//TODO 7. Make Slider. Just simple Slider. OK
 //TODO 8. Menubar build itself, not delegates it to AppWindow.
 //TODO 9. Builder for PopUpWindow1 and 2.
 //TODO 10. Divide EventHandler, it's too big.
@@ -35,16 +35,12 @@ void AppWindow::updateLabel(const std::string &newStation) {
 AppWindow *AppWindow::createButtons() {
 
     this->playButton1 = new AppButton(eventForWidgets, PLAY);
-    this->playButton1->style("media-playback-start");
 
     this->pauseButton1 = new AppButton(eventForWidgets, PAUSE);
-    this->pauseButton1->style("media-playback-pause");
 
     this->previousButton = new AppButton(eventForWidgets,PREVIOUS);
-    this->previousButton->style("media-seek-backward");
 
     this->nextButton = new AppButton(eventForWidgets,NEXT);
-    this->nextButton->style("media-seek-forward");
 
     return this;
 }
@@ -52,7 +48,7 @@ AppWindow *AppWindow::createButtons() {
 AppWindow *AppWindow::createLabel() {
 
     this->label = new Gtk::Label("Hello world");
-
+    this->label->property_margin() = 10;
     return this;
 }
 
@@ -61,11 +57,11 @@ AppWindow *AppWindow::attachWidgets() {
 
     this->grid->attach(*this->label,0,1,4);
 
-    this->grid->attach(*this->pauseButton1->getAppWidget(), 2,2,1);
-    this->grid->attach(*this->playButton1->getAppWidget(),1,2,1);
-    this->grid->attach(*this->previousButton->getAppWidget(),0,2,1);
-    this->grid->attach(*this->nextButton->getAppWidget(),3,2,1);
-    this->grid->attach(*this->appSlider->getAppWidget(),0,3,4);
+    this->grid->attach(*this->pauseButton1, 2,2,1);
+    this->grid->attach(*this->playButton1,1,2,1);
+    this->grid->attach(*this->previousButton,0,2,1);
+    this->grid->attach(*this->nextButton,3,2,1);
+    this->grid->attach(*this->appSlider,0,3,4);
 
     this->grid->show_all();
 
@@ -74,7 +70,6 @@ AppWindow *AppWindow::attachWidgets() {
 
 AppWindow *AppWindow::createSlider() {
     this->appSlider = new AppSlider(eventForWidgets);
-    this->appSlider->style("audio-volume-high");
 
     return this;
 }

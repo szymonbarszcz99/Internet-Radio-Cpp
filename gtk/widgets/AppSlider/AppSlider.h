@@ -3,21 +3,19 @@
 #include <gtkmm/scale.h>
 #include <gtkmm/box.h>
 #include <gtkmm/image.h>
-#include "../AppWidget/AppWidget.h"
 #include "../Buttons/Events/Event.h"
 
-class AppSlider: public AppWidget{
-    Gtk::Box appWidget;
+class AppSlider: public Gtk::Box{
     Gtk::Image image;
     Gtk::Scale slider;
     Event* properEvent;
     void pack();
+    void onClicked();
+    AppSlider* createImage();
+    AppSlider* createSlider();
 
 public:
     AppSlider(Event* properEvent);
-    void style(std::string styleString);
-    void onClicked();
-    Gtk::Widget* getAppWidget();
 };
 
 

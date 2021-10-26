@@ -1,17 +1,14 @@
 #ifndef UNTITLED2_APPBUTTON_H
 #define UNTITLED2_APPBUTTON_H
 #include <gtkmm/button.h>
-#include "../AppWidget/AppWidget.h"
+#include "../Buttons/Events/Event.h"
 
-class AppButton : public AppWidget{
+class AppButton : public Gtk::Button{
     Event* properEvent;
-    Gtk::Button appWidget;
     Actions action;
+    void onClicked();
 public:
-    void style(std::string styleString) override;
-    void onClicked() override;
     AppButton(Event *properEvent, Actions action);
-    Gtk::Widget* getAppWidget() override;
 };
 
 
