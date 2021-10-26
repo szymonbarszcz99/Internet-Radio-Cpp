@@ -1,5 +1,4 @@
 #include "AppWindow.h"
-#include "PopUpWindow/PopUpWindow.h"
 
 //TODO 1. Delete factory. OK
 //TODO 2. Replace AppLabel with ordinary Label that doesn't connect to event. OK
@@ -9,12 +8,13 @@
 //TODO 6. Attach ?
 //TODO 7. Make Slider. Just simple Slider. OK
 //TODO 8. Menubar build itself, not delegates it to AppWindow. OK
-//TODO 9. Builder for PopUpWindow1 and 2.
+//TODO 9. Builder for PopUpWindow1 and 2. OK
 //TODO 10. Divide EventHandler, it's too big.
 //TODO 11. Make something with these pop ups "purpose" field. It should be nicer.
 //TODO 12. Look for places for Lambdas.
 //TODO 13. Structured bindings may be useful.
 //TODO 14. Apply smart pointers
+//TODO 15. Get rid of WidgetGrid and replace it with ordinary Grid.
 
 
 AppWindow::AppWindow(EventHandler* eventHandler):Gtk::ApplicationWindow() {
@@ -79,23 +79,18 @@ AppWindow *AppWindow::createMenubar() {
     return this;
 }
 
-void AppWindow::createPopUpWindow(const std::vector<Stations>& stations) {
-    this->popUpWindow = new PopUpWindow("Stations");
+void AppWindow::createPopUpWindowView(const std::vector<Stations>& stations) {
+    this->popUpWindowView = new PopUpWindowView("Stations");
 
-    int i=0;
     for(auto it: stations){
-        Gtk::Label* name = new Gtk::Label(it.StationName);
-        Gtk::Label* link = new Gtk::Label(it.StationLink);
-
-        popUpWindow->populate(name,0,i);
-        popUpWindow->populate(link,1,i++);
+        popUpWindowView->populate(it.StationName,it.StationLink);
     }
 
-    this->popUpWindow->show_all();
+    this->popUpWindowView->show_all();
 }
 
-void AppWindow::createPopUpWindow2(std::string nameEntry, std::string linkEntry) {
-    this->popUpWindow2 = new PopUpWindow2("Add",nameEntry,linkEntry,eventForWidgets);
+void AppWindow::createPopUpWindowWrite(std::string nameEntry, std::string linkEntry) {
+    this->popUpWindow2 = new PopUpWindowWrite("Add",nameEntry,linkEntry,eventForWidgets);
     this->popUpWindow2->show_all();
 }
 

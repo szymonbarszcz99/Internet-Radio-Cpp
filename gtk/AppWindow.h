@@ -7,8 +7,8 @@
 #include "widgets/AppButton/AppButton.h"
 #include "widgets/AppSlider/AppSlider.h"
 #include "widgets/Menubar/Menubar.h"
-#include "PopUpWindow/PopUpWindow.h"
-#include "PopUpWindow/PopUpWindow2.h"
+#include "PopUpWindow/PopUpWindowView.h"
+#include "PopUpWindow/PopUpWindowWrite.h"
 
 class AppWindow : public AppWindowInterface, public Gtk::ApplicationWindow{
     WidgetGrid* grid;
@@ -17,8 +17,8 @@ class AppWindow : public AppWindowInterface, public Gtk::ApplicationWindow{
     AppSlider *appSlider;
     Event* eventForWidgets;
     Menubar* menubar;
-    PopUpWindow* popUpWindow;
-    PopUpWindow2* popUpWindow2;
+    PopUpWindowView* popUpWindowView;
+    PopUpWindowWrite* popUpWindow2;
 
 public:
     AppWindow(EventHandler* eventHandler);
@@ -28,8 +28,8 @@ public:
     AppWindow* attachWidgets();
     AppWindow* createSlider();
     AppWindow* createMenubar();
-    void createPopUpWindow(const std::vector<Stations>& stations) override;
-    void createPopUpWindow2(std::string nameEntry = "", std::string linkEntry = "") override;
+    void createPopUpWindowView(const std::vector<Stations>& stations) override;
+    void createPopUpWindowWrite(std::string nameEntry = "", std::string linkEntry = "") override;
 };
 
 

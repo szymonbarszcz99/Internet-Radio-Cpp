@@ -1,30 +1,20 @@
-#ifndef UNTITLED2_POPUPWINDOW2_H
-#define UNTITLED2_POPUPWINDOW2_H
-#include <gtkmm/window.h>
+#ifndef UNTITLED2_POPUPWINDOWWRITE_H
+#define UNTITLED2_POPUPWINDOWWRITE_H
 #include <gtkmm/entry.h>
 #include <gtkmm/button.h>
-#include <gtkmm/grid.h>
 #include <iostream>
 #include "../widgets/Buttons/Events/Event.h"
+#include "PopUpWindow.h"
 
-class PopUpWindow2 : public Gtk::Window{
-    Gtk::Grid* grid;
+class PopUpWindowWrite : public PopUpWindow{
     Gtk::Entry* nameEntry, *linkEntry;
     Gtk::Button *addButton;
     Event* event;
     Purpose windowPurpose;
 public:
-    PopUpWindow2(std::string windowName,std::string nameEntry, std::string linkEntry, Event* event): Gtk::Window(), event(event){
+    PopUpWindowWrite(std::string windowName,std::string nameEntry, std::string linkEntry, Event* event): PopUpWindow(windowName), event(event){
         if(nameEntry == "" && linkEntry == "")this->windowPurpose = ADD;
         else this->windowPurpose = UPDATE;
-
-        this->grid = new Gtk::Grid();
-        this->grid->set_column_spacing(10);
-        this->grid->set_row_spacing(10);
-        this->grid->property_margin()=10;
-
-        this->add(*this->grid);
-        this->set_title(windowName);
 
         this->nameEntry = new Gtk::Entry();
         this->nameEntry->set_text(nameEntry);
@@ -34,7 +24,7 @@ public:
         this->addButton = new Gtk::Button();
         if(this->windowPurpose == UPDATE)this->addButton->set_label("Update");
         else this->addButton->set_label("Add");
-        this->addButton->signal_clicked().connect(sigc::mem_fun(*this, &PopUpWindow2::onAddClicked));
+        this->addButton->signal_clicked().connect(sigc::mem_fun(*this, &PopUpWindowWrite::onAddClicked));
 
         populate();
     };
@@ -43,4 +33,4 @@ public:
 };
 
 
-#endif //UNTITLED2_POPUPWINDOW2_H
+#endif //UNTITLED2_POPUPWINDOWWRITE_H
