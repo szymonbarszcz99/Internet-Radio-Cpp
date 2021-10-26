@@ -8,7 +8,7 @@ class Menubar : public Gtk::MenuBar{
     FileMenuButton* fileMenuButton;
     ViewStationsButton* viewStationsButton;
 public:
-    Menubar();
+    Menubar(Event* event);
     void createFileMenuButton(Event* eventValueChanged);
     void createViewStationButton(Event* event);
 };

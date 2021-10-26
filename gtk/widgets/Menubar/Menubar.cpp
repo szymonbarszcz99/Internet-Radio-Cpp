@@ -1,6 +1,10 @@
 #include "Menubar.h"
 
-Menubar::Menubar(): Gtk::MenuBar() {}
+Menubar::Menubar(Event* event): Gtk::MenuBar() {
+    this->createFileMenuButton(event);
+    this->createViewStationButton(event);
+
+}
 
 void Menubar::createFileMenuButton(Event *eventValueChanged) {
     this->fileMenuButton = new FileMenuButton(eventValueChanged);

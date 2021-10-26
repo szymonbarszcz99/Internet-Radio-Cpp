@@ -8,7 +8,7 @@
 //TODO 5. Builder for AppWindow widgets ?
 //TODO 6. Attach ?
 //TODO 7. Make Slider. Just simple Slider. OK
-//TODO 8. Menubar build itself, not delegates it to AppWindow.
+//TODO 8. Menubar build itself, not delegates it to AppWindow. OK
 //TODO 9. Builder for PopUpWindow1 and 2.
 //TODO 10. Divide EventHandler, it's too big.
 //TODO 11. Make something with these pop ups "purpose" field. It should be nicer.
@@ -75,9 +75,7 @@ AppWindow *AppWindow::createSlider() {
 }
 
 AppWindow *AppWindow::createMenubar() {
-    this->menubar = new Menubar();
-    this->menubar->createFileMenuButton(eventForWidgets);
-    this->menubar->createViewStationButton(eventForWidgets);
+    this->menubar = new Menubar(eventForWidgets);
     return this;
 }
 
