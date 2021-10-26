@@ -7,8 +7,6 @@
 #include "widgets/AppButton/AppButton.h"
 #include "widgets/AppWidget/AppWidget.h"
 #include "widgets/AppLabel/AppLabel.h"
-#include "widgets/WidgetConstructor/ButtonConstructor.h"
-#include "widgets/WidgetConstructor/LabelConstructor.h"
 #include "widgets/AppSlider/AppSlider.h"
 #include "widgets/Menubar/Menubar.h"
 #include "PopUpWindow/PopUpWindow.h"

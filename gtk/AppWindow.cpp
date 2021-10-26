@@ -1,6 +1,22 @@
 #include "AppWindow.h"
 #include "PopUpWindow/PopUpWindow.h"
 
+//TODO 1. Delete factory.
+//TODO 2. Replace AppLabel with ordinary Label that doesn't connect to event.
+//TODO 3. Make button with constructor that connects callbacks.
+//TODO 4. Remove that weird,ugly AppWidget interface. It only complicates.
+//TODO 5. Builder for AppWindow widgets ?
+//TODO 6. Attach ?
+//TODO 7. Make Slider. Just simple Slider.
+//TODO 8. Menubar build itself, not delegates it to AppWindow.
+//TODO 9. Builder for PopUpWindow1 and 2.
+//TODO 10. Divide EventHandler, it's too big.
+//TODO 11. Make something with these pop ups "purpose" field. It should be nicer.
+//TODO 12. Look for places for Lambdas.
+//TODO 13. Structured bindings may be useful.
+//TODO 14. Apply smart pointers
+
+
 AppWindow::AppWindow(EventHandler* eventHandler):Gtk::ApplicationWindow() {
     set_title("Internet Radio");
 
@@ -17,27 +33,25 @@ void AppWindow::updateLabel(const std::string &newStation) {
 }
 
 AppWindow *AppWindow::createButtons() {
-    ButtonConstructor buttonConstructor;
 
-    this->playButton1 = buttonConstructor.FactoryMethod(eventForWidgets, PLAY);
+    this->playButton1 = new AppButton(eventForWidgets, PLAY);
     this->playButton1->style("media-playback-start");
 
-    this->pauseButton1 = buttonConstructor.FactoryMethod(eventForWidgets, PAUSE);
+    this->pauseButton1 = new AppButton(eventForWidgets, PAUSE);
     this->pauseButton1->style("media-playback-pause");
 
-    this->previousButton = buttonConstructor.FactoryMethod(eventForWidgets,PREVIOUS);
+    this->previousButton = new AppButton(eventForWidgets,PREVIOUS);
     this->previousButton->style("media-seek-backward");
 
-    this->nextButton = buttonConstructor.FactoryMethod(eventForWidgets,NEXT);
+    this->nextButton = new AppButton(eventForWidgets,NEXT);
     this->nextButton->style("media-seek-forward");
 
     return this;
 }
 
 AppWindow *AppWindow::createLabel() {
-    LabelConstructor labelConstructor;
 
-    this->appLabel = labelConstructor.FactoryMethod(eventForWidgets);
+    this->appLabel = new AppLabel(eventForWidgets);
     this->appLabel->style("Hello world");
 
     return this;

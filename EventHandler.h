@@ -4,7 +4,7 @@
 #include "gst/PlayerInterface.h"
 #include "links/LinksInterface.h"
 #include <iostream>
-//TODO apply mediator
+
 class EventHandler{
     AppWindowInterface* appWindowInterface = nullptr;
     PlayerInterface* playerInterface = nullptr;
