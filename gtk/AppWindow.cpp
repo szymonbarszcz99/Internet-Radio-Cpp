@@ -1,8 +1,8 @@
 #include "AppWindow.h"
 #include "PopUpWindow/PopUpWindow.h"
 
-//TODO 1. Delete factory.
-//TODO 2. Replace AppLabel with ordinary Label that doesn't connect to event.
+//TODO 1. Delete factory. OK
+//TODO 2. Replace AppLabel with ordinary Label that doesn't connect to event. OK
 //TODO 3. Make button with constructor that connects callbacks.
 //TODO 4. Remove that weird,ugly AppWidget interface. It only complicates.
 //TODO 5. Builder for AppWindow widgets ?
@@ -29,7 +29,7 @@ AppWindow::AppWindow(EventHandler* eventHandler):Gtk::ApplicationWindow() {
 }
 
 void AppWindow::updateLabel(const std::string &newStation) {
-    this->appLabel->style(newStation);
+    this->label->set_label(newStation);
 }
 
 AppWindow *AppWindow::createButtons() {
@@ -51,8 +51,7 @@ AppWindow *AppWindow::createButtons() {
 
 AppWindow *AppWindow::createLabel() {
 
-    this->appLabel = new AppLabel(eventForWidgets);
-    this->appLabel->style("Hello world");
+    this->label = new Gtk::Label("Hello world");
 
     return this;
 }
@@ -60,7 +59,7 @@ AppWindow *AppWindow::createLabel() {
 AppWindow *AppWindow::attachWidgets() {
     this->grid->attach(*this->menubar,0,0,4);
 
-    this->grid->attach(*this->appLabel->getAppWidget(),0,1,4);
+    this->grid->attach(*this->label,0,1,4);
 
     this->grid->attach(*this->pauseButton1->getAppWidget(), 2,2,1);
     this->grid->attach(*this->playButton1->getAppWidget(),1,2,1);

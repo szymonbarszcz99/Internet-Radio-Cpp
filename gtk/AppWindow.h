@@ -6,7 +6,6 @@
 #include "widgets/WidgetGrid/WidgetGrid.h"
 #include "widgets/AppButton/AppButton.h"
 #include "widgets/AppWidget/AppWidget.h"
-#include "widgets/AppLabel/AppLabel.h"
 #include "widgets/AppSlider/AppSlider.h"
 #include "widgets/Menubar/Menubar.h"
 #include "PopUpWindow/PopUpWindow.h"
@@ -14,7 +13,8 @@
 
 class AppWindow : public AppWindowInterface, public Gtk::ApplicationWindow{
     WidgetGrid* grid;
-    AppWidget* appLabel, *playButton1, *pauseButton1, *nextButton, *previousButton, *appSlider;
+    Gtk::Label* label;
+    AppWidget *playButton1, *pauseButton1, *nextButton, *previousButton, *appSlider;
     Event* eventForWidgets;
     Menubar* menubar;
     PopUpWindow* popUpWindow;
