@@ -11,8 +11,4 @@ enum Actions{
     VIEW
 };
 
-enum Purpose{
-    ADD,
-    UPDATE
-};
 #endif //UNTITLED2_ENUMS_H

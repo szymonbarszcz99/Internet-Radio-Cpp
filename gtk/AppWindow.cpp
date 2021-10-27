@@ -9,8 +9,8 @@
 //TODO 7. Make Slider. Just simple Slider. OK
 //TODO 8. Menubar build itself, not delegates it to AppWindow. OK
 //TODO 9. Builder for PopUpWindow1 and 2. OK
-//TODO 10. Divide EventHandler, it's too big. Apply Strategy design pattern
-//TODO 11. Make something with these pop ups "purpose" field. It should be nicer.
+//TODO 10. Divide EventHandler, it's too big. Apply Strategy design pattern  OK
+//TODO 11. Make something with these pop ups "purpose" field. It should be nicer. OK
 //TODO 12. Look for places for Lambdas.
 //TODO 13. Structured bindings may be useful.
 //TODO 14. Apply smart pointers
