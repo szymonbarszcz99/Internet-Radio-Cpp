@@ -66,6 +66,7 @@ void Links::updateCurrent(FileLine cmd,std::string name, std::string link) {
     std::string temp_line;
     long index = std::distance(this->StationsVector.begin(),this->StationsIterator);
     long i = 0;
+    int maxI = this->StationsVector.size()-1;
 
     std::fstream newFile("../stations_temp.csv",std::fstream::out);
     this->stations.open("../stations.csv");
@@ -73,17 +74,40 @@ void Links::updateCurrent(FileLine cmd,std::string name, std::string link) {
     if(!newFile.is_open() || !this->stations.is_open()){
         std::cout<<"Unable to open files"<<std::endl;
     }
+    if(cmd == DELETE){
+        while(getline(this->stations, temp_line)){
 
-    while(getline(this->stations, temp_line)){
-        if(i == index && cmd == MODIFY){
-            newFile<<name<<","<<link<<std::endl;
+            if(i == index){
+                i++;
+                continue;
+            }
+            else{
+                if((i == 1 && index == 0) || i==0)newFile<<temp_line;
+                else newFile<<std::endl<<temp_line;
+                i++;
+                /*
+                 * if((index == 0 && i == index))nie wklejaj endl
+                 * if((index != 0 || i != index) && i != maxI)wklejaj
+                 */
+
+            }
+
         }
-        else if(i == index && cmd == DELETE)continue;
-        else{
-            newFile<<temp_line<<std::endl;
-        }
-        i++;
     }
+    else{
+        while(getline(this->stations, temp_line)){
+
+            if(i == index){
+                newFile<<name<<","<<link;
+            }
+            else{
+                newFile<<temp_line;
+            }
+            if(i != maxI)newFile<<std::endl;
+            i++;
+        }
+    }
+
     this->stations.close();
     newFile.close();
 

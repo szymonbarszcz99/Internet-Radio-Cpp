@@ -12,11 +12,19 @@ private:
     void on_hide_window();
     EventHandler* eventHandler = nullptr;
     AppWindow* appWindow = nullptr;
+    PlayerClickedStrategy* clickedStrategy = nullptr;
+    MenubarClickedStrategy* menubarClickedStrategy = nullptr;
+    PopUpWindowStrategy* popUpWindowStrategy = nullptr;
+    SliderStrategy* sliderStrategy = nullptr;
 
 public:
     static Glib::RefPtr<RadioApp> create();
     void setEventHandler(EventHandler* eventHandler);
+    void setPlayerClickedStrategy(PlayerClickedStrategy *clickedStrategy);
     AppWindow* getAppWindow();
+    void setMenubarClickedStrategy(MenubarClickedStrategy *menubarClickedStrategy);
+    void setPopUpWindowStrategy(PopUpWindowStrategy *popUpWindowStrategy);
+    void setSliderStrategy(SliderStrategy *sliderStrategy);
 };
 
 

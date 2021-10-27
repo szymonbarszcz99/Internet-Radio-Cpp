@@ -14,5 +14,6 @@ void PopUpWindowWrite::populate() {
 }
 
 void PopUpWindowWrite::onAddClicked() {
-    this->event->eventPassArg(std::string(nameEntry->get_text()), std::string(linkEntry->get_text()),windowPurpose);
+    this->event->eventPassArg(std::string(nameEntry->get_text()), std::string(linkEntry->get_text()),windowAction);
+    this->close();
 }

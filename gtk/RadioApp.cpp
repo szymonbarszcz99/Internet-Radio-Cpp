@@ -8,7 +8,9 @@ Glib::RefPtr<RadioApp> RadioApp::create() {
 }
 
 void RadioApp::createAppWindow() {
-    this->appWindow = new AppWindow(this->eventHandler);
+    this->appWindow = new AppWindow(this->eventHandler, this->clickedStrategy,
+                                    this->menubarClickedStrategy, this->popUpWindowStrategy,
+                                    this->sliderStrategy);
     add_window(*this->appWindow);
 
     this->appWindow->signal_hide().connect(sigc::mem_fun(*this,&RadioApp::on_hide_window));
@@ -16,7 +18,9 @@ void RadioApp::createAppWindow() {
 
 void RadioApp::on_activate(){
     createAppWindow();
-    this->eventHandler->setAppWindowInterface(this->appWindow);
+    this->clickedStrategy->setAppWindowInterface(this->appWindow);
+    this->menubarClickedStrategy->setAppWindowInterface(this->appWindow);
+    this->popUpWindowStrategy->setAppWindowInterface(this->appWindow);
     this->appWindow->present();
 }
 
@@ -32,4 +36,19 @@ void RadioApp::setEventHandler(EventHandler *eventHandler) {
     this->eventHandler = eventHandler;
 }
 
+void RadioApp::setPlayerClickedStrategy(PlayerClickedStrategy *clickedStrategy) {
+    this->clickedStrategy = clickedStrategy;
+}
+
+void RadioApp::setMenubarClickedStrategy(MenubarClickedStrategy *menubarClickedStrategy) {
+    this->menubarClickedStrategy = menubarClickedStrategy;
+}
+
+void RadioApp::setPopUpWindowStrategy(PopUpWindowStrategy *popUpWindowStrategy) {
+    this->popUpWindowStrategy = popUpWindowStrategy;
+}
+
+void RadioApp::setSliderStrategy(SliderStrategy* sliderStrategy){
+    this->sliderStrategy = sliderStrategy;
+}
 

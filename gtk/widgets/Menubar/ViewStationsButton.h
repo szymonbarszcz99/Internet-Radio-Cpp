@@ -2,12 +2,12 @@
 #define UNTITLED2_VIEWSTATIONSBUTTON_H
 #include <gtkmm/menu.h>
 #include <gtkmm/menubutton.h>
-#include "../Buttons/Events/Event.h"
+#include "../Events/Event.h"
 
 class ViewStationsButton : public Gtk::MenuItem{
 Event* properEvent;
 Gtk::Menu* viewMenu;
-void onValueChosen(int valueId);
+void onValueChosen(Actions actionId);
 public:
     ViewStationsButton(Event* properEvent);
 };

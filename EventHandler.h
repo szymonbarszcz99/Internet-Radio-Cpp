@@ -3,37 +3,18 @@
 #include "gtk/AppWindowInterface.h"
 #include "gst/PlayerInterface.h"
 #include "links/LinksInterface.h"
+#include "Strategy/ClickedStrategy.h"
 #include <iostream>
 
 class EventHandler{
-    AppWindowInterface* appWindowInterface = nullptr;
-    PlayerInterface* playerInterface = nullptr;
-    LinksInterface* linksInterface = nullptr;
+    ClickedStrategy* clickedStrategy = nullptr;
 public:
-    //GUI Buttons events
-    void playEventClicked();
-    void pauseEventClicked();
-    void nextEventClicked();
-    void previousEventClicked();
 
-    //GUI Label event
-    void labelClicked();
+    //Strategy setter
+    void setStrategy(ClickedStrategy* clickedStrategy);
 
-    //GUI Slider event
-    void sliderValueChanged(double newValue);
-
-    //GUI Menubar event
-    void menubarClicked(int optionChoosen);
-
-    //GUI Pop up window event
-    void updateFile(std::string newName, std::string newLink);
-    void addToFile(std::string newName, std::string newLink);
-
-    //Interface setters
-    void setAppWindowInterface(AppWindowInterface* appWindowInterface);
-    void setPlayerInterface(PlayerInterface *playerInterface);
-    void setLinksInterface(LinksInterface *linksInterface);
+    //Execute proper strategy
+    void executeStrategy();
 };
-
 
 #endif //UNTITLED2_EVENTHANDLER_H

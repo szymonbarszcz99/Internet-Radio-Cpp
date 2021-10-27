@@ -3,18 +3,17 @@
 #include <gtkmm/entry.h>
 #include <gtkmm/button.h>
 #include <iostream>
-#include "../widgets/Buttons/Events/Event.h"
+#include "../widgets/Events/Event.h"
 #include "PopUpWindow.h"
 
 class PopUpWindowWrite : public PopUpWindow{
     Gtk::Entry* nameEntry, *linkEntry;
     Gtk::Button *addButton;
     Event* event;
-    Purpose windowPurpose;
+    Actions windowAction;
 public:
-    PopUpWindowWrite(std::string windowName,std::string nameEntry, std::string linkEntry, Event* event): PopUpWindow(windowName), event(event){
-        if(nameEntry == "" && linkEntry == "")this->windowPurpose = ADD;
-        else this->windowPurpose = UPDATE;
+    PopUpWindowWrite(std::string windowName,std::string nameEntry, std::string linkEntry, Event* event, Actions action):
+    PopUpWindow(windowName), event(event), windowAction(action){
 
         this->nameEntry = new Gtk::Entry();
         this->nameEntry->set_text(nameEntry);
@@ -22,7 +21,7 @@ public:
         this->linkEntry->set_text(linkEntry);
 
         this->addButton = new Gtk::Button();
-        if(this->windowPurpose == UPDATE)this->addButton->set_label("Update");
+        if(this->windowAction == MODIFY_STATION)this->addButton->set_label("Update");
         else this->addButton->set_label("Add");
         this->addButton->signal_clicked().connect(sigc::mem_fun(*this, &PopUpWindowWrite::onAddClicked));
 

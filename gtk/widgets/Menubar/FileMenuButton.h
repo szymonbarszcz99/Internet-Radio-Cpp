@@ -2,11 +2,11 @@
 #define UNTITLED2_FILEMENUBUTTON_H
 #include <gtkmm/menu.h>
 #include <gtkmm/menubutton.h>
-#include "../Buttons/Events/Event.h"
+#include "../Events/Event.h"
 
 class FileMenuButton : public Gtk::MenuItem{
     Event* eventValueChanged;
-    void onValueChosen(int valueId);
+    void onValueChosen(Actions actionId);
     Gtk::Menu* fileMenu;
 public:
     FileMenuButton(Event* eventValueChanged);

@@ -4,26 +4,29 @@
 //TODO 2. Replace AppLabel with ordinary Label that doesn't connect to event. OK
 //TODO 3. Make button with constructor that connects callbacks. OK
 //TODO 4. Remove that weird,ugly AppWidget interface. It only complicates. OK
-//TODO 5. Builder for AppWindow widgets ?
+//TODO 5. Builder for AppWindow widgets ? No, now methods have only few lines.
 //TODO 6. Attach ?
 //TODO 7. Make Slider. Just simple Slider. OK
 //TODO 8. Menubar build itself, not delegates it to AppWindow. OK
 //TODO 9. Builder for PopUpWindow1 and 2. OK
-//TODO 10. Divide EventHandler, it's too big.
+//TODO 10. Divide EventHandler, it's too big. Apply Strategy design pattern
 //TODO 11. Make something with these pop ups "purpose" field. It should be nicer.
 //TODO 12. Look for places for Lambdas.
 //TODO 13. Structured bindings may be useful.
 //TODO 14. Apply smart pointers
-//TODO 15. Get rid of WidgetGrid and replace it with ordinary Grid.
+//TODO 15. Get rid of WidgetGrid and replace it with ordinary Grid. OK
 
 
-AppWindow::AppWindow(EventHandler* eventHandler):Gtk::ApplicationWindow() {
+AppWindow::AppWindow(EventHandler* eventHandler, PlayerClickedStrategy* clickedStrategy,
+                     MenubarClickedStrategy* menubarClickedStrategy,
+                     PopUpWindowStrategy* popUpWindowStrategy,SliderStrategy* sliderStrategy)
+:Gtk::ApplicationWindow() {
     set_title("Internet Radio");
 
-    this->grid = new WidgetGrid();
+    this->grid = new Gtk::Grid();
     add(*(this->grid));
 
-    this->eventForWidgets = new Event(eventHandler);
+    this->eventForWidgets = new Event(eventHandler,clickedStrategy,menubarClickedStrategy,popUpWindowStrategy,sliderStrategy);
 
     this->createLabel()->createButtons()->createSlider()->createMenubar()->attachWidgets();
 }
@@ -89,9 +92,13 @@ void AppWindow::createPopUpWindowView(const std::vector<Stations>& stations) {
     this->popUpWindowView->show_all();
 }
 
-void AppWindow::createPopUpWindowWrite(std::string nameEntry, std::string linkEntry) {
-    this->popUpWindow2 = new PopUpWindowWrite("Add",nameEntry,linkEntry,eventForWidgets);
+void AppWindow::createPopUpWindowWrite(std::string windowName,std::string nameEntry, std::string linkEntry) {
+    Actions windowAction;
+    if(windowName == "Add")windowAction = ADD_STATION;
+    else windowAction = MODIFY_STATION;
+    this->popUpWindow2 = new PopUpWindowWrite(windowName,nameEntry,linkEntry,eventForWidgets, windowAction);
     this->popUpWindow2->show_all();
 }
+
 
 

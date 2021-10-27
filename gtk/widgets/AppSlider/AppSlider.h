@@ -3,7 +3,7 @@
 #include <gtkmm/scale.h>
 #include <gtkmm/box.h>
 #include <gtkmm/image.h>
-#include "../Buttons/Events/Event.h"
+#include "../Events/Event.h"
 
 class AppSlider: public Gtk::Box{
     Gtk::Image image;
