@@ -20,11 +20,10 @@ private:
 public:
     static Glib::RefPtr<RadioApp> create();
     void setEventHandler(EventHandler* eventHandler);
-    void setPlayerClickedStrategy(PlayerClickedStrategy *clickedStrategy);
-    AppWindow* getAppWindow();
-    void setMenubarClickedStrategy(MenubarClickedStrategy *menubarClickedStrategy);
-    void setPopUpWindowStrategy(PopUpWindowStrategy *popUpWindowStrategy);
-    void setSliderStrategy(SliderStrategy *sliderStrategy);
+    RadioApp* setPlayerClickedStrategy(PlayerClickedStrategy *clickedStrategy);
+    RadioApp* setMenubarClickedStrategy(MenubarClickedStrategy *menubarClickedStrategy);
+    RadioApp* setPopUpWindowStrategy(PopUpWindowStrategy *popUpWindowStrategy);
+    RadioApp* setSliderStrategy(SliderStrategy *sliderStrategy);
 };
 
 

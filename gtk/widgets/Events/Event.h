@@ -16,7 +16,9 @@ class Event {
     PopUpWindowStrategy* popUpWindowStrategy;
     SliderStrategy* sliderStrategy;
 public:
-    Event(EventHandler* eventHandler,PlayerClickedStrategy* playerClickedStrategy, MenubarClickedStrategy* menubarClickedStrategy, PopUpWindowStrategy* popUpWindowStrategy,SliderStrategy* sliderStrategy):
+    Event(EventHandler* eventHandler,PlayerClickedStrategy* playerClickedStrategy,
+          MenubarClickedStrategy* menubarClickedStrategy, PopUpWindowStrategy* popUpWindowStrategy,
+          SliderStrategy* sliderStrategy):
     eventHandler(eventHandler),playerClickedStrategy(playerClickedStrategy),
     menubarClickedStrategy(menubarClickedStrategy),popUpWindowStrategy(popUpWindowStrategy),
     sliderStrategy(sliderStrategy){}

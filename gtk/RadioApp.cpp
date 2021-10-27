@@ -28,27 +28,27 @@ void RadioApp::on_hide_window() {
     delete this->appWindow;
 }
 
-AppWindow *RadioApp::getAppWindow() {
-    return this->appWindow;
-}
-
 void RadioApp::setEventHandler(EventHandler *eventHandler) {
     this->eventHandler = eventHandler;
 }
 
-void RadioApp::setPlayerClickedStrategy(PlayerClickedStrategy *clickedStrategy) {
+RadioApp* RadioApp::setPlayerClickedStrategy(PlayerClickedStrategy *clickedStrategy) {
     this->clickedStrategy = clickedStrategy;
+    return this;
 }
 
-void RadioApp::setMenubarClickedStrategy(MenubarClickedStrategy *menubarClickedStrategy) {
+RadioApp* RadioApp::setMenubarClickedStrategy(MenubarClickedStrategy *menubarClickedStrategy) {
     this->menubarClickedStrategy = menubarClickedStrategy;
+    return this;
 }
 
-void RadioApp::setPopUpWindowStrategy(PopUpWindowStrategy *popUpWindowStrategy) {
+RadioApp* RadioApp::setPopUpWindowStrategy(PopUpWindowStrategy *popUpWindowStrategy) {
     this->popUpWindowStrategy = popUpWindowStrategy;
+    return this;
 }
 
-void RadioApp::setSliderStrategy(SliderStrategy* sliderStrategy){
+RadioApp* RadioApp::setSliderStrategy(SliderStrategy* sliderStrategy){
     this->sliderStrategy = sliderStrategy;
+    return this;
 }
 
