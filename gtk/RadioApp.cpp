@@ -8,7 +8,7 @@ Glib::RefPtr<RadioApp> RadioApp::create() {
 }
 
 void RadioApp::createAppWindow() {
-    this->appWindow = new AppWindow(this->eventHandler, this->clickedStrategy,
+    this->appWindow = std::make_shared<AppWindow>(std::move(this->eventHandler), this->playerClickedStrategy,
                                     this->menubarClickedStrategy, this->popUpWindowStrategy,
                                     this->sliderStrategy);
     add_window(*this->appWindow);
@@ -18,36 +18,36 @@ void RadioApp::createAppWindow() {
 
 void RadioApp::on_activate(){
     createAppWindow();
-    this->clickedStrategy->setAppWindowInterface(this->appWindow);
     this->menubarClickedStrategy->setAppWindowInterface(this->appWindow);
     this->popUpWindowStrategy->setAppWindowInterface(this->appWindow);
+    this->playerClickedStrategy->setAppWindowInterface(this->appWindow);
     this->appWindow->present();
 }
 
 void RadioApp::on_hide_window() {
-    delete this->appWindow;
+    this->appWindow.reset();
 }
 
-void RadioApp::setEventHandler(EventHandler *eventHandler) {
-    this->eventHandler = eventHandler;
+void RadioApp::setEventHandler(std::unique_ptr<EventHandler>&& eventHandler) {
+    this->eventHandler = std::move(eventHandler);
 }
 
-RadioApp* RadioApp::setPlayerClickedStrategy(PlayerClickedStrategy *clickedStrategy) {
-    this->clickedStrategy = clickedStrategy;
+RadioApp* RadioApp::setPlayerClickedStrategy(std::shared_ptr<PlayerClickedStrategy>&& clickedStrategy) {
+    this->playerClickedStrategy = clickedStrategy;
     return this;
 }
 
-RadioApp* RadioApp::setMenubarClickedStrategy(MenubarClickedStrategy *menubarClickedStrategy) {
+RadioApp* RadioApp::setMenubarClickedStrategy(std::shared_ptr<MenubarClickedStrategy>&& menubarClickedStrategy) {
     this->menubarClickedStrategy = menubarClickedStrategy;
     return this;
 }
 
-RadioApp* RadioApp::setPopUpWindowStrategy(PopUpWindowStrategy *popUpWindowStrategy) {
+RadioApp* RadioApp::setPopUpWindowStrategy(std::shared_ptr<PopUpWindowStrategy>&& popUpWindowStrategy) {
     this->popUpWindowStrategy = popUpWindowStrategy;
     return this;
 }
 
-RadioApp* RadioApp::setSliderStrategy(SliderStrategy* sliderStrategy){
+RadioApp* RadioApp::setSliderStrategy(std::shared_ptr<SliderStrategy>&& sliderStrategy){
     this->sliderStrategy = sliderStrategy;
     return this;
 }

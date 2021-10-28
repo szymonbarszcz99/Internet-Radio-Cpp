@@ -9,18 +9,18 @@ class PlayerClickedStrategy : public ClickedStrategy{
     void nextEventClicked();
     void previousEventClicked();
     Actions actionToDo;
-    AppWindowInterface* appWindowInterface;
-    LinksInterface* linksInterface;
-    PlayerInterface* playerInterface;
+    std::shared_ptr<AppWindowInterface> appWindowInterface;
+    std::shared_ptr<LinksInterface> linksInterface;
+    std::shared_ptr<PlayerInterface> playerInterface;
 public:
-    PlayerClickedStrategy( LinksInterface* linksInterface, PlayerInterface* playerInterface):
+    PlayerClickedStrategy( std::shared_ptr<LinksInterface> linksInterface, std::shared_ptr<PlayerInterface> playerInterface):
              linksInterface(linksInterface), playerInterface(playerInterface){};
 
     void onClickedEvent() override;
 
     void setActionToDo(Actions action);
 
-    void setAppWindowInterface(AppWindowInterface *appWindowInterface) override;
+    void setAppWindowInterface(std::shared_ptr<AppWindowInterface> appWindowInterface) override;
 };
 
 

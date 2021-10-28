@@ -7,18 +7,20 @@
 #include "PopUpWindow.h"
 
 class PopUpWindowWrite : public PopUpWindow{
-    Gtk::Entry* nameEntry, *linkEntry;
+
     Gtk::Button *addButton;
-    Event* event;
+    std::shared_ptr<Event> event;
     Actions windowAction;
+    std::vector<std::unique_ptr<Gtk::Entry>> entryVec;
 public:
-    PopUpWindowWrite(std::string windowName,std::string nameEntry, std::string linkEntry, Event* event, Actions action):
+    PopUpWindowWrite(std::string windowName,std::string nameEntry, std::string linkEntry, std::shared_ptr<Event> event,
+                     Actions action):
     PopUpWindow(windowName), event(event), windowAction(action){
 
-        this->nameEntry = new Gtk::Entry();
-        this->nameEntry->set_text(nameEntry);
-        this->linkEntry = new Gtk::Entry();
-        this->linkEntry->set_text(linkEntry);
+        this->entryVec.emplace_back(std::make_unique<Gtk::Entry>());
+        this->entryVec.back()->set_text(nameEntry);
+        this->entryVec.emplace_back(std::make_unique<Gtk::Entry>());
+        this->entryVec.back()->set_text(linkEntry);
 
         this->addButton = new Gtk::Button();
         if(this->windowAction == MODIFY_STATION)this->addButton->set_label("Update");

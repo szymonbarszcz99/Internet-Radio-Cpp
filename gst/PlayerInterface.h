@@ -1,5 +1,6 @@
 #ifndef UNTITLED2_PLAYERINTERFACE_H
 #define UNTITLED2_PLAYERINTERFACE_H
+#include <memory>
 
 class PlayerInterface{
 public:

@@ -12,21 +12,21 @@
 //TODO 10. Divide EventHandler, it's too big. Apply Strategy design pattern  OK
 //TODO 11. Make something with these pop ups "purpose" field. It should be nicer. OK
 //TODO 12. Look for places for Lambdas.
-//TODO 13. Structured bindings may be useful.
+//TODO 13. Structured bindings may be useful. Maybe not.
 //TODO 14. Apply smart pointers
 //TODO 15. Get rid of WidgetGrid and replace it with ordinary Grid. OK
 
 
-AppWindow::AppWindow(EventHandler* eventHandler, PlayerClickedStrategy* clickedStrategy,
-                     MenubarClickedStrategy* menubarClickedStrategy,
-                     PopUpWindowStrategy* popUpWindowStrategy,SliderStrategy* sliderStrategy)
+AppWindow::AppWindow(std::unique_ptr<EventHandler> eventHandler,std::shared_ptr<PlayerClickedStrategy> clickedStrategy,
+                     std::shared_ptr<MenubarClickedStrategy> menubarClickedStrategy, std::shared_ptr<PopUpWindowStrategy> popUpWindowStrategy,
+                     std::shared_ptr<SliderStrategy> sliderStrategy)
 :Gtk::ApplicationWindow() {
     set_title("Internet Radio");
 
-    this->grid = new Gtk::Grid();
+    this->grid =  std::make_unique<Gtk::Grid>();
     add(*(this->grid));
 
-    this->eventForWidgets = new Event(eventHandler,clickedStrategy,menubarClickedStrategy,popUpWindowStrategy,sliderStrategy);
+    this->eventForWidgets = std::make_shared<Event>(std::move(eventHandler),clickedStrategy,menubarClickedStrategy,popUpWindowStrategy,sliderStrategy);
 
     this->createLabel()->createButtons()->createSlider()->createMenubar()->attachWidgets();
 }
@@ -37,20 +37,20 @@ void AppWindow::updateLabel(const std::string &newStation) {
 
 AppWindow *AppWindow::createButtons() {
 
-    this->playButton1 = new AppButton(eventForWidgets, PLAY);
+    this->playButton1 = std::make_unique<AppButton>(eventForWidgets, PLAY);
 
-    this->pauseButton1 = new AppButton(eventForWidgets, PAUSE);
+    this->pauseButton1 = std::make_unique<AppButton>(eventForWidgets, PAUSE);
 
-    this->previousButton = new AppButton(eventForWidgets,PREVIOUS);
+    this->previousButton = std::make_unique<AppButton>(eventForWidgets,PREVIOUS);
 
-    this->nextButton = new AppButton(eventForWidgets,NEXT);
+    this->nextButton = std::make_unique<AppButton>(eventForWidgets,NEXT);
 
     return this;
 }
 
 AppWindow *AppWindow::createLabel() {
 
-    this->label = new Gtk::Label("Hello world");
+    this->label = std::make_unique<Gtk::Label>("Hello world");
     this->label->property_margin() = 10;
     return this;
 }
@@ -72,18 +72,18 @@ AppWindow *AppWindow::attachWidgets() {
 }
 
 AppWindow *AppWindow::createSlider() {
-    this->appSlider = new AppSlider(eventForWidgets);
+    this->appSlider = std::make_unique<AppSlider>(eventForWidgets);
 
     return this;
 }
 
 AppWindow *AppWindow::createMenubar() {
-    this->menubar = new Menubar(eventForWidgets);
+    this->menubar = std::make_unique<Menubar>(eventForWidgets);
     return this;
 }
 
 void AppWindow::createPopUpWindowView(const std::vector<Stations>& stations) {
-    this->popUpWindowView = new PopUpWindowView("Stations");
+    this->popUpWindowView = std::make_unique<PopUpWindowView>("Stations");
 
     for(auto it: stations){
         popUpWindowView->populate(it.StationName,it.StationLink);
@@ -96,7 +96,7 @@ void AppWindow::createPopUpWindowWrite(std::string windowName,std::string nameEn
     Actions windowAction;
     if(windowName == "Add")windowAction = ADD_STATION;
     else windowAction = MODIFY_STATION;
-    this->popUpWindow2 = new PopUpWindowWrite(windowName,nameEntry,linkEntry,eventForWidgets, windowAction);
+    this->popUpWindow2 = std::make_unique<PopUpWindowWrite>(windowName,nameEntry,linkEntry,eventForWidgets, windowAction);
     this->popUpWindow2->show_all();
 }
 

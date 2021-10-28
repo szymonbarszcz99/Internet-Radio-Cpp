@@ -10,19 +10,19 @@
 #include "PopUpWindow/PopUpWindowWrite.h"
 
 class AppWindow : public AppWindowInterface, public Gtk::ApplicationWindow{
-    Gtk::Grid* grid;
-    Gtk::Label* label;
-    AppButton* playButton1, *pauseButton1, *nextButton, *previousButton;
-    AppSlider *appSlider;
-    Event* eventForWidgets;
-    Menubar* menubar;
-    PopUpWindowView* popUpWindowView;
-    PopUpWindowWrite* popUpWindow2;
+    std::unique_ptr<Gtk::Grid> grid;
+    std::unique_ptr<Gtk::Label> label;
+    std::unique_ptr<AppButton> playButton1, pauseButton1, nextButton, previousButton;
+    std::unique_ptr<AppSlider> appSlider;
+    std::shared_ptr<Event> eventForWidgets;
+    std::unique_ptr<Menubar> menubar;
+    std::unique_ptr<PopUpWindowView> popUpWindowView;
+    std::unique_ptr<PopUpWindowWrite> popUpWindow2;
 
 public:
-    AppWindow(EventHandler* eventHandler,PlayerClickedStrategy* clickedStrategy,
-              MenubarClickedStrategy* menubarClickedStrategy, PopUpWindowStrategy* popUpWindowStrategy,
-              SliderStrategy* sliderStrategy);
+    AppWindow(std::unique_ptr<EventHandler> eventHandler,std::shared_ptr<PlayerClickedStrategy> clickedStrategy,
+              std::shared_ptr<MenubarClickedStrategy> menubarClickedStrategy, std::shared_ptr<PopUpWindowStrategy> popUpWindowStrategy,
+              std::shared_ptr<SliderStrategy> sliderStrategy);
     void updateLabel(const std::string& newStation) override;
     AppWindow* createButtons();
     AppWindow* createLabel();

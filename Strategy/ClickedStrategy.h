@@ -4,11 +4,12 @@
 #include "../gst/PlayerInterface.h"
 #include "../gtk/widgets/Events/Enums.h"
 #include <iostream>
+#include "memory"
 
 class ClickedStrategy {
 public:
     virtual void onClickedEvent() = 0;
-    virtual void setAppWindowInterface(AppWindowInterface *appWindowInterface)=0;
+    virtual void setAppWindowInterface(std::shared_ptr<AppWindowInterface> appWindowInterface)=0;
 };
 
 

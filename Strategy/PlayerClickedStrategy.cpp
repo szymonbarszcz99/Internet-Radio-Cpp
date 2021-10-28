@@ -45,7 +45,7 @@ void PlayerClickedStrategy::setActionToDo(Actions action) {
     this->actionToDo = action;
 }
 
-void PlayerClickedStrategy::setAppWindowInterface(AppWindowInterface *appWindowInterface) {
+void PlayerClickedStrategy::setAppWindowInterface(std::shared_ptr<AppWindowInterface> appWindowInterface) {
     this->appWindowInterface = appWindowInterface;
 }
 

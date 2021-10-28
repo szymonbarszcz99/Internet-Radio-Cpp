@@ -8,11 +8,11 @@ class PopUpWindowStrategy : public ClickedStrategy{
     Actions actionToDo;
     std::string name;
     std::string link;
-    AppWindowInterface* appWindowInterface;
-    LinksInterface* linksInterface;
-    PlayerInterface* playerInterface;
+    std::shared_ptr<AppWindowInterface> appWindowInterface;
+    std::shared_ptr<LinksInterface> linksInterface;
+    std::shared_ptr<PlayerInterface> playerInterface;
 public:
-    PopUpWindowStrategy( LinksInterface* linksInterface, PlayerInterface* playerInterface):
+    PopUpWindowStrategy( std::shared_ptr<LinksInterface> linksInterface, std::shared_ptr<PlayerInterface> playerInterface):
     linksInterface(linksInterface), playerInterface(playerInterface){};
 
     void onClickedEvent() override;
@@ -21,7 +21,7 @@ public:
 
     void setStrings(std::string name, std::string link);
 
-    void setAppWindowInterface(AppWindowInterface *appWindowInterface) override;
+    void setAppWindowInterface(std::shared_ptr<AppWindowInterface> appWindowInterface) override;
 };
 
 

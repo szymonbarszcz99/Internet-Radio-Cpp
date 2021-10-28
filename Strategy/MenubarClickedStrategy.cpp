@@ -1,6 +1,6 @@
 #include "MenubarClickedStrategy.h"
 
-void MenubarClickedStrategy::setAppWindowInterface(AppWindowInterface *appWindowInterface) {
+void MenubarClickedStrategy::setAppWindowInterface(std::shared_ptr<AppWindowInterface> appWindowInterface) {
     this->appWindowInterface = appWindowInterface;
 }
 

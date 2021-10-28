@@ -7,14 +7,18 @@ extern "C"{
 #include "PlayerInterface.h"
 
 class Player : public PlayerInterface{
-    GstElement* pipeline;
-    GError* error;
+    GstElement* pipeline = nullptr;
+    GError* error = nullptr;
 public:
     Player(const std::string& link);
     void changeStation(const std::string& newLink);
     void pause();
     void play();
     void setVolume(double volume) override;
+    ~Player(){
+        delete this->pipeline;
+        delete this->error;
+    }
 };
 
 

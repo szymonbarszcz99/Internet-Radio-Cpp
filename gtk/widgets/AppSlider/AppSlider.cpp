@@ -1,6 +1,6 @@
 #include "AppSlider.h"
 
-AppSlider::AppSlider(Event* properEvent): properEvent(properEvent), Gtk::Box(){
+AppSlider::AppSlider(std::shared_ptr<Event> properEvent): properEvent(properEvent), Gtk::Box(){
 
     //Box
     this->property_margin() = 10;

@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(const std::string& link):pipeline(nullptr),error(nullptr){
+Player::Player(const std::string& link){
     gst_init(nullptr, nullptr);
     GstStateChangeReturn ret;
 
@@ -14,7 +14,7 @@ Player::Player(const std::string& link):pipeline(nullptr),error(nullptr){
         g_print("%s\n",error->message);
     }
 
-    g_object_set(this->pipeline,"volume",0.5,NULL);
+    //g_object_set(this->pipeline,"volume",0.5,NULL);
 
     ret = gst_element_set_state(this->pipeline, GST_STATE_PLAYING);
     if(ret == 0){

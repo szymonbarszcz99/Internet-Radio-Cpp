@@ -5,12 +5,12 @@
 #include "ViewStationsButton.h"
 
 class Menubar : public Gtk::MenuBar{
-    FileMenuButton* fileMenuButton;
-    ViewStationsButton* viewStationsButton;
+    std::unique_ptr<FileMenuButton> fileMenuButton;
+    std::unique_ptr<ViewStationsButton> viewStationsButton;
 public:
-    Menubar(Event* event);
-    void createFileMenuButton(Event* eventValueChanged);
-    void createViewStationButton(Event* event);
+    explicit Menubar(std::shared_ptr<Event> event);
+    void createFileMenuButton(std::shared_ptr<Event> eventValueChanged);
+    void createViewStationButton(std::shared_ptr<Event> event);
 };
 
 

@@ -4,18 +4,19 @@
 #include <gtkmm/box.h>
 #include <gtkmm/image.h>
 #include "../Events/Event.h"
+#include <memory>
 
 class AppSlider: public Gtk::Box{
     Gtk::Image image;
     Gtk::Scale slider;
-    Event* properEvent;
+    std::shared_ptr<Event> properEvent;
     void pack();
     void onClicked();
     AppSlider* createImage();
     AppSlider* createSlider();
 
 public:
-    AppSlider(Event* properEvent);
+    explicit AppSlider(std::shared_ptr<Event> properEvent);
 };
 
 

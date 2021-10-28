@@ -10,7 +10,7 @@ enum FileLine{
 struct Stations{
     std::string StationName;
     std::string StationLink;
-    Stations(char* Name, char* Link):StationName(Name), StationLink(Link){};
+    //Stations(char* Name, char* Link):StationName(Name), StationLink(Link){};
     Stations(std::string Name,std::string Link): StationName(Name),StationLink(Link){};
 };
 
@@ -21,7 +21,6 @@ public:
     virtual const std::string& getCurrentLink()=0;
     virtual void setNextStation()=0;
     virtual void setPreviousStation()=0;
-    virtual void throwError(const std::string& error)=0;
     virtual const std::vector<Stations>& getAllStations() = 0;
     virtual void updateCurrent(FileLine cmd,std::string name = "", std::string link = "")=0;
     virtual void appendStation(std::string name, std::string link)=0;

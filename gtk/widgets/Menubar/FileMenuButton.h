@@ -5,11 +5,12 @@
 #include "../Events/Event.h"
 
 class FileMenuButton : public Gtk::MenuItem{
-    Event* eventValueChanged;
+    std::shared_ptr<Event> eventValueChanged;
     void onValueChosen(Actions actionId);
-    Gtk::Menu* fileMenu;
+    std::unique_ptr<Gtk::Menu> fileMenu;
+    std::vector<std::unique_ptr<Gtk::MenuItem>> optionsVector;
 public:
-    FileMenuButton(Event* eventValueChanged);
+    FileMenuButton(std::shared_ptr<Event> eventValueChanged);
 };
 
 

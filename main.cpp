@@ -5,19 +5,19 @@
 
 int main() {
     auto app = RadioApp::create();
-    EventHandler eventHandler;
+    std::unique_ptr<EventHandler> eventHandler = std::make_unique<EventHandler>();
 
-    app->setEventHandler(&eventHandler);
+    app->setEventHandler(std::move(eventHandler));
 
-    Links links;
-    Player player(links.getCurrentLink());
+    std::shared_ptr<Links> links = std::make_shared<Links>();
+    std::shared_ptr<Player> player = std::make_shared<Player>(links->getCurrentLink());
 
-    PlayerClickedStrategy playerClickedStrategy(&links,&player);
-    MenubarClickedStrategy menubarClickedStrategy(&links,&player);
-    PopUpWindowStrategy popUpWindowStrategy(&links, &player);
-    SliderStrategy sliderStrategy(&player);
+    std::shared_ptr<PlayerClickedStrategy> playerClickedStrategy = std::make_shared<PlayerClickedStrategy>(links,player);
+    std::shared_ptr<MenubarClickedStrategy> menubarClickedStrategy = std::make_shared<MenubarClickedStrategy>(links,player);
+    std::shared_ptr<PopUpWindowStrategy> popUpWindowStrategy = std::make_shared<PopUpWindowStrategy>(links, player);
+    std::shared_ptr<SliderStrategy> sliderStrategy = std::make_shared<SliderStrategy>(player);
 
-    app->setPlayerClickedStrategy(&playerClickedStrategy)->setMenubarClickedStrategy(&menubarClickedStrategy)
-    ->setPopUpWindowStrategy(&popUpWindowStrategy)->setSliderStrategy(&sliderStrategy);
+    app->setPlayerClickedStrategy(std::move(playerClickedStrategy))->setMenubarClickedStrategy(std::move(menubarClickedStrategy))
+    ->setPopUpWindowStrategy(std::move(popUpWindowStrategy))->setSliderStrategy(std::move(sliderStrategy));
     return app->run();
 }

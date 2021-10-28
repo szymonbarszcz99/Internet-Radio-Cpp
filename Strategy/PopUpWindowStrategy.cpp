@@ -4,7 +4,7 @@ void PopUpWindowStrategy::setActionToDo(Actions action) {
     this->actionToDo = action;
 }
 
-void PopUpWindowStrategy::setAppWindowInterface(AppWindowInterface *appWindowInterface) {
+void PopUpWindowStrategy::setAppWindowInterface(std::shared_ptr<AppWindowInterface> appWindowInterface) {
     this->appWindowInterface = appWindowInterface;
 }
 

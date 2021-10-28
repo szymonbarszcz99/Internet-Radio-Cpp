@@ -1,20 +1,20 @@
 #include "FileMenuButton.h"
 
-FileMenuButton::FileMenuButton(Event *eventValueChanged): eventValueChanged(eventValueChanged), Gtk::MenuItem("File"){
+FileMenuButton::FileMenuButton(std::shared_ptr<Event> eventValueChanged): eventValueChanged(eventValueChanged), Gtk::MenuItem("File"){
 
-    this->fileMenu = new Gtk::Menu();
-    auto addStation = new Gtk::MenuItem("Add Station");
-    auto deleteStation = new Gtk::MenuItem("Delete Station");
-    auto editStation = new Gtk::MenuItem("Edit current station");
-    addStation->signal_activate().connect(sigc::bind<Actions>(sigc::mem_fun(*this,&FileMenuButton::onValueChosen),ADD_STATION));
-    deleteStation->signal_activate().connect(sigc::bind<Actions>(sigc::mem_fun(*this,&FileMenuButton::onValueChosen),DELETE_STATION));
-    editStation->signal_activate().connect(sigc::bind<Actions>(sigc::mem_fun(*this,&FileMenuButton::onValueChosen),MODIFY_STATION));
-    fileMenu->append(*addStation);
-    fileMenu->append(*deleteStation);
-    fileMenu->append(*editStation);
+    this->fileMenu = std::make_unique<Gtk::Menu>();
+    optionsVector.emplace_back(std::make_unique<Gtk::MenuItem>("Add Station"));
+    optionsVector.emplace_back(std::make_unique<Gtk::MenuItem>("Delete Station"));
+    optionsVector.emplace_back(std::make_unique<Gtk::MenuItem>("Edit current"));
+    optionsVector[0]->signal_activate().connect(sigc::bind<Actions>(sigc::mem_fun(*this,&FileMenuButton::onValueChosen),ADD_STATION));
+    optionsVector[1]->signal_activate().connect(sigc::bind<Actions>(sigc::mem_fun(*this,&FileMenuButton::onValueChosen),DELETE_STATION));
+    optionsVector[2]->signal_activate().connect(sigc::bind<Actions>(sigc::mem_fun(*this,&FileMenuButton::onValueChosen),MODIFY_STATION));
+    fileMenu->append(*optionsVector[0]);
+    fileMenu->append(*optionsVector[1]);
+    fileMenu->append(*optionsVector[2]);
 
-
-    this->set_submenu(*fileMenu);this->fileMenu->show_all();
+    this->set_submenu(*fileMenu);
+    this->fileMenu->show_all();
 }
 
 void FileMenuButton::onValueChosen(Actions actionId) {

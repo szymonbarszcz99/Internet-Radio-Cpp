@@ -5,11 +5,14 @@
 #include "../Events/Event.h"
 
 class ViewStationsButton : public Gtk::MenuItem{
-Event* properEvent;
-Gtk::Menu* viewMenu;
-void onValueChosen(Actions actionId);
+
+    std::shared_ptr<Event> properEvent;
+    std::unique_ptr<Gtk::Menu> viewMenu;
+    std::unique_ptr<Gtk::MenuItem> menuItem;
+    void onValueChosen(Actions actionId);
+
 public:
-    ViewStationsButton(Event* properEvent);
+    ViewStationsButton(std::shared_ptr<Event> properEvent);
 };
 
 

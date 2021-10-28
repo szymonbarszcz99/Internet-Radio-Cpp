@@ -6,12 +6,13 @@ Links::Links() {
         std::cout<<"Unable to open file!\n";
     }
 
-    char* tempName = (char *)malloc(sizeof(char) * 512);
-    char* tempLink = (char *)malloc(sizeof(char) * 512);
+    std::string tempName;
+    std::string tempLink;
     while(stations.good()){
-        stations.getline(tempName,512,',');
+        //getline(this->stations, temp_line
+        getline(this->stations,tempName,',');
         if(stations.eof())break;
-        stations.getline(tempLink, 512);
+        getline(this->stations,tempLink, '\n');
         Stations stations1(tempName,tempLink);
         this->StationsVector.push_back(stations1);
     }
@@ -51,10 +52,6 @@ void Links::setPreviousStation() {
     else{
         this->StationsIterator--;
     }
-}
-
-void Links::throwError(const std::string &error) {
-    std::cout<<error<<std::endl;
 }
 
 const std::vector<Stations> &Links::getAllStations() {

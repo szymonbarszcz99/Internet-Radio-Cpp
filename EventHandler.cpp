@@ -1,6 +1,6 @@
 #include "EventHandler.h"
 
-void EventHandler::setStrategy(ClickedStrategy *clickedStrategy) {
+void EventHandler::setStrategy(const std::shared_ptr<ClickedStrategy>& clickedStrategy) {
     this->clickedStrategy = clickedStrategy;
 }
 

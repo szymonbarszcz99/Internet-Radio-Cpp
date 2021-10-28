@@ -2,13 +2,14 @@
 #define UNTITLED2_APPBUTTON_H
 #include <gtkmm/button.h>
 #include "../Events/Event.h"
+#include <memory>
 
 class AppButton : public Gtk::Button{
-    Event* properEvent;
+    std::shared_ptr<Event> properEvent;
     Actions action;
     void onClicked();
 public:
-    AppButton(Event *properEvent, Actions action);
+    AppButton(std::shared_ptr<Event> properEvent, Actions action);
 };
 
 

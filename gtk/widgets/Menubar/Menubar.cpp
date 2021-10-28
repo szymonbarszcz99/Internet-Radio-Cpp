@@ -1,17 +1,17 @@
 #include "Menubar.h"
 
-Menubar::Menubar(Event* event): Gtk::MenuBar() {
+Menubar::Menubar(std::shared_ptr<Event> event): Gtk::MenuBar() {
     this->createFileMenuButton(event);
     this->createViewStationButton(event);
 
 }
 
-void Menubar::createFileMenuButton(Event *eventValueChanged) {
-    this->fileMenuButton = new FileMenuButton(eventValueChanged);
+void Menubar::createFileMenuButton(std::shared_ptr<Event>eventValueChanged) {
+    this->fileMenuButton = std::make_unique<FileMenuButton>(eventValueChanged);
     this->add(*fileMenuButton);
 }
 
-void Menubar::createViewStationButton(Event * event) {
-    this->viewStationsButton = new ViewStationsButton(event);
+void Menubar::createViewStationButton(std::shared_ptr<Event> event) {
+    this->viewStationsButton = std::make_unique<ViewStationsButton>(event);
     this->add(*viewStationsButton);
 }

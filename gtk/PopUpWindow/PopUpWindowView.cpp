@@ -8,4 +8,5 @@ void PopUpWindowView::populate(std::string name, std::string link) {
     this->PopUpWindow::populate(newLabelLink,1,top);
 
     this->top++;
+
 }

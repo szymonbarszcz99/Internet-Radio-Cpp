@@ -1,6 +1,6 @@
 #include "SliderStrategy.h"
 
-void SliderStrategy::setAppWindowInterface(AppWindowInterface *appWindowInterface) {
+void SliderStrategy::setAppWindowInterface(std::shared_ptr<AppWindowInterface> appWindowInterface) {
     this->appWindowInterface = appWindowInterface;
 }
 
@@ -9,7 +9,6 @@ void SliderStrategy::setVolume(double volume) {
 }
 
 void SliderStrategy::onClickedEvent() {
-    std::cout<<std::endl<<"Slider strategy"<<std::endl;
     std::cout<<"Volume: "<<this->volumeValue<<std::endl;
     this->playerInterface->setVolume(this->volumeValue);
 }

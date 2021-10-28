@@ -16,7 +16,7 @@ template<> void Event::eventPassArg<Actions>(Actions action) {
 }
 
 template<> void Event::eventPassArg<double>(double volumeChanged){
-    std::cout<<"Pop up window strategy"<<std::endl;
+    std::cout<<"Slider strategy"<<std::endl;
     this->sliderStrategy->setVolume(volumeChanged);
     this->eventHandler->setStrategy(this->sliderStrategy);
     this->eventHandler->executeStrategy();

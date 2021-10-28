@@ -1,6 +1,6 @@
 #ifndef UNTITLED2_EVENT_H
 #define UNTITLED2_EVENT_H
-
+#include <memory>
 #include "../../../EventHandler.h"
 #include "../../../Strategy/ClickedStrategy.h"
 #include "../../../Strategy/PlayerClickedStrategy.h"
@@ -10,18 +10,20 @@
 #include "../../../Strategy/SliderStrategy.h"
 
 class Event {
-    EventHandler* eventHandler;
-    PlayerClickedStrategy* playerClickedStrategy;
-    MenubarClickedStrategy* menubarClickedStrategy;
-    PopUpWindowStrategy* popUpWindowStrategy;
-    SliderStrategy* sliderStrategy;
+    std::unique_ptr<EventHandler> eventHandler;
+    std::shared_ptr<PlayerClickedStrategy> playerClickedStrategy;
+    std::shared_ptr<MenubarClickedStrategy> menubarClickedStrategy;
+    std::shared_ptr<PopUpWindowStrategy> popUpWindowStrategy;
+    std::shared_ptr<SliderStrategy> sliderStrategy;
 public:
-    Event(EventHandler* eventHandler,PlayerClickedStrategy* playerClickedStrategy,
-          MenubarClickedStrategy* menubarClickedStrategy, PopUpWindowStrategy* popUpWindowStrategy,
-          SliderStrategy* sliderStrategy):
-    eventHandler(eventHandler),playerClickedStrategy(playerClickedStrategy),
+    Event(std::unique_ptr<EventHandler>&& eventHandler,std::shared_ptr<PlayerClickedStrategy> playerClickedStrategy,
+          std::shared_ptr<MenubarClickedStrategy> menubarClickedStrategy, std::shared_ptr<PopUpWindowStrategy> popUpWindowStrategy,
+          std::shared_ptr<SliderStrategy> sliderStrategy):
+     playerClickedStrategy(playerClickedStrategy),
     menubarClickedStrategy(menubarClickedStrategy),popUpWindowStrategy(popUpWindowStrategy),
-    sliderStrategy(sliderStrategy){}
+    sliderStrategy(sliderStrategy){
+        this->eventHandler = std::move(eventHandler);
+    }
 
     template<typename ... name> void eventPassArg(name ...arg) {
         std::cout<<"Unknown value type"<<std::endl;
