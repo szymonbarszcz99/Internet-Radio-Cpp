@@ -3,22 +3,20 @@
 Player::Player(const std::string& link){
     gst_init(nullptr, nullptr);
     GstStateChangeReturn ret;
+    if(link.empty()){
+        std::string uri("playbin uri=");
+        uri.append(link);
 
-    std::string uri("playbin uri=");
-    uri.append(link);
+        this->pipeline = gst_parse_launch(uri.c_str(),&this->error);
 
-    this->pipeline = gst_parse_launch(uri.c_str(),&this->error);
-
-    if(!this->pipeline){
-        std::cout<<"Pipeline creation error\n";
-        g_print("%s\n",error->message);
-    }
-
-    //g_object_set(this->pipeline,"volume",0.5,NULL);
-
-    ret = gst_element_set_state(this->pipeline, GST_STATE_PLAYING);
-    if(ret == 0){
-        printf("State change failed\n");
+        if(!this->pipeline){
+            std::cout<<"Pipeline creation error\n";
+            g_print("%s\n",error->message);
+        }
+        ret = gst_element_set_state(this->pipeline, GST_STATE_PLAYING);
+        if(ret == 0){
+            printf("State change failed\n");
+        }
     }
 }
 

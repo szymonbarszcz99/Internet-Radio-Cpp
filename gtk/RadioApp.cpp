@@ -10,7 +10,7 @@ Glib::RefPtr<RadioApp> RadioApp::create() {
 void RadioApp::createAppWindow() {
     this->appWindow = std::make_shared<AppWindow>(std::move(this->eventHandler), this->playerClickedStrategy,
                                     this->menubarClickedStrategy, this->popUpWindowStrategy,
-                                    this->sliderStrategy);
+                                    this->sliderStrategy,this->startupStrategy);
     add_window(*this->appWindow);
 
     this->appWindow->signal_hide().connect(sigc::mem_fun(*this,&RadioApp::on_hide_window));
@@ -21,7 +21,9 @@ void RadioApp::on_activate(){
     this->menubarClickedStrategy->setAppWindowInterface(this->appWindow);
     this->popUpWindowStrategy->setAppWindowInterface(this->appWindow);
     this->playerClickedStrategy->setAppWindowInterface(this->appWindow);
+    this->startupStrategy->setAppWindowInterface(this->appWindow);
     this->appWindow->present();
+    this->appWindow->startupCheck();
 }
 
 void RadioApp::on_hide_window() {
@@ -57,4 +59,10 @@ RadioApp::~RadioApp() {
     std::cout<<"RadioApp destructor"<<std::endl;
     std::cout<<"App window use count: "<<this->appWindow.use_count()<<std::endl;
 }
+
+RadioApp *RadioApp::setStartupStrategy(std::shared_ptr<StartupStrategy> &&startupStrategy) {
+    this->startupStrategy = startupStrategy;
+    return this;
+}
+
 

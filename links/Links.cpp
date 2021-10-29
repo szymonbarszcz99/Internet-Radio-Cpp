@@ -1,22 +1,32 @@
 #include "Links.h"
 
 Links::Links() {
-    this->stations.open("../stations.csv");
+    this->stations.open("../stations.csv",std::fstream::out);
     if(!stations.is_open()){
         std::cout<<"Unable to open file!\n";
     }
-
+    int i = 1;
     std::string tempName;
     std::string tempLink;
     while(stations.good()){
-        //getline(this->stations, temp_line
         getline(this->stations,tempName,',');
         if(stations.eof())break;
         getline(this->stations,tempLink, '\n');
+        if(tempName.empty()){
+            this->errorVector.emplace_back(std::make_pair(i,"No name"));
+            continue;
+        }
+        else if(tempLink.empty()){
+            this->errorVector.emplace_back(std::make_pair(i,"No link"));
+            continue;
+        }
+        if(tempName[0] == '\n')tempName.erase(0,1);
+        if(tempName.back() == '\n')tempName.erase(tempName.end()-1);
         Stations stations1(tempName,tempLink);
         this->StationsVector.push_back(stations1);
+        i++;
     }
-    this->StationsIterator = StationsVector.begin();
+    if(i > 1)this->StationsIterator = StationsVector.begin();
 
     stations.close();
 
@@ -31,12 +41,14 @@ void Links::printStations() {
     std::cout<<"Vector size: "<<StationsVector.size()<<std::endl;
 }
 
-const std::string& Links::getCurrentName() {
-    return this->StationsIterator->StationName;
+std::string Links::getCurrentName() {
+    if(!StationsVector.empty())return this->StationsIterator->StationName;
+    else return "";
 }
 
-const std::string& Links::getCurrentLink() {
-    return this->StationsIterator->StationLink;
+std::string Links::getCurrentLink() {;
+    if(!StationsVector.empty())return this->StationsIterator->StationLink;
+    else return "";
 }
 
 void Links::setNextStation(){
@@ -63,7 +75,7 @@ void Links::updateCurrent(FileLine cmd,std::string name, std::string link) {
     std::string temp_line;
     long index = std::distance(this->StationsVector.begin(),this->StationsIterator);
     long i = 0;
-    int maxI = this->StationsVector.size()-1;
+    unsigned long maxI = this->StationsVector.size()-1;
 
     std::fstream newFile("../stations_temp.csv",std::fstream::out);
     this->stations.open("../stations.csv");
@@ -82,11 +94,6 @@ void Links::updateCurrent(FileLine cmd,std::string name, std::string link) {
                 if((i == 1 && index == 0) || i==0)newFile<<temp_line;
                 else newFile<<std::endl<<temp_line;
                 i++;
-                /*
-                 * if((index == 0 && i == index))nie wklejaj endl
-                 * if((index != 0 || i != index) && i != maxI)wklejaj
-                 */
-
             }
 
         }
@@ -124,10 +131,11 @@ void Links::updateCurrent(FileLine cmd,std::string name, std::string link) {
 }
 
 void Links::appendStation(std::string name, std::string link) {
-    int currentIndex = std::distance(this->StationsVector.begin(), this->StationsIterator);
+    long currentIndex = std::distance(this->StationsVector.begin(), this->StationsIterator);
 
     this->stations.open("../stations.csv",std::fstream::app);
-    this->stations<<std::endl<<name<<","<<link;
+    if(!this->StationsVector.empty())this->stations<<std::endl;
+    this->stations<<name<<","<<link;
     this->stations.close();
 
     Stations newOne(name,link);
@@ -136,4 +144,8 @@ void Links::appendStation(std::string name, std::string link) {
     this->StationsIterator = this->StationsVector.begin() + currentIndex;
 
     printStations();
+}
+
+const std::vector<std::pair<int, std::string>> &Links::getErrorVector() {
+    return this->errorVector;
 }

@@ -11,22 +11,24 @@
 //TODO 9. Builder for PopUpWindow1 and 2. OK
 //TODO 10. Divide EventHandler, it's too big. Apply Strategy design pattern  OK
 //TODO 11. Make something with these pop ups "purpose" field. It should be nicer. OK
-//TODO 12. Look for places for Lambdas.
-//TODO 13. Structured bindings may be useful. Maybe not.
-//TODO 14. Apply smart pointers OK
-//TODO 15. Get rid of WidgetGrid and replace it with ordinary Grid. OK
+//TODO 12. Apply smart pointers OK
+//TODO 13. Get rid of WidgetGrid and replace it with ordinary Grid. OK
+//TODO 14. Add bunch of control if's in Links
+//TODO 15. Error handling in player
 
 
 AppWindow::AppWindow(std::unique_ptr<EventHandler> eventHandler,std::shared_ptr<PlayerClickedStrategy> clickedStrategy,
-                     std::shared_ptr<MenubarClickedStrategy> menubarClickedStrategy, std::shared_ptr<PopUpWindowStrategy> popUpWindowStrategy,
-                     std::shared_ptr<SliderStrategy> sliderStrategy)
+                     std::shared_ptr<MenubarClickedStrategy> menubarClickedStrategy,
+                     std::shared_ptr<PopUpWindowStrategy> popUpWindowStrategy,
+                     std::shared_ptr<SliderStrategy> sliderStrategy, std::shared_ptr<StartupStrategy> startupStrategy)
 :Gtk::ApplicationWindow() {
     set_title("Internet Radio");
 
     this->grid =  std::make_unique<Gtk::Grid>();
     add(*(this->grid));
 
-    this->eventForWidgets = std::make_shared<Event>(std::move(eventHandler),clickedStrategy,menubarClickedStrategy,popUpWindowStrategy,sliderStrategy);
+    this->eventForWidgets = std::make_shared<Event>(std::move(eventHandler),clickedStrategy,menubarClickedStrategy,
+                                                    popUpWindowStrategy,sliderStrategy,startupStrategy);
 
     this->createLabel()->createButtons()->createSlider()->createMenubar()->attachWidgets();
 }
@@ -103,6 +105,15 @@ void AppWindow::createPopUpWindowWrite(std::string windowName,std::string nameEn
 AppWindow::~AppWindow() {
     std::cout<<"AppWindow Destructor"<<std::endl;
     //this->eventForWidgets.reset();
+}
+
+void AppWindow::throwModal(int lineNumber, std::string text) {
+    Gtk::MessageDialog linkError("Error at line: " + std::to_string(lineNumber) + ":\n" + text + "\n" + "Skipping");
+    linkError.run();
+}
+
+void AppWindow::startupCheck() {
+    this->eventForWidgets->onStartup();
 }
 
 

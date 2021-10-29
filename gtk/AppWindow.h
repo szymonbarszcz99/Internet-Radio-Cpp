@@ -1,6 +1,7 @@
 #ifndef UNTITLED2_APPWINDOW_H
 #define UNTITLED2_APPWINDOW_H
 #include <gtkmm/applicationwindow.h>
+#include <gtkmm/messagedialog.h>
 #include "AppWindowInterface.h"
 #include "../EventHandler.h"
 #include "widgets/AppButton/AppButton.h"
@@ -22,7 +23,7 @@ class AppWindow : public AppWindowInterface, public Gtk::ApplicationWindow{
 public:
     AppWindow(std::unique_ptr<EventHandler> eventHandler,std::shared_ptr<PlayerClickedStrategy> clickedStrategy,
               std::shared_ptr<MenubarClickedStrategy> menubarClickedStrategy, std::shared_ptr<PopUpWindowStrategy> popUpWindowStrategy,
-              std::shared_ptr<SliderStrategy> sliderStrategy);
+              std::shared_ptr<SliderStrategy> sliderStrategy,std::shared_ptr<StartupStrategy> startupStrategy);
     void updateLabel(const std::string& newStation) override;
     AppWindow* createButtons();
     AppWindow* createLabel();
@@ -32,6 +33,8 @@ public:
     void createPopUpWindowView(const std::vector<Stations>& stations) override;
     void createPopUpWindowWrite(std::string windowName,std::string nameEntry = "", std::string linkEntry = "") override;
     ~AppWindow() override;
+    void throwModal(int lineNumber,std::string text) override;
+    void startupCheck();
 };
 
 

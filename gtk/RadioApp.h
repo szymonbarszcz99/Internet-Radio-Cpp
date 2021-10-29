@@ -16,6 +16,7 @@ private:
     std::shared_ptr<MenubarClickedStrategy> menubarClickedStrategy;
     std::shared_ptr<PopUpWindowStrategy> popUpWindowStrategy;
     std::shared_ptr<SliderStrategy> sliderStrategy;
+    std::shared_ptr<StartupStrategy> startupStrategy;
 
 public:
     static Glib::RefPtr<RadioApp> create();
@@ -24,6 +25,7 @@ public:
     RadioApp* setMenubarClickedStrategy(std::shared_ptr<MenubarClickedStrategy>&& menubarClickedStrategy);
     RadioApp* setPopUpWindowStrategy(std::shared_ptr<PopUpWindowStrategy>&& popUpWindowStrategy);
     RadioApp* setSliderStrategy(std::shared_ptr<SliderStrategy>&& sliderStrategy);
+    RadioApp* setStartupStrategy(std::shared_ptr<StartupStrategy>&& startupStrategy);
     ~RadioApp() override;
 };
 

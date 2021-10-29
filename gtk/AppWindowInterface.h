@@ -10,6 +10,7 @@ public:
     virtual void createPopUpWindowView(const std::vector<Stations>& Stations)=0;
     virtual void createPopUpWindowWrite(std::string windowName, std::string nameEntry = "", std::string linkEntry = "")=0;
     virtual ~AppWindowInterface(){};
+    virtual void throwModal(int lineNumber, std::string text) = 0;
 };
 
 

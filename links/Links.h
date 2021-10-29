@@ -9,12 +9,13 @@ class Links : public LinksInterface{
     std::fstream stations;
     std::vector<Stations> StationsVector;
     std::vector<Stations>::iterator StationsIterator;
+    std::vector<std::pair<int,std::string>> errorVector;
 
 public:
     Links();
     void printStations() override;
-    const std::string& getCurrentName() override;
-    const std::string& getCurrentLink() override;
+    std::string getCurrentName() override;
+    std::string getCurrentLink() override;
     void setNextStation() override;
     void setPreviousStation() override;
     const std::vector<Stations>& getAllStations() override;
@@ -23,6 +24,7 @@ public:
     ~Links() override{
         std::cout<<"Links destructor"<<std::endl;
     }
+    const std::vector<std::pair<int,std::string>>& getErrorVector();
 };
 
 

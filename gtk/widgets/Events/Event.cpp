@@ -29,3 +29,8 @@ template<> void Event::eventPassArg<std::string, std::string, Actions>(std::stri
     this->popUpWindowStrategy->setActionToDo(actions);
     this->eventHandler->executeStrategy();
 }
+
+void Event::onStartup() {
+    this->eventHandler->setStrategy(this->startupStrategy);
+    this->eventHandler->executeStrategy();
+}
