@@ -3,6 +3,7 @@
 #include <gtkmm/window.h>
 #include <gtkmm/grid.h>
 #include <gtkmm/label.h>
+#include <iostream>
 
 class PopUpWindow : public Gtk::Window{
 protected:
@@ -19,6 +20,9 @@ public:
         this->grid->property_margin()=10;
         this->add(*grid);
     }
+    virtual ~PopUpWindow(){
+        std::cout<<"Pop Up Window destructor"<<std::endl;
+    };
 };
 
 

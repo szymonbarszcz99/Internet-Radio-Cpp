@@ -10,6 +10,9 @@ class AppButton : public Gtk::Button{
     void onClicked();
 public:
     AppButton(std::shared_ptr<Event> properEvent, Actions action);
+    ~AppButton() override{
+        std::cout<<"App Button destructor"<<std::endl;
+    }
 };
 
 

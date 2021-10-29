@@ -11,6 +11,9 @@ public:
     explicit Menubar(std::shared_ptr<Event> event);
     void createFileMenuButton(std::shared_ptr<Event> eventValueChanged);
     void createViewStationButton(std::shared_ptr<Event> event);
+    ~Menubar() override{
+        std::cout<<"Menubar destructor"<<std::endl;
+    }
 };
 
 

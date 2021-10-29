@@ -25,7 +25,8 @@ void RadioApp::on_activate(){
 }
 
 void RadioApp::on_hide_window() {
-    this->appWindow.reset();
+    //std::cout<<"Hide window"<<std::endl;
+    this->appWindow->hide();
 }
 
 void RadioApp::setEventHandler(std::unique_ptr<EventHandler>&& eventHandler) {
@@ -50,5 +51,10 @@ RadioApp* RadioApp::setPopUpWindowStrategy(std::shared_ptr<PopUpWindowStrategy>&
 RadioApp* RadioApp::setSliderStrategy(std::shared_ptr<SliderStrategy>&& sliderStrategy){
     this->sliderStrategy = sliderStrategy;
     return this;
+}
+
+RadioApp::~RadioApp() {
+    std::cout<<"RadioApp destructor"<<std::endl;
+    std::cout<<"App window use count: "<<this->appWindow.use_count()<<std::endl;
 }
 

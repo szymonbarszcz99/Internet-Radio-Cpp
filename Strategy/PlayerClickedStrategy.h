@@ -9,7 +9,7 @@ class PlayerClickedStrategy : public ClickedStrategy{
     void nextEventClicked();
     void previousEventClicked();
     Actions actionToDo;
-    std::shared_ptr<AppWindowInterface> appWindowInterface;
+    std::weak_ptr<AppWindowInterface> appWindowInterface;
     std::shared_ptr<LinksInterface> linksInterface;
     std::shared_ptr<PlayerInterface> playerInterface;
 public:
@@ -21,6 +21,10 @@ public:
     void setActionToDo(Actions action);
 
     void setAppWindowInterface(std::shared_ptr<AppWindowInterface> appWindowInterface) override;
+
+    ~PlayerClickedStrategy() override {
+        std::cout<<"Player Clicked Strategy destructor"<<std::endl;
+    }
 };
 
 

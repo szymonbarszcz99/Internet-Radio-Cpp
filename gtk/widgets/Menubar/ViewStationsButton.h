@@ -13,6 +13,9 @@ class ViewStationsButton : public Gtk::MenuItem{
 
 public:
     ViewStationsButton(std::shared_ptr<Event> properEvent);
+    ~ViewStationsButton() override{
+        std::cout<<"ViewStationsButton destructor"<<std::endl;
+    }
 };
 
 

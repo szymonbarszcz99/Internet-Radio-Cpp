@@ -16,8 +16,10 @@ public:
     void play();
     void setVolume(double volume) override;
     ~Player(){
-        delete this->pipeline;
-        delete this->error;
+        std::cout<<"Player destructor"<<std::endl;
+        gst_object_unref(this->pipeline);
+        if(this->error != nullptr)g_error_free(this->error);
+        //gst_deinit();
     }
 };
 

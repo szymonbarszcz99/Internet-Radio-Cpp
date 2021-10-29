@@ -13,7 +13,7 @@
 //TODO 11. Make something with these pop ups "purpose" field. It should be nicer. OK
 //TODO 12. Look for places for Lambdas.
 //TODO 13. Structured bindings may be useful. Maybe not.
-//TODO 14. Apply smart pointers
+//TODO 14. Apply smart pointers OK
 //TODO 15. Get rid of WidgetGrid and replace it with ordinary Grid. OK
 
 
@@ -85,7 +85,7 @@ AppWindow *AppWindow::createMenubar() {
 void AppWindow::createPopUpWindowView(const std::vector<Stations>& stations) {
     this->popUpWindowView = std::make_unique<PopUpWindowView>("Stations");
 
-    for(auto it: stations){
+    for(const auto& it: stations){
         popUpWindowView->populate(it.StationName,it.StationLink);
     }
 
@@ -98,6 +98,11 @@ void AppWindow::createPopUpWindowWrite(std::string windowName,std::string nameEn
     else windowAction = MODIFY_STATION;
     this->popUpWindow2 = std::make_unique<PopUpWindowWrite>(windowName,nameEntry,linkEntry,eventForWidgets, windowAction);
     this->popUpWindow2->show_all();
+}
+
+AppWindow::~AppWindow() {
+    std::cout<<"AppWindow Destructor"<<std::endl;
+    //this->eventForWidgets.reset();
 }
 
 

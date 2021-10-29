@@ -20,6 +20,9 @@ public:
     const std::vector<Stations>& getAllStations() override;
     void updateCurrent(FileLine cmd,std::string name = "", std::string link = "") override;
     void appendStation(std::string name, std::string link) override;
+    ~Links() override{
+        std::cout<<"Links destructor"<<std::endl;
+    }
 };
 
 

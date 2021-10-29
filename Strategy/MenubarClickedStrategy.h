@@ -3,7 +3,7 @@
 #include "ClickedStrategy.h"
 
 class MenubarClickedStrategy : public ClickedStrategy{
-    std::shared_ptr<AppWindowInterface> appWindowInterface;
+    std::weak_ptr<AppWindowInterface> appWindowInterface;
     std::shared_ptr<LinksInterface> linksInterface;
     std::shared_ptr<PlayerInterface> playerInterface;
     Actions actionToDo;
@@ -17,6 +17,10 @@ public:
     void setActionToDo(Actions action);
 
     void setAppWindowInterface(std::shared_ptr<AppWindowInterface> appWindowInterface) override;
+
+    ~MenubarClickedStrategy() override{
+        std::cout<<"Menubar Strategy destructor"<<std::endl;
+    }
 };
 
 

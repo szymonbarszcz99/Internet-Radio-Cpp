@@ -11,6 +11,9 @@ class FileMenuButton : public Gtk::MenuItem{
     std::vector<std::unique_ptr<Gtk::MenuItem>> optionsVector;
 public:
     FileMenuButton(std::shared_ptr<Event> eventValueChanged);
+    ~FileMenuButton() override{
+        std::cout<<"FileMenuButton destructor"<<std::endl;
+    }
 };
 
 

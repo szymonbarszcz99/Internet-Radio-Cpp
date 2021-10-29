@@ -24,6 +24,7 @@ public:
     RadioApp* setMenubarClickedStrategy(std::shared_ptr<MenubarClickedStrategy>&& menubarClickedStrategy);
     RadioApp* setPopUpWindowStrategy(std::shared_ptr<PopUpWindowStrategy>&& popUpWindowStrategy);
     RadioApp* setSliderStrategy(std::shared_ptr<SliderStrategy>&& sliderStrategy);
+    ~RadioApp() override;
 };
 
 

@@ -28,6 +28,10 @@ public:
     template<typename ... name> void eventPassArg(name ...arg) {
         std::cout<<"Unknown value type"<<std::endl;
     }
+
+    ~Event(){
+        std::cout<<"Event destructor"<<std::endl;
+    }
 };
 
 

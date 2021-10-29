@@ -8,7 +8,7 @@ class PopUpWindowStrategy : public ClickedStrategy{
     Actions actionToDo;
     std::string name;
     std::string link;
-    std::shared_ptr<AppWindowInterface> appWindowInterface;
+    std::weak_ptr<AppWindowInterface> appWindowInterface;
     std::shared_ptr<LinksInterface> linksInterface;
     std::shared_ptr<PlayerInterface> playerInterface;
 public:
@@ -22,6 +22,10 @@ public:
     void setStrings(std::string name, std::string link);
 
     void setAppWindowInterface(std::shared_ptr<AppWindowInterface> appWindowInterface) override;
+
+    ~PopUpWindowStrategy() override {
+        std::cout<<"Pop Up Window Strategy destructor"<<std::endl;
+    }
 };
 
 

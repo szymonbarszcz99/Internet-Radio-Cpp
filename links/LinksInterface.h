@@ -24,6 +24,7 @@ public:
     virtual const std::vector<Stations>& getAllStations() = 0;
     virtual void updateCurrent(FileLine cmd,std::string name = "", std::string link = "")=0;
     virtual void appendStation(std::string name, std::string link)=0;
+    virtual ~LinksInterface(){}
 };
 
 

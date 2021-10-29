@@ -17,6 +17,9 @@ class AppSlider: public Gtk::Box{
 
 public:
     explicit AppSlider(std::shared_ptr<Event> properEvent);
+    ~AppSlider() override{
+        std::cout<<"App Slider destructor"<<std::endl;
+    }
 };
 
 

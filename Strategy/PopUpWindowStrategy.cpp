@@ -15,7 +15,8 @@ void PopUpWindowStrategy::onClickedEvent() {
             break;
         case MODIFY_STATION:
             this->linksInterface->updateCurrent(MODIFY,name,link );
-            this->appWindowInterface->updateLabel(linksInterface->getCurrentName());
+            auto sp = this->appWindowInterface.lock();
+            sp->updateLabel(linksInterface->getCurrentName());
             break;
     }
 }

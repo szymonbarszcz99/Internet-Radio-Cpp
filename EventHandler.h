@@ -5,7 +5,7 @@
 #include <memory>
 
 class EventHandler{
-    std::shared_ptr<ClickedStrategy> clickedStrategy;
+    std::weak_ptr<ClickedStrategy> clickedStrategy;
 public:
 
     //Strategy setter
@@ -13,6 +13,10 @@ public:
 
     //Execute proper strategy
     void executeStrategy();
+
+    ~EventHandler(){
+        std::cout<<"Event Handler Destructor"<<std::endl;
+    }
 };
 
 #endif //UNTITLED2_EVENTHANDLER_H

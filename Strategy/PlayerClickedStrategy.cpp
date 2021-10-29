@@ -31,14 +31,18 @@ void PlayerClickedStrategy::nextEventClicked() {
     std::cout<<"Next clicked"<<std::endl;
     this->linksInterface->setNextStation();
     this->playerInterface->changeStation(this->linksInterface->getCurrentLink());
-    this->appWindowInterface->updateLabel(this->linksInterface->getCurrentName());
+
+    auto sp = this->appWindowInterface.lock();
+    sp->updateLabel(this->linksInterface->getCurrentName());
 }
 
 void PlayerClickedStrategy::previousEventClicked() {
     std::cout<<"Previous clicked"<<std::endl;
     this->linksInterface->setPreviousStation();
     this->playerInterface->changeStation(this->linksInterface->getCurrentLink());
-    this->appWindowInterface->updateLabel(this->linksInterface->getCurrentName());
+
+    auto sp = this->appWindowInterface.lock();
+    sp->updateLabel(this->linksInterface->getCurrentName());
 }
 
 void PlayerClickedStrategy::setActionToDo(Actions action) {

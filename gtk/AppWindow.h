@@ -31,6 +31,7 @@ public:
     AppWindow* createMenubar();
     void createPopUpWindowView(const std::vector<Stations>& stations) override;
     void createPopUpWindowWrite(std::string windowName,std::string nameEntry = "", std::string linkEntry = "") override;
+    ~AppWindow() override;
 };
 
 

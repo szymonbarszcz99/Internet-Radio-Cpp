@@ -7,7 +7,9 @@ class PopUpWindowView : public PopUpWindow{
 public:
     PopUpWindowView(std::string name): PopUpWindow(name){}
     void populate(std::string name, std::string link);
-
+    ~PopUpWindowView() override{
+        std::cout<<"Pop Up Window View destructor"<<std::endl;
+    }
 };
 
 

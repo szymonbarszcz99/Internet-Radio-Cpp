@@ -19,5 +19,6 @@ int main() {
 
     app->setPlayerClickedStrategy(std::move(playerClickedStrategy))->setMenubarClickedStrategy(std::move(menubarClickedStrategy))
     ->setPopUpWindowStrategy(std::move(popUpWindowStrategy))->setSliderStrategy(std::move(sliderStrategy));
-    return app->run();
+
+    return app->run();;
 }

@@ -10,6 +10,7 @@ class ClickedStrategy {
 public:
     virtual void onClickedEvent() = 0;
     virtual void setAppWindowInterface(std::shared_ptr<AppWindowInterface> appWindowInterface)=0;
+    virtual ~ClickedStrategy(){}
 };
 
 

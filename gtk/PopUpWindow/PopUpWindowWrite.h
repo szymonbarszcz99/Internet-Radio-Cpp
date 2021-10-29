@@ -31,6 +31,9 @@ public:
     };
     void populate();
     void onAddClicked();
+    ~PopUpWindowWrite() override{
+        std::cout<<"Pop Up Window Write destructor"<<std::endl;
+    }
 };
 
 

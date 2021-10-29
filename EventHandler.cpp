@@ -4,8 +4,9 @@ void EventHandler::setStrategy(const std::shared_ptr<ClickedStrategy>& clickedSt
     this->clickedStrategy = clickedStrategy;
 }
 
-void EventHandler::executeStrategy() {
-    this->clickedStrategy->onClickedEvent();
+void EventHandler::executeStrategy(){
+    auto sp = this->clickedStrategy.lock();
+    sp->onClickedEvent();
 }
 
 
