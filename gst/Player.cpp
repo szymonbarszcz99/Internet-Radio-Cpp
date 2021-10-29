@@ -3,7 +3,8 @@
 Player::Player(const std::string& link){
     gst_init(nullptr, nullptr);
     GstStateChangeReturn ret;
-    if(link.empty()){
+    if(!link.empty()){
+        std::cout<<"Player constructor"<<std::endl;
         std::string uri("playbin uri=");
         uri.append(link);
 
@@ -38,5 +39,5 @@ void Player::play(){
 }
 
 void Player::setVolume(double volume) {
-    g_object_set(this->pipeline,"volume",volume/100,NULL);
+    if(this->pipeline != nullptr)g_object_set(this->pipeline,"volume",volume/100,NULL);
 }

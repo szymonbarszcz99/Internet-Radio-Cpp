@@ -17,7 +17,7 @@ public:
     void setVolume(double volume) override;
     ~Player(){
         std::cout<<"Player destructor"<<std::endl;
-        gst_object_unref(this->pipeline);
+        if(this->pipeline != nullptr)gst_object_unref(this->pipeline);
         if(this->error != nullptr)g_error_free(this->error);
         //gst_deinit();
     }

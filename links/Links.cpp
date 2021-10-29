@@ -1,9 +1,10 @@
 #include "Links.h"
 
 Links::Links() {
-    this->stations.open("../stations.csv",std::fstream::out);
+    this->stations.open("../stations.csv",std::fstream::in);
     if(!stations.is_open()){
-        std::cout<<"Unable to open file!\n";
+        std::cout<<"Unable to open file!\nTrying to create it";
+        this->stations.open("../stations.csv,std::fstream::app");
     }
     int i = 1;
     std::string tempName;
@@ -77,7 +78,7 @@ void Links::updateCurrent(FileLine cmd,std::string name, std::string link) {
     long i = 0;
     unsigned long maxI = this->StationsVector.size()-1;
 
-    std::fstream newFile("../stations_temp.csv",std::fstream::out);
+    std::fstream newFile("../stations_temp.csv",std::fstream::app);
     this->stations.open("../stations.csv");
 
     if(!newFile.is_open() || !this->stations.is_open()){
