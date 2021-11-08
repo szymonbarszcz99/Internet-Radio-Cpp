@@ -1,8 +1,22 @@
 #include "Player.h"
 
+static gboolean bus_callback(GstBus * bus, GstMessage * message, gpointer data)
+{
+    if(GST_MESSAGE_TYPE(message) == GST_MESSAGE_TAG){
+        GstTagList* tags = nullptr;
+        gst_message_parse_tag (message, &tags);
+        printf("%s\n",gst_tag_list_to_string(tags));
+        gst_tag_list_unref (tags);
+    }
+    return true;
+}
+
 Player::Player(const std::string& link){
     gst_init(nullptr, nullptr);
     GstStateChangeReturn ret;
+    GstBus* bus;
+    int bus_watch_id;
+
     if(!link.empty()){
         std::cout<<"Player constructor"<<std::endl;
         std::string uri("playbin uri=");
@@ -18,6 +32,9 @@ Player::Player(const std::string& link){
         if(ret == 0){
             printf("State change failed\n");
         }
+        bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
+        bus_watch_id = gst_bus_add_watch (bus, bus_callback, NULL);
+
     }
 }
 
