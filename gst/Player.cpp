@@ -2,20 +2,26 @@
 
 static gboolean bus_callback(GstBus * bus, GstMessage * message, gpointer data)
 {
+    PlayerEvent* playerEvent = static_cast<PlayerEvent*>(data);
     if(GST_MESSAGE_TYPE(message) == GST_MESSAGE_TAG){
         GstTagList* tags = nullptr;
         gst_message_parse_tag (message, &tags);
         printf("%s\n",gst_tag_list_to_string(tags));
+        gchar* value;
+        if(gst_tag_list_get_string(tags,"title",&value)){
+            playerEvent->playerEventPassArg(std::string(value));
+        }
         gst_tag_list_unref (tags);
     }
     return true;
 }
 
-Player::Player(const std::string& link){
+Player::Player(const std::string& link, std::unique_ptr<PlayerEvent> playerEvent){
+    this->playerEvent = std::move(playerEvent);
+
     gst_init(nullptr, nullptr);
     GstStateChangeReturn ret;
     GstBus* bus;
-    int bus_watch_id;
 
     if(!link.empty()){
         std::cout<<"Player constructor"<<std::endl;
@@ -33,7 +39,7 @@ Player::Player(const std::string& link){
             printf("State change failed\n");
         }
         bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
-        bus_watch_id = gst_bus_add_watch (bus, bus_callback, NULL);
+        gst_bus_add_watch (bus, bus_callback,this->playerEvent.get());
 
     }
 }

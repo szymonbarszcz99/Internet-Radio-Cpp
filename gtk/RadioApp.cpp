@@ -22,6 +22,7 @@ void RadioApp::on_activate(){
     this->popUpWindowStrategy->setAppWindowInterface(this->appWindow);
     this->playerClickedStrategy->setAppWindowInterface(this->appWindow);
     this->startupStrategy->setAppWindowInterface(this->appWindow);
+    this->busMessageStrategy->setAppWindowInterface(this->appWindow);
     this->appWindow->present();
     this->appWindow->startupCheck();
 }
@@ -31,8 +32,8 @@ void RadioApp::on_hide_window() {
     this->appWindow->hide();
 }
 
-void RadioApp::setEventHandler(std::unique_ptr<EventHandler>&& eventHandler) {
-    this->eventHandler = std::move(eventHandler);
+void RadioApp::setEventHandler(std::shared_ptr<EventHandler> eventHandler) {
+    this->eventHandler = eventHandler;
 }
 
 RadioApp* RadioApp::setPlayerClickedStrategy(std::shared_ptr<PlayerClickedStrategy>&& clickedStrategy) {
@@ -62,6 +63,11 @@ RadioApp::~RadioApp() {
 
 RadioApp *RadioApp::setStartupStrategy(std::shared_ptr<StartupStrategy> &&startupStrategy) {
     this->startupStrategy = startupStrategy;
+    return this;
+}
+
+RadioApp *RadioApp::setBusMessageStrategy(std::shared_ptr<BusMessageStrategy> &&busMessageStrategy) {
+    this->busMessageStrategy = busMessageStrategy;
     return this;
 }
 

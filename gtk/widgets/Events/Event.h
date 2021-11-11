@@ -9,16 +9,18 @@
 #include "../../../Strategy/PopUpWindowStrategy.h"
 #include "../../../Strategy/SliderStrategy.h"
 #include "../../../Strategy/StartupStrategy.h"
+#include "../../../Strategy/BusMessageStrategy.h"
 
 class Event {
-    std::unique_ptr<EventHandler> eventHandler;
+    std::shared_ptr<EventHandler> eventHandler;
     std::shared_ptr<PlayerClickedStrategy> playerClickedStrategy;
     std::shared_ptr<MenubarClickedStrategy> menubarClickedStrategy;
     std::shared_ptr<PopUpWindowStrategy> popUpWindowStrategy;
     std::shared_ptr<SliderStrategy> sliderStrategy;
     std::shared_ptr<StartupStrategy> startupStrategy;
+
 public:
-    Event(std::unique_ptr<EventHandler>&& eventHandler,std::shared_ptr<PlayerClickedStrategy> playerClickedStrategy,
+    Event(std::shared_ptr<EventHandler>&& eventHandler,std::shared_ptr<PlayerClickedStrategy> playerClickedStrategy,
           std::shared_ptr<MenubarClickedStrategy> menubarClickedStrategy, std::shared_ptr<PopUpWindowStrategy> popUpWindowStrategy,
           std::shared_ptr<SliderStrategy> sliderStrategy, std::shared_ptr<StartupStrategy> startupStrategy):
      playerClickedStrategy(playerClickedStrategy),

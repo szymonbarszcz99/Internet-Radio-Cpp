@@ -13,11 +13,11 @@
 //TODO 11. Make something with these pop ups "purpose" field. It should be nicer. OK
 //TODO 12. Apply smart pointers OK
 //TODO 13. Get rid of WidgetGrid and replace it with ordinary Grid. OK
-//TODO 14. Add bunch of control if's in Links
+//TODO 14. Add bunch of control if's in Links (Validator)
 //TODO 15. Error handling in player
 
 
-AppWindow::AppWindow(std::unique_ptr<EventHandler> eventHandler,std::shared_ptr<PlayerClickedStrategy> clickedStrategy,
+AppWindow::AppWindow(std::shared_ptr<EventHandler>&& eventHandler,std::shared_ptr<PlayerClickedStrategy> clickedStrategy,
                      std::shared_ptr<MenubarClickedStrategy> menubarClickedStrategy,
                      std::shared_ptr<PopUpWindowStrategy> popUpWindowStrategy,
                      std::shared_ptr<SliderStrategy> sliderStrategy, std::shared_ptr<StartupStrategy> startupStrategy)
@@ -52,8 +52,10 @@ AppWindow *AppWindow::createButtons() {
 
 AppWindow *AppWindow::createLabel() {
 
-    this->label = std::make_unique<Gtk::Label>("Hello world");
+    this->label = std::make_unique<Gtk::Label>("Station Name");
     this->label->property_margin() = 10;
+    this->songNameLabel = std::make_unique<Gtk::Label>("Song name");
+    this->songNameLabel->property_margin() = 10;
     return this;
 }
 
@@ -61,12 +63,13 @@ AppWindow *AppWindow::attachWidgets() {
     this->grid->attach(*this->menubar,0,0,4);
 
     this->grid->attach(*this->label,0,1,4);
+    this->grid->attach(*this->songNameLabel,0,2,4);
 
-    this->grid->attach(*this->pauseButton1, 2,2,1);
-    this->grid->attach(*this->playButton1,1,2,1);
-    this->grid->attach(*this->previousButton,0,2,1);
-    this->grid->attach(*this->nextButton,3,2,1);
-    this->grid->attach(*this->appSlider,0,3,4);
+    this->grid->attach(*this->pauseButton1, 2,3,1);
+    this->grid->attach(*this->playButton1,1,3,1);
+    this->grid->attach(*this->previousButton,0,3,1);
+    this->grid->attach(*this->nextButton,3,3,1);
+    this->grid->attach(*this->appSlider,0,4,4);
 
     this->grid->show_all();
 
@@ -114,6 +117,10 @@ void AppWindow::throwModal(int lineNumber, std::string text) {
 
 void AppWindow::startupCheck() {
     this->eventForWidgets->onStartup();
+}
+
+void AppWindow::updateSongNameLabel(const std::string &songName) {
+    this->songNameLabel->set_label(songName);
 }
 
 
