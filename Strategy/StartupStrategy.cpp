@@ -1,9 +1,5 @@
 #include "StartupStrategy.h"
 
-void StartupStrategy::setAppWindowInterface(std::shared_ptr<AppWindowInterface> appWindowInterface) {
-    this->appWindowInterface = appWindowInterface;
-}
-
 void StartupStrategy::onClickedEvent() {
     auto lsp = this->linksInterface.lock();
     auto wsp = this->appWindowInterface.lock();

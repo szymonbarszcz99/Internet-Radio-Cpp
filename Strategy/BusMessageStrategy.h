@@ -3,9 +3,7 @@
 #include "ClickedStrategy.h"
 
 class BusMessageStrategy : public ClickedStrategy{
-    std::weak_ptr<AppWindowInterface> appWindowInterface;
 public:
-    void setAppWindowInterface(std::shared_ptr<AppWindowInterface> appWindowInterface) override;
     void onClickedEvent() override;
     ~BusMessageStrategy(){
         std::cout<<"BusMessageStrategy destructor"<<std::endl;

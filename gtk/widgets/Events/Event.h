@@ -10,6 +10,7 @@
 #include "../../../Strategy/SliderStrategy.h"
 #include "../../../Strategy/StartupStrategy.h"
 #include "../../../Strategy/BusMessageStrategy.h"
+#include "../../../Strategy/ClickedStrategy.h"
 
 class Event {
     std::shared_ptr<EventHandler> eventHandler;

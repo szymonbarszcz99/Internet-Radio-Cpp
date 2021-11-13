@@ -71,7 +71,7 @@ AppWindow *AppWindow::attachWidgets() {
     this->grid->attach(*this->nextButton,3,3,1);
     this->grid->attach(*this->appSlider,0,4,4);
 
-    this->grid->show_all();
+    //this->grid->show_all();
 
     return this;
 }

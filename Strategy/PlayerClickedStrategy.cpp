@@ -18,39 +18,37 @@ void PlayerClickedStrategy::onClickedEvent() {
 }
 
 void PlayerClickedStrategy::playEventClicked() {
+    auto sp = this->playerInterface.lock();
     std::cout<<"Play clicked"<<std::endl;
-    this->playerInterface->play();
+    sp->play();
 }
 
 void PlayerClickedStrategy::pauseEventClicked() {
     std::cout<<"Pause clicked"<<std::endl;
-    this->playerInterface->pause();
+    auto sp = this->playerInterface.lock();
+    sp->pause();
 }
 
 void PlayerClickedStrategy::nextEventClicked() {
     std::cout<<"Next clicked"<<std::endl;
-    this->linksInterface->setNextStation();
-    this->playerInterface->changeStation(this->linksInterface->getCurrentLink());
+    auto psp = this->playerInterface.lock();
+    auto lsp = this->linksInterface.lock();
+    lsp->setNextStation();
+    psp->changeStation(lsp->getCurrentLink());
 
-    auto sp = this->appWindowInterface.lock();
-    sp->updateLabel(this->linksInterface->getCurrentName());
+    auto wsp = this->appWindowInterface.lock();
+    wsp->updateLabel(lsp->getCurrentName());
 }
 
 void PlayerClickedStrategy::previousEventClicked() {
     std::cout<<"Previous clicked"<<std::endl;
-    this->linksInterface->setPreviousStation();
-    this->playerInterface->changeStation(this->linksInterface->getCurrentLink());
+    auto psp = this->playerInterface.lock();
+    auto lsp = this->linksInterface.lock();
+    lsp->setPreviousStation();
+    psp->changeStation(lsp->getCurrentLink());
 
-    auto sp = this->appWindowInterface.lock();
-    sp->updateLabel(this->linksInterface->getCurrentName());
-}
-
-void PlayerClickedStrategy::setActionToDo(Actions action) {
-    this->actionToDo = action;
-}
-
-void PlayerClickedStrategy::setAppWindowInterface(std::shared_ptr<AppWindowInterface> appWindowInterface) {
-    this->appWindowInterface = appWindowInterface;
+    auto wsp = this->appWindowInterface.lock();
+    wsp->updateLabel(lsp->getCurrentName());
 }
 
 

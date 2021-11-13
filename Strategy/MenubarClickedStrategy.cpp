@@ -1,24 +1,18 @@
 #include "MenubarClickedStrategy.h"
 
-void MenubarClickedStrategy::setAppWindowInterface(std::shared_ptr<AppWindowInterface> appWindowInterface) {
-    this->appWindowInterface = appWindowInterface;
-}
-
 void MenubarClickedStrategy::onClickedEvent() {
     std::cout<<"Menubar value: "<<actionToDo<<std::endl;
-    auto sp = this->appWindowInterface.lock();
+    auto wsp = this->appWindowInterface.lock();
+    auto lsp = this->linksInterface.lock();
+    auto psp = this->playerInterface.lock();
 
-    if(actionToDo == ADD_STATION)sp->createPopUpWindowWrite("Add");
+    if(actionToDo == ADD_STATION)wsp->createPopUpWindowWrite("Add");
     else if(actionToDo == DELETE_STATION) {
-        this->linksInterface->updateCurrent(FileLine::DELETE);
-        this->linksInterface->setPreviousStation();
-        sp->updateLabel(this->linksInterface->getCurrentName());
-        this->playerInterface->changeStation(this->linksInterface->getCurrentLink());
+        lsp->updateCurrent(FileLine::DELETE);
+        lsp->setPreviousStation();
+        wsp->updateLabel(lsp->getCurrentName());
+        psp->changeStation(lsp->getCurrentLink());
     }
-    else if(actionToDo == MODIFY_STATION)sp->createPopUpWindowWrite("Update",linksInterface->getCurrentName(), linksInterface->getCurrentLink());
-    else if(actionToDo == VIEW)sp->createPopUpWindowView(linksInterface->getAllStations());
-}
-
-void MenubarClickedStrategy::setActionToDo(Actions action) {
-    this->actionToDo = action;
+    else if(actionToDo == MODIFY_STATION)wsp->createPopUpWindowWrite("Update",lsp->getCurrentName(), lsp->getCurrentLink());
+    else if(actionToDo == VIEW)wsp->createPopUpWindowView(lsp->getAllStations());
 }
