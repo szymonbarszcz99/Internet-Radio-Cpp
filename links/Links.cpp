@@ -72,50 +72,6 @@ const std::vector<Stations> &Links::getAllStations() {
 }
 
 void Links::updateCurrent(FileLine cmd,std::string name, std::string link) {
-
-    std::string temp_line;
-    long index = std::distance(this->StationsVector.begin(),this->StationsIterator);
-    long i = 0;
-    unsigned long maxI = this->StationsVector.size()-1;
-
-    std::fstream newFile("../stations_temp.csv",std::fstream::app);
-    this->stations.open("../stations.csv");
-
-    if(!newFile.is_open() || !this->stations.is_open()){
-        std::cout<<"Unable to open files"<<std::endl;
-    }
-    if(cmd == DELETE){
-        while(getline(this->stations, temp_line)){
-
-            if(i == index){
-                i++;
-                continue;
-            }
-            else{
-                if((i == 1 && index == 0) || i==0)newFile<<temp_line;
-                else newFile<<std::endl<<temp_line;
-                i++;
-            }
-
-        }
-    }
-    else{
-        while(getline(this->stations, temp_line)){
-
-            if(i == index){
-                newFile<<name<<","<<link;
-            }
-            else{
-                newFile<<temp_line;
-            }
-            if(i != maxI)newFile<<std::endl;
-            i++;
-        }
-    }
-
-    this->stations.close();
-    newFile.close();
-
     if(cmd == MODIFY){
         this->StationsIterator->StationName = name;
         this->StationsIterator->StationLink = link;
@@ -123,10 +79,6 @@ void Links::updateCurrent(FileLine cmd,std::string name, std::string link) {
     else{
         StationsIterator = this->StationsVector.erase(StationsIterator);
     }
-
-
-    remove("../stations.csv");
-    rename("../stations_temp.csv", "../stations.csv");
 
     printStations();
 }

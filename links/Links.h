@@ -14,6 +14,7 @@ class Links : public LinksInterface{
 public:
     Links();
     void printStations() override;
+    //TODO(Make one getter)
     std::string getCurrentName() override;
     std::string getCurrentLink() override;
     void setNextStation() override;

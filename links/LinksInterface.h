@@ -1,5 +1,6 @@
 #ifndef UNTITLED2_LINKSINTERFACE_H
 #define UNTITLED2_LINKSINTERFACE_H
+#include <utility>
 #include <vector>
 
 enum FileLine{
@@ -10,8 +11,7 @@ enum FileLine{
 struct Stations{
     std::string StationName;
     std::string StationLink;
-    //Stations(char* Name, char* Link):StationName(Name), StationLink(Link){};
-    Stations(std::string Name,std::string Link): StationName(Name),StationLink(Link){};
+    Stations(std::string Name,std::string Link): StationName(std::move(Name)),StationLink(std::move(Link)){};
 };
 
 class LinksInterface {
