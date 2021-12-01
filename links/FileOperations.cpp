@@ -10,7 +10,7 @@ void FileOperations::readToVector(std::vector<Stations> &StationsVector,
 
     if(!stations.is_open()){
         //Jeżeli się nie otworzył, to w katalogu z radiem go nie ma i trzeba go stworzyć
-        std::cout<<"Unable to open file!\nTrying to create it";
+        std::cout<<"Unable to open file!\nTrying to create it\n";
         this->stations.open("stations.csv,std::fstream::app");
     }
     else{
@@ -28,9 +28,32 @@ void FileOperations::readToVector(std::vector<Stations> &StationsVector,
             }
             getline(this->stations,tempLink, '\n');
 
-            possibleErrors name
+            possibleErrors nameError = Validator::validate(tempName),
+            linkError = Validator::validate(tempLink);
+            if(nameError == VALID && linkError == VALID){
+                StationsVector.emplace_back(Stations(tempName, tempLink));
+            }
             else{
-
+                switch(nameError){
+                    case NON_ASCII:
+                        errorVector.emplace_back(std::make_pair(i, "File cannot contain nonASCII cahracters"));
+                        break;
+                    case COMMA:
+                        errorVector.emplace_back(std::make_pair(i, "Commas in text may cause wrong parsing"));
+                        break;
+                    case EMPTY:
+                        errorVector.emplace_back(std::make_pair(i, "Text entry should not be empty"));
+                }
+                switch(linkError){
+                    case NON_ASCII:
+                        errorVector.emplace_back(std::make_pair(i, "File cannot contain nonASCII cahracters"));
+                        break;
+                    case COMMA:
+                        errorVector.emplace_back(std::make_pair(i, "Commas in text may cause wrong parsing"));
+                        break;
+                    case EMPTY:
+                        errorVector.emplace_back(std::make_pair(i, "Text entry should not be empty"));
+                }
             }
             i++;
         }
@@ -56,5 +79,6 @@ void FileOperations::writeFromVector(std::vector<Stations> &StationsVector) {
 
     //Zamień pliki
     remove("stations.csv");
-    rename("stations_temp.csv", "../stations.csv");
+    rename("stations_temp.csv", "stations.csv");
+    std::cout<<"Successful write"<<std::endl;
 }

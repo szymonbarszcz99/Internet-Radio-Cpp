@@ -3,9 +3,10 @@
 #include <string>
 #include <fstream>
 #include <iostream>
-#include "LinksInterface.h"
+#include "FileOperations.h"
 
 class Links : public LinksInterface{
+    FileOperations fileOperations;
     std::fstream stations;
     std::vector<Stations> StationsVector;
     std::vector<Stations>::iterator StationsIterator;

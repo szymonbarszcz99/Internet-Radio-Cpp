@@ -1,36 +1,8 @@
 #include "Links.h"
 
 Links::Links() {
-    this->stations.open("../stations.csv",std::fstream::in);
-    if(!stations.is_open()){
-        std::cout<<"Unable to open file!\nTrying to create it";
-        this->stations.open("../stations.csv,std::fstream::app");
-    }
-    int i = 1;
-    std::string tempName;
-    std::string tempLink;
-    while(stations.good()){
-        getline(this->stations,tempName,',');
-        if(stations.eof())break;
-        getline(this->stations,tempLink, '\n');
-        if(tempName.empty()){
-            this->errorVector.emplace_back(std::make_pair(i,"No name"));
-            continue;
-        }
-        else if(tempLink.empty()){
-            this->errorVector.emplace_back(std::make_pair(i,"No link"));
-            continue;
-        }
-        if(tempName[0] == '\n')tempName.erase(0,1);
-        if(tempName.back() == '\n')tempName.erase(tempName.end()-1);
-        Stations stations1(tempName,tempLink);
-        this->StationsVector.push_back(stations1);
-        i++;
-    }
-    if(i > 1)this->StationsIterator = StationsVector.begin();
-
-    stations.close();
-
+    fileOperations.readToVector(this->StationsVector,this->errorVector);
+    this->StationsIterator = this->StationsVector.begin();
     printStations();
 }
 
@@ -80,21 +52,17 @@ void Links::updateCurrent(FileLine cmd,std::string name, std::string link) {
         StationsIterator = this->StationsVector.erase(StationsIterator);
     }
 
+    this->fileOperations.writeFromVector(this->StationsVector);
     printStations();
 }
 
 void Links::appendStation(std::string name, std::string link) {
-    long currentIndex = std::distance(this->StationsVector.begin(), this->StationsIterator);
-
-    this->stations.open("../stations.csv",std::fstream::app);
-    if(!this->StationsVector.empty())this->stations<<std::endl;
-    this->stations<<name<<","<<link;
-    this->stations.close();
 
     Stations newOne(name,link);
     this->StationsVector.push_back(newOne);
+    this->StationsIterator = StationsVector.begin();
 
-    this->StationsIterator = this->StationsVector.begin() + currentIndex;
+    this->fileOperations.writeFromVector(this->StationsVector);
 
     printStations();
 }
