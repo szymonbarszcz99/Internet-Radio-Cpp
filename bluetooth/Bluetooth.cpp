@@ -2,6 +2,7 @@
 
 void Bluetooth::scan() {
     int sockId, devId;
+    std::cout<<"Scanning"<<std::endl;
     devId = hci_get_route(NULL);
     sockId = hci_open_dev(devId);
 
