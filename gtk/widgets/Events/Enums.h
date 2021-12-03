@@ -10,7 +10,8 @@ enum Actions{
     DELETE_STATION,
     VIEW_ALL,
     HELP_TUNEIN,
-    HELP_FILE
+    HELP_FILE,
+    BT_SCAN
 };
 
 #endif //UNTITLED2_ENUMS_H

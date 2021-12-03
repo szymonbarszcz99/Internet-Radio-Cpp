@@ -31,4 +31,8 @@ void MenubarClickedStrategy::onClickedEvent() {
         helpWindow->setBuffer(fileInstruction);
         wsp->showWindow(helpWindow);
     }
+    else if(actionToDo == BT_SCAN){
+        Bluetooth bluetooth;
+        bluetooth.scan();
+    }
 }
