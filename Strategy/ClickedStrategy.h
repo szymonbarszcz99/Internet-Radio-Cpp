@@ -14,18 +14,7 @@ public:
     inline static std::weak_ptr<PlayerInterface> playerInterface;
     inline static std::weak_ptr<LinksInterface> linksInterface;
     virtual void onClickedEvent() = 0;
-    void setAppWindowInterface(const std::shared_ptr<AppWindowInterface>& appWindowInterface){
-        this->appWindowInterface = appWindowInterface;
-    };
     virtual ~ClickedStrategy(){}
-
-    void setPlayerInterface(const std::shared_ptr<PlayerInterface> &playerInterface) {
-        this->playerInterface = playerInterface;
-    }
-
-    void setLinksInterface(const std::shared_ptr<LinksInterface> &linksInterface) {
-        this->linksInterface = linksInterface;
-    }
 };
 
 

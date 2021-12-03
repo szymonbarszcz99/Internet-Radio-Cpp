@@ -34,10 +34,11 @@ void PlayerClickedStrategy::nextEventClicked() {
     auto psp = this->playerInterface.lock();
     auto lsp = this->linksInterface.lock();
     lsp->setNextStation();
-    psp->changeStation(lsp->getCurrentLink());
+    const Stations& stations = lsp->getCurrentStation();
+    psp->changeStation(stations.StationLink);
 
     auto wsp = this->appWindowInterface.lock();
-    wsp->updateLabel(lsp->getCurrentName());
+    wsp->updateLabel(stations.StationName);
 }
 
 void PlayerClickedStrategy::previousEventClicked() {
@@ -45,10 +46,11 @@ void PlayerClickedStrategy::previousEventClicked() {
     auto psp = this->playerInterface.lock();
     auto lsp = this->linksInterface.lock();
     lsp->setPreviousStation();
-    psp->changeStation(lsp->getCurrentLink());
+    const Stations& stations = lsp->getCurrentStation();
+    psp->changeStation(stations.StationLink);
 
     auto wsp = this->appWindowInterface.lock();
-    wsp->updateLabel(lsp->getCurrentName());
+    wsp->updateLabel(stations.StationName);
 }
 
 

@@ -4,24 +4,20 @@
 #include "gtk/RadioApp.h"
 
 int main() {
-    std::shared_ptr<EventHandler> eventHandler = std::make_shared<EventHandler>();
+    EventHandler eventHandler;
 
     std::shared_ptr<Links> links = std::make_shared<Links>();
+
+    std::unique_ptr<PlayerEvent> playerEvent = std::make_unique<PlayerEvent>(eventHandler);
+    std::shared_ptr<Player> player = std::make_shared<Player>(links->getCurrentStation().StationLink,std::move(playerEvent));
+
+    ClickedStrategy::playerInterface = player;
     ClickedStrategy::linksInterface = links;
 
-    std::shared_ptr<BusMessageStrategy> busMessageStrategy = std::make_shared<BusMessageStrategy>();
-    std::unique_ptr<PlayerEvent> playerEvent = std::make_unique<PlayerEvent>(eventHandler,busMessageStrategy);
-    std::shared_ptr<Player> player = std::make_shared<Player>(links->getCurrentLink(),std::move(playerEvent));
-    ClickedStrategy::playerInterface = player;
+    //Command from design pattern
+    Event event(eventHandler);
 
-    std::shared_ptr<PlayerClickedStrategy> playerClickedStrategy = std::make_shared<PlayerClickedStrategy>();
-    std::shared_ptr<MenubarClickedStrategy> menubarClickedStrategy = std::make_shared<MenubarClickedStrategy>();
-    std::shared_ptr<PopUpWindowStrategy> popUpWindowStrategy = std::make_shared<PopUpWindowStrategy>();
-    std::shared_ptr<SliderStrategy> sliderStrategy = std::make_shared<SliderStrategy>();
-    std::shared_ptr<StartupStrategy> startupStrategy = std::make_shared<StartupStrategy>();
-
-    auto app = RadioApp::create(eventHandler,playerClickedStrategy,menubarClickedStrategy,
-                                popUpWindowStrategy,sliderStrategy,startupStrategy);
-
+    auto app = RadioApp::create(event);
+    std::cout<<"12:01"<<std::endl;
     return app->run();
 }

@@ -7,9 +7,10 @@ void PopUpWindowStrategy::onClickedEvent() {
             lsp->appendStation(name,link);
             break;
         case MODIFY_STATION:
-            lsp->updateCurrent(MODIFY,name,link );
+            lsp->modifyStation(name,link);
             auto sp = this->appWindowInterface.lock();
-            sp->updateLabel(lsp->getCurrentName());
+            const Stations& stations = lsp->getCurrentStation();
+            sp->updateLabel(stations.StationName);
             break;
     }
 }

@@ -5,10 +5,12 @@
 
 class PlayerEvent {
     std::shared_ptr<BusMessageStrategy> busMessageStrategy;
-    std::shared_ptr<EventHandler> eventHandler;
+    EventHandler& eventHandler;
 public:
-    PlayerEvent(std::shared_ptr<EventHandler> eventHandler,std::shared_ptr<BusMessageStrategy> busMessageStrategy):
-    eventHandler(eventHandler),busMessageStrategy(busMessageStrategy){}
+    PlayerEvent(EventHandler& eventHandler):
+    eventHandler(eventHandler){
+        this->busMessageStrategy = std::make_shared<BusMessageStrategy>();
+    }
 
     template<typename ... name> void playerEventPassArg(name ...arg) {
         std::cout<<"Unknown value type"<<std::endl;

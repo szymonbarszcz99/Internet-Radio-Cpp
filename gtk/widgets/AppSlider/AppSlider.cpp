@@ -1,6 +1,6 @@
 #include "AppSlider.h"
 
-AppSlider::AppSlider(std::shared_ptr<Event> properEvent): properEvent(properEvent), Gtk::Box(){
+AppSlider::AppSlider(const Event& properEvent): properEvent(properEvent), Gtk::Box(){
 
     //Box
     this->property_margin() = 10;
@@ -14,7 +14,7 @@ void AppSlider::pack() {
 }
 
 void AppSlider::onClicked() {
-    this->properEvent->eventPassArg(this->slider.get_value());
+    this->properEvent.eventPassArg(this->slider.get_value());
 }
 
 

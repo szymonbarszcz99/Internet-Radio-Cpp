@@ -1,4 +1,5 @@
 #include "MenubarClickedStrategy.h"
+#include "../gtk/PopUpWindow/HelpWindow.h"
 
 void MenubarClickedStrategy::onClickedEvent() {
     std::cout<<"Menubar value: "<<actionToDo<<std::endl;
@@ -8,11 +9,26 @@ void MenubarClickedStrategy::onClickedEvent() {
 
     if(actionToDo == ADD_STATION)wsp->createPopUpWindowWrite("Add");
     else if(actionToDo == DELETE_STATION) {
-        lsp->updateCurrent(FileLine::DELETE);
+        lsp->deleteStation();
         lsp->setPreviousStation();
-        wsp->updateLabel(lsp->getCurrentName());
-        psp->changeStation(lsp->getCurrentLink());
+        const Stations& stations = lsp->getCurrentStation();
+        wsp->updateLabel(stations.StationName);
+        psp->changeStation(stations.StationLink);
     }
-    else if(actionToDo == MODIFY_STATION)wsp->createPopUpWindowWrite("Update",lsp->getCurrentName(), lsp->getCurrentLink());
-    else if(actionToDo == VIEW)wsp->createPopUpWindowView(lsp->getAllStations());
+    else if(actionToDo == MODIFY_STATION){
+        const Stations& stations = lsp->getCurrentStation();
+        wsp->createPopUpWindowWrite("Update",stations.StationName, stations.StationLink);
+    }
+    else if(actionToDo == VIEW_ALL)wsp->createPopUpWindowView(lsp->getAllStations());
+
+    else if(actionToDo == HELP_TUNEIN){
+        auto helpWindow = std::make_shared<HelpWindow>();
+        helpWindow->setBuffer(tuneInInstruction);
+        wsp->showWindow(helpWindow);
+    }
+    else if(actionToDo == HELP_FILE){
+        auto helpWindow = std::make_shared<HelpWindow>();
+        helpWindow->setBuffer(fileInstruction);
+        wsp->showWindow(helpWindow);
+    }
 }

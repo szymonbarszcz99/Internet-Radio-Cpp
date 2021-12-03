@@ -13,22 +13,16 @@
 //TODO 11. Make something with these pop ups "purpose" field. It should be nicer. OK
 //TODO 12. Apply smart pointers OK
 //TODO 13. Get rid of WidgetGrid and replace it with ordinary Grid. OK
-//TODO 14. Add bunch of control if's in Links (Validator)
+//TODO 14. Add bunch of control if's in Links (Validator) OK
 //TODO 15. Error handling in player
 
 
-AppWindow::AppWindow(std::shared_ptr<EventHandler>&& eventHandler,std::shared_ptr<PlayerClickedStrategy> clickedStrategy,
-                     std::shared_ptr<MenubarClickedStrategy> menubarClickedStrategy,
-                     std::shared_ptr<PopUpWindowStrategy> popUpWindowStrategy,
-                     std::shared_ptr<SliderStrategy> sliderStrategy, std::shared_ptr<StartupStrategy> startupStrategy)
-:Gtk::ApplicationWindow() {
+AppWindow::AppWindow(const Event& event)
+:Gtk::ApplicationWindow(), eventForWidgets(event) {
     set_title("Internet Radio");
 
     this->grid =  std::make_unique<Gtk::Grid>();
     add(*(this->grid));
-
-    this->eventForWidgets = std::make_shared<Event>(std::move(eventHandler),clickedStrategy,menubarClickedStrategy,
-                                                    popUpWindowStrategy,sliderStrategy,startupStrategy);
 
     this->createLabel()->createButtons()->createSlider()->createMenubar()->attachWidgets();
 }
@@ -111,16 +105,21 @@ AppWindow::~AppWindow() {
 }
 
 void AppWindow::throwModal(int lineNumber, std::string text) {
-    Gtk::MessageDialog linkError("Error at line: " + std::to_string(lineNumber) + ":\n" + text + "\n" + "Skipping");
+    Gtk::MessageDialog linkError("Error at line: " + std::to_string(lineNumber) + ":\n" + text + "\n" + "Skipping this line");
     linkError.run();
 }
 
-void AppWindow::startupCheck() {
-    this->eventForWidgets->onStartup();
+void AppWindow::startupCheckLinks() {
+    this->eventForWidgets.onStartup();
 }
 
 void AppWindow::updateSongNameLabel(const std::string &songName) {
     this->songNameLabel->set_label(songName);
+}
+
+void AppWindow::showWindow(std::shared_ptr<Gtk::Window> windowToShow) {
+    this->windowToShow = windowToShow;
+    this->windowToShow->present();
 }
 
 

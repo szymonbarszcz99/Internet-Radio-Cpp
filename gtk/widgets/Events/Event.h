@@ -13,7 +13,7 @@
 #include "../../../Strategy/ClickedStrategy.h"
 
 class Event {
-    std::shared_ptr<EventHandler> eventHandler;
+    EventHandler& eventHandler;
     std::shared_ptr<PlayerClickedStrategy> playerClickedStrategy;
     std::shared_ptr<MenubarClickedStrategy> menubarClickedStrategy;
     std::shared_ptr<PopUpWindowStrategy> popUpWindowStrategy;
@@ -21,20 +21,13 @@ class Event {
     std::shared_ptr<StartupStrategy> startupStrategy;
 
 public:
-    Event(std::shared_ptr<EventHandler>&& eventHandler,std::shared_ptr<PlayerClickedStrategy> playerClickedStrategy,
-          std::shared_ptr<MenubarClickedStrategy> menubarClickedStrategy, std::shared_ptr<PopUpWindowStrategy> popUpWindowStrategy,
-          std::shared_ptr<SliderStrategy> sliderStrategy, std::shared_ptr<StartupStrategy> startupStrategy):
-     playerClickedStrategy(playerClickedStrategy),
-    menubarClickedStrategy(menubarClickedStrategy),popUpWindowStrategy(popUpWindowStrategy),
-    sliderStrategy(sliderStrategy),startupStrategy(startupStrategy){
-        this->eventHandler = std::move(eventHandler);
-    }
+    Event(EventHandler& eventHandler);
 
-    template<typename ... name> void eventPassArg(name ...arg) {
+    template<typename ... name> void eventPassArg(name ...arg) const {
         std::cout<<"Unknown value type"<<std::endl;
     }
 
-    void onStartup();
+    void onStartup() const;
 
     ~Event(){
         std::cout<<"Event destructor"<<std::endl;

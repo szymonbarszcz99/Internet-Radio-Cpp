@@ -3,7 +3,8 @@
 void StartupStrategy::onClickedEvent() {
     auto lsp = this->linksInterface.lock();
     auto wsp = this->appWindowInterface.lock();
-    wsp->updateLabel(lsp->getCurrentName());
+    const Stations& stations = lsp->getCurrentStation();
+    wsp->updateLabel(stations.StationName);
 
     const std::vector<std::pair<int,std::string>>& errorVector = lsp->getErrorVector();
     if(!errorVector.empty()){

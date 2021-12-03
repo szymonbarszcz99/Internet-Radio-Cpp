@@ -8,7 +8,9 @@ enum Actions{
     ADD_STATION,
     MODIFY_STATION,
     DELETE_STATION,
-    VIEW
+    VIEW_ALL,
+    HELP_TUNEIN,
+    HELP_FILE
 };
 
 #endif //UNTITLED2_ENUMS_H

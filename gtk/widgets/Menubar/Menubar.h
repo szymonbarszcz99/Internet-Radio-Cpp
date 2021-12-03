@@ -2,15 +2,15 @@
 #define UNTITLED2_MENUBAR_H
 #include <gtkmm/menubar.h>
 #include "FileMenuButton.h"
-#include "ViewStationsButton.h"
+#include "HelpMenuButton.h"
+#include "BluetoothMenuButton.h"
 
 class Menubar : public Gtk::MenuBar{
     std::unique_ptr<FileMenuButton> fileMenuButton;
-    std::unique_ptr<ViewStationsButton> viewStationsButton;
+    std::unique_ptr<HelpMenuButton> helpMenuButton;
+    std::unique_ptr<BluetoothMenuButton> bluetoothMenuButton;
 public:
-    explicit Menubar(std::shared_ptr<Event> event);
-    void createFileMenuButton(std::shared_ptr<Event> eventValueChanged);
-    void createViewStationButton(std::shared_ptr<Event> event);
+    explicit Menubar(const Event& event);
     ~Menubar() override{
         std::cout<<"Menubar destructor"<<std::endl;
     }

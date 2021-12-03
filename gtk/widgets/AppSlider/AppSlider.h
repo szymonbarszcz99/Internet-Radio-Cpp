@@ -9,14 +9,14 @@
 class AppSlider: public Gtk::Box{
     Gtk::Image image;
     Gtk::Scale slider;
-    std::shared_ptr<Event> properEvent;
+    const Event& properEvent;
     void pack();
     void onClicked();
     AppSlider* createImage();
     AppSlider* createSlider();
 
 public:
-    explicit AppSlider(std::shared_ptr<Event> properEvent);
+    explicit AppSlider(const Event& properEvent);
     ~AppSlider() override{
         std::cout<<"App Slider destructor"<<std::endl;
     }

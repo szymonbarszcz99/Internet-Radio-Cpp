@@ -15,14 +15,13 @@ class Links : public LinksInterface{
 public:
     Links();
     void printStations() override;
-    //TODO(Make one getter)
-    std::string getCurrentName() override;
-    std::string getCurrentLink() override;
+    const Stations getCurrentStation() override;
     void setNextStation() override;
     void setPreviousStation() override;
     const std::vector<Stations>& getAllStations() override;
-    void updateCurrent(FileLine cmd,std::string name = "", std::string link = "") override;
     void appendStation(std::string name, std::string link) override;
+    void deleteStation() override;
+    void modifyStation(std::string name, std::string link) override;
     ~Links() override{
         std::cout<<"Links destructor"<<std::endl;
     }

@@ -5,11 +5,11 @@
 #include <memory>
 
 class AppButton : public Gtk::Button{
-    std::shared_ptr<Event> properEvent;
+    const Event& properEvent;
     Actions action;
     void onClicked();
 public:
-    AppButton(std::shared_ptr<Event> properEvent, Actions action);
+    AppButton(const Event& properEvent, Actions action);
     ~AppButton() override{
         std::cout<<"App Button destructor"<<std::endl;
     }

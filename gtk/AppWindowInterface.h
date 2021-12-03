@@ -2,6 +2,8 @@
 #define UNTITLED2_APPWINDOWINTERFACE_H
 #include <string>
 #include "../links/LinksInterface.h"
+#include <memory>
+#include <gtkmm/window.h>
 
 class AppWindowInterface {
 
@@ -12,6 +14,7 @@ public:
     virtual void createPopUpWindowWrite(std::string windowName, std::string nameEntry = "", std::string linkEntry = "")=0;
     virtual ~AppWindowInterface(){};
     virtual void throwModal(int lineNumber, std::string text) = 0;
+    virtual void showWindow(std::shared_ptr<Gtk::Window> windowToShow) = 0;
 };
 
 

@@ -15,17 +15,16 @@ class AppWindow : public AppWindowInterface, public Gtk::ApplicationWindow{
     std::unique_ptr<AppButton> playButton1, pauseButton1, nextButton, previousButton;
     std::unique_ptr<AppSlider> appSlider;
     std::unique_ptr<Gtk::Label> label,songNameLabel;
-    std::shared_ptr<Event> eventForWidgets;
+    const Event& eventForWidgets;
     std::unique_ptr<Menubar> menubar;
     std::unique_ptr<PopUpWindowView> popUpWindowView;
     std::unique_ptr<PopUpWindowWrite> popUpWindow2;
+    std::shared_ptr<Gtk::Window> windowToShow;
 
 public:
-    AppWindow(std::shared_ptr<EventHandler>&& eventHandler,std::shared_ptr<PlayerClickedStrategy> clickedStrategy,
-              std::shared_ptr<MenubarClickedStrategy> menubarClickedStrategy, std::shared_ptr<PopUpWindowStrategy> popUpWindowStrategy,
-              std::shared_ptr<SliderStrategy> sliderStrategy,std::shared_ptr<StartupStrategy> startupStrategy);
-    void updateLabel(const std::string& newStation) override;
+    AppWindow(const Event& event);
     void updateSongNameLabel(const std::string& songName) override;
+    void updateLabel(const std::string& text) override;
     AppWindow* createButtons();
     AppWindow* createLabel();
     AppWindow* attachWidgets();
@@ -35,7 +34,8 @@ public:
     void createPopUpWindowWrite(std::string windowName,std::string nameEntry = "", std::string linkEntry = "") override;
     ~AppWindow() override;
     void throwModal(int lineNumber,std::string text) override;
-    void startupCheck();
+    void startupCheckLinks();
+    void showWindow(std::shared_ptr<Gtk::Window> windowToShow) override;
 };
 
 

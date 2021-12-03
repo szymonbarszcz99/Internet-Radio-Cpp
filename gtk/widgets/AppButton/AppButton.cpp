@@ -1,6 +1,6 @@
 #include "AppButton.h"
 
-AppButton::AppButton(std::shared_ptr<Event> properEvent,Actions action):properEvent(properEvent),action(action) {
+AppButton::AppButton(const Event& properEvent,Actions action):properEvent(properEvent),action(action) {
 
     this->signal_clicked().connect(sigc::mem_fun(*this,&AppButton::onClicked));
     this->property_margin() = 10;
@@ -22,5 +22,5 @@ AppButton::AppButton(std::shared_ptr<Event> properEvent,Actions action):properEv
 }
 
 void AppButton::onClicked() {
-    this->properEvent->eventPassArg(this->action);
+    this->properEvent.eventPassArg(this->action);
 }

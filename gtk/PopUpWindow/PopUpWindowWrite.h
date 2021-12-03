@@ -9,11 +9,11 @@
 class PopUpWindowWrite : public PopUpWindow{
 
     Gtk::Button *addButton;
-    std::shared_ptr<Event> event;
+    const Event& event;
     Actions windowAction;
     std::vector<std::unique_ptr<Gtk::Entry>> entryVec;
 public:
-    PopUpWindowWrite(std::string windowName,std::string nameEntry, std::string linkEntry, std::shared_ptr<Event> event,
+    PopUpWindowWrite(std::string windowName,std::string nameEntry, std::string linkEntry, const Event& event,
                      Actions action):
     PopUpWindow(windowName), event(event), windowAction(action){
 

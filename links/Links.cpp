@@ -14,16 +14,6 @@ void Links::printStations() {
     std::cout<<"Vector size: "<<StationsVector.size()<<std::endl;
 }
 
-std::string Links::getCurrentName() {
-    if(!StationsVector.empty())return this->StationsIterator->StationName;
-    else return "";
-}
-
-std::string Links::getCurrentLink() {;
-    if(!StationsVector.empty())return this->StationsIterator->StationLink;
-    else return "";
-}
-
 void Links::setNextStation(){
     if(++this->StationsIterator == this->StationsVector.end()){
         this->StationsIterator = this->StationsVector.begin();
@@ -43,14 +33,9 @@ const std::vector<Stations> &Links::getAllStations() {
     return this->StationsVector;
 }
 
-void Links::updateCurrent(FileLine cmd,std::string name, std::string link) {
-    if(cmd == MODIFY){
-        this->StationsIterator->StationName = name;
-        this->StationsIterator->StationLink = link;
-    }
-    else{
-        StationsIterator = this->StationsVector.erase(StationsIterator);
-    }
+void Links::modifyStation(std::string name, std::string link) {
+    this->StationsIterator->StationName = name;
+    this->StationsIterator->StationLink = link;
 
     this->fileOperations.writeFromVector(this->StationsVector);
     printStations();
@@ -69,4 +54,17 @@ void Links::appendStation(std::string name, std::string link) {
 
 const std::vector<std::pair<int, std::string>> &Links::getErrorVector() {
     return this->errorVector;
+}
+
+void Links::deleteStation() {
+    StationsIterator = this->StationsVector.erase(StationsIterator);
+    this->fileOperations.writeFromVector(this->StationsVector);
+    printStations();
+}
+
+const Stations Links::getCurrentStation() {
+    if(!this->StationsVector.empty()){
+        return *this->StationsIterator;
+    }
+    else return Stations("","");
 }
