@@ -9,6 +9,7 @@
 class BluetoothInterface {
 public:
     virtual std::map<std::string, std::string> scan() = 0;
+    virtual void connectToDevice(std::string addr) = 0;
 };
 
 

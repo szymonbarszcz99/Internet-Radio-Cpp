@@ -7,6 +7,8 @@
 class BtWindow : public Gtk::Window{
     Gtk::Label label;
     Gtk::ListViewText list{2};
+    void on_my_row_activated(const Gtk::TreeModel::Path& path, Gtk::TreeViewColumn* column);
+
 public:
     BtWindow(): Gtk::Window(){
         set_title("Bluetooth devices");

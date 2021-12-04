@@ -45,3 +45,7 @@ std::map<std::string, std::string> Bluetooth::scan() {
     return devices;
 
 }
+
+void Bluetooth::connectToDevice(std::string addr) {
+    std::cout<<"I should connect to "<<addr<<" device"<<std::endl;
+}
