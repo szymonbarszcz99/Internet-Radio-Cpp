@@ -4,7 +4,7 @@
 
 class Bluetooth : public BluetoothInterface{
 public:
-    void scan() override;
+    std::map<std::string, std::string> scan() override;
 
 };
 

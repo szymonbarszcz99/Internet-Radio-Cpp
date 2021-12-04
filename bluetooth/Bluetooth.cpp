@@ -1,15 +1,19 @@
+#include <map>
 #include "Bluetooth.h"
 
-void Bluetooth::scan() {
+std::map<std::string, std::string> Bluetooth::scan() {
+    std::map<std::string, std::string> devices;
+
     int sockId, devId;
     std::cout<<"Scanning"<<std::endl;
     devId = hci_get_route(NULL);
     sockId = hci_open_dev(devId);
 
     if(sockId < 0 || devId < 0){
-        std::cout<<"Error opening socket on bluetooth adapter"<<std::endl;
+        std::cout<<""<<std::endl;
         std::cout<<"Exiting..."<<std::endl;
-        return;
+        devices["Error"] = "Error opening socket";
+        return devices;
     }
 
     inquiry_info *ii = NULL;
@@ -17,7 +21,8 @@ void Bluetooth::scan() {
     int numDev = hci_inquiry(devId, 8, 255, NULL, &ii, IREQ_CACHE_FLUSH);
     if(numDev < 0){
         std::cout<<"Inquiry error. Exiting..."<<std::endl;
-        return;
+        devices["Error"] = "Inquiry error";
+        return devices;
     }
     std::cout<<"Found "<<numDev<<" devices. Asking them for names..."<<std::endl;
 
@@ -30,10 +35,13 @@ void Bluetooth::scan() {
                                  name, 0) < 0)
             strcpy(name, "[unknown]");
         printf("%s  %s\n", addr, name);
+        std::string tempName(name);
+        std::string tempAddr(addr);
+        devices[tempName] = tempAddr;
     }
 
     free( ii );
     close( sockId );
-    return;
+    return devices;
 
 }

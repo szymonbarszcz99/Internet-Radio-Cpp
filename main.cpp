@@ -2,8 +2,10 @@
 #include "links/Links.h"
 #include "gst/Player.h"
 #include "gtk/RadioApp.h"
+#include<X11/Xlib.h>
 
 int main() {
+    XInitThreads();
     EventHandler eventHandler;
 
     std::shared_ptr<Links> links = std::make_shared<Links>();

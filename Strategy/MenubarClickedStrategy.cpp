@@ -32,7 +32,11 @@ void MenubarClickedStrategy::onClickedEvent() {
         wsp->showWindow(helpWindow);
     }
     else if(actionToDo == BT_SCAN){
-        Bluetooth bluetooth;
-        bluetooth.scan();
+        auto btWindow = std::make_shared<BtWindow>();
+        wsp->showWindow(btWindow);
+        std::thread btScan([&]{Bluetooth bluetooth;
+                                        btWindow->addList(bluetooth.scan());});
+
+    btScan.detach();
     }
 }

@@ -4,6 +4,9 @@
 #include <gtkmm/textbuffer.h>
 #include "../bluetooth/Bluetooth.h"
 #include "ClickedStrategy.h"
+#include "../gtk/PopUpWindow/BtWindow.h"
+#include <thread>
+#include <mutex>
 
 const std::string tuneInInstruction = "To get station from TuneIn, open developer tools in your browser and navigate to network tab.\nThen play your stream and look for media with link in its name";
 
