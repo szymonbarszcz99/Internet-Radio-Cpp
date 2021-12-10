@@ -1,6 +1,8 @@
 #include "Menubar.h"
 
 Menubar::Menubar(const Event& event): Gtk::MenuBar() {
+    this->property_hexpand() = true;
+
     this->fileMenuButton = std::make_unique<FileMenuButton>(event);
     this->add(*fileMenuButton);
 

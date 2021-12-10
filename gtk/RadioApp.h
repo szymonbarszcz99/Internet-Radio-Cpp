@@ -1,8 +1,9 @@
 #ifndef UNTITLED2_RADIOAPP_H
 #define UNTITLED2_RADIOAPP_H
+#pragma once
+#include <iostream>
 #include <gtkmm.h>
 #include "AppWindow.h"
-#include "../EventHandler.h"
 
 class RadioApp : public Gtk::Application{
 private:

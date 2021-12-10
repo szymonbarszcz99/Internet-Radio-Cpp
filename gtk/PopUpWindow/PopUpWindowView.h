@@ -1,5 +1,6 @@
 #ifndef UNTITLED2_POPUPWINDOWVIEW_H
 #define UNTITLED2_POPUPWINDOWVIEW_H
+#pragma once
 #include "PopUpWindow.h"
 
 class PopUpWindowView : public PopUpWindow{

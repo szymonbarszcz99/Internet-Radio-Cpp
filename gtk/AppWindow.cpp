@@ -1,27 +1,13 @@
 #include "AppWindow.h"
 
-//TODO 1. Delete factory. OK
-//TODO 2. Replace AppLabel with ordinary Label that doesn't connect to event. OK
-//TODO 3. Make button with constructor that connects callbacks. OK
-//TODO 4. Remove that weird,ugly AppWidget interface. It only complicates. OK
-//TODO 5. Builder for AppWindow widgets ? No, now methods have only few lines.
-//TODO 6. Attach ?
-//TODO 7. Make Slider. Just simple Slider. OK
-//TODO 8. Menubar build itself, not delegates it to AppWindow. OK
-//TODO 9. Builder for PopUpWindow1 and 2. OK
-//TODO 10. Divide EventHandler, it's too big. Apply Strategy design pattern  OK
-//TODO 11. Make something with these pop ups "purpose" field. It should be nicer. OK
-//TODO 12. Apply smart pointers OK
-//TODO 13. Get rid of WidgetGrid and replace it with ordinary Grid. OK
-//TODO 14. Add bunch of control if's in Links (Validator) OK
-//TODO 15. Error handling in player
-
-
 AppWindow::AppWindow(const Event& event)
 :Gtk::ApplicationWindow(), eventForWidgets(event) {
     set_title("Internet Radio");
+    //this->maximize();
+    this->set_default_size(320, 240);
 
     this->grid =  std::make_unique<Gtk::Grid>();
+    //this->grid->property_expand() = true;
     add(*(this->grid));
 
     this->createLabel()->createButtons()->createSlider()->createMenubar()->attachWidgets();
@@ -95,8 +81,8 @@ void AppWindow::createPopUpWindowWrite(std::string windowName,std::string nameEn
     Actions windowAction;
     if(windowName == "Add")windowAction = ADD_STATION;
     else windowAction = MODIFY_STATION;
-    this->popUpWindow2 = std::make_unique<PopUpWindowWrite>(windowName,nameEntry,linkEntry,eventForWidgets, windowAction);
-    this->popUpWindow2->show_all();
+    auto popUpWindow2 = std::make_shared<PopUpWindowWrite>(windowName,nameEntry,linkEntry,eventForWidgets, windowAction);
+    this->showWindow(popUpWindow2);
 }
 
 AppWindow::~AppWindow() {
@@ -105,8 +91,14 @@ AppWindow::~AppWindow() {
 }
 
 void AppWindow::throwModal(int lineNumber, std::string text) {
-    Gtk::MessageDialog linkError("Error at line: " + std::to_string(lineNumber) + ":\n" + text + "\n" + "Skipping this line");
-    linkError.run();
+    if(lineNumber > 0){
+        Gtk::MessageDialog linkError("Error at line: " + std::to_string(lineNumber) + ":\n" + text + "\n" + "Skipping this line");
+        linkError.run();
+    }
+    else{
+        Gtk::MessageDialog linkError(text);
+        linkError.run();
+    }
 }
 
 void AppWindow::startupCheckLinks() {
@@ -120,6 +112,10 @@ void AppWindow::updateSongNameLabel(const std::string &songName) {
 void AppWindow::showWindow(std::shared_ptr<Gtk::Window> windowToShow) {
     this->windowToShow = windowToShow;
     this->windowToShow->present();
+}
+
+void AppWindow::closeWindow() {
+    this->windowToShow->close();
 }
 
 

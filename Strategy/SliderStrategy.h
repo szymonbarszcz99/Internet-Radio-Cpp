@@ -1,5 +1,6 @@
 #ifndef UNTITLED2_SLIDERSTRATEGY_H
 #define UNTITLED2_SLIDERSTRATEGY_H
+#pragma once
 #include "ClickedStrategy.h"
 
 class SliderStrategy : public ClickedStrategy{

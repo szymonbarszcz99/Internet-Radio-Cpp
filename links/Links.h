@@ -19,9 +19,9 @@ public:
     void setNextStation() override;
     void setPreviousStation() override;
     const std::vector<Stations>& getAllStations() override;
-    void appendStation(std::string name, std::string link) override;
+    possibleErrors appendStation(std::string name, std::string link) override;
     void deleteStation() override;
-    void modifyStation(std::string name, std::string link) override;
+    possibleErrors modifyStation(std::string name, std::string link) override;
     ~Links() override{
         std::cout<<"Links destructor"<<std::endl;
     }

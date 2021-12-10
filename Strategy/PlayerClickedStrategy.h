@@ -1,5 +1,6 @@
 #ifndef UNTITLED2_PLAYERCLICKEDSTRATEGY_H
 #define UNTITLED2_PLAYERCLICKEDSTRATEGY_H
+#pragma once
 #include "ClickedStrategy.h"
 #include <iostream>
 

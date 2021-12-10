@@ -33,23 +33,37 @@ const std::vector<Stations> &Links::getAllStations() {
     return this->StationsVector;
 }
 
-void Links::modifyStation(std::string name, std::string link) {
-    this->StationsIterator->StationName = name;
-    this->StationsIterator->StationLink = link;
+possibleErrors Links::modifyStation(std::string name, std::string link) {
+    possibleErrors nameError = Validator::validate(name);
+    possibleErrors linkError = Validator::validate(link);
+    if(nameError == VALID && linkError == VALID) {
+        this->StationsIterator->StationName = name;
+        this->StationsIterator->StationLink = link;
 
-    this->fileOperations.writeFromVector(this->StationsVector);
-    printStations();
+        this->fileOperations.writeFromVector(this->StationsVector);
+        printStations();
+        return VALID;
+    }
+    else if(nameError != VALID)return nameError;
+    else return linkError;
 }
 
-void Links::appendStation(std::string name, std::string link) {
+possibleErrors Links::appendStation(std::string name, std::string link) {
+    possibleErrors nameError = Validator::validate(name);
+    possibleErrors linkError = Validator::validate(link);
+    if(nameError == VALID && linkError == VALID){
+        Stations newOne(name,link);
+        this->StationsVector.push_back(newOne);
+        this->StationsIterator = StationsVector.begin();
 
-    Stations newOne(name,link);
-    this->StationsVector.push_back(newOne);
-    this->StationsIterator = StationsVector.begin();
+        this->fileOperations.writeFromVector(this->StationsVector);
 
-    this->fileOperations.writeFromVector(this->StationsVector);
+        printStations();
 
-    printStations();
+        return VALID;
+    }
+    else if(nameError != VALID)return nameError;
+    else return linkError;
 }
 
 const std::vector<std::pair<int, std::string>> &Links::getErrorVector() {

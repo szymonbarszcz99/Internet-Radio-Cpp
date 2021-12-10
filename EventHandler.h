@@ -1,5 +1,6 @@
 #ifndef UNTITLED2_EVENTHANDLER_H
 #define UNTITLED2_EVENTHANDLER_H
+#pragma once
 #include "Strategy/ClickedStrategy.h"
 #include <iostream>
 #include <memory>

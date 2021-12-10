@@ -1,13 +1,18 @@
 #ifndef UNTITLED2_BTWINDOW_H
 #define UNTITLED2_BTWINDOW_H
+#pragma once
 #include <gtkmm/window.h>
 #include <gtkmm/label.h>
 #include <gtkmm/listviewtext.h>
+#include <iostream>
+
+static std::string currentSpeaker;
 
 class BtWindow : public Gtk::Window{
     Gtk::Label label;
     Gtk::ListViewText list{2};
     void on_my_row_activated(const Gtk::TreeModel::Path& path, Gtk::TreeViewColumn* column);
+
 
 public:
     BtWindow(): Gtk::Window(){
@@ -28,6 +33,9 @@ public:
     }
 
     void addList(std::map<std::string, std::string> devices);
+
+    static void disconnect();
+
 };
 
 

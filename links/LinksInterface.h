@@ -2,6 +2,7 @@
 #define UNTITLED2_LINKSINTERFACE_H
 #include <utility>
 #include <vector>
+#include "Validator.h"
 
 struct Stations{
     std::string StationName;
@@ -16,9 +17,9 @@ public:
     virtual void setNextStation()=0;
     virtual void setPreviousStation()=0;
     virtual const std::vector<Stations>& getAllStations() = 0;
-    virtual void appendStation(std::string name, std::string link)=0;
+    virtual possibleErrors appendStation(std::string name, std::string link)=0;
     virtual void deleteStation() = 0;
-    virtual void modifyStation(std::string name, std::string link) = 0;
+    virtual possibleErrors modifyStation(std::string name, std::string link) = 0;
     virtual ~LinksInterface(){}
     virtual const std::vector<std::pair<int,std::string>>& getErrorVector() = 0;
 };

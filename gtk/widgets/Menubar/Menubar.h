@@ -1,5 +1,6 @@
 #ifndef UNTITLED2_MENUBAR_H
 #define UNTITLED2_MENUBAR_H
+#pragma once
 #include <gtkmm/menubar.h>
 #include "FileMenuButton.h"
 #include "HelpMenuButton.h"

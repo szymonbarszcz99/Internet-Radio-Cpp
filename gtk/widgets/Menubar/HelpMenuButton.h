@@ -1,7 +1,9 @@
 #ifndef UNTITLED2_HELPMENUBUTTON_H
 #define UNTITLED2_HELPMENUBUTTON_H
+#pragma once
 #include <gtkmm/menuitem.h>
 #include <gtkmm/menu.h>
+#include <iostream>
 #include "../Events/Event.h"
 
 class HelpMenuButton : public Gtk::MenuItem{

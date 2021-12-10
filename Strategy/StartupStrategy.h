@@ -1,5 +1,6 @@
 #ifndef UNTITLED2_STARTUPSTRATEGY_H
 #define UNTITLED2_STARTUPSTRATEGY_H
+#pragma once
 #include "ClickedStrategy.h"
 
 class StartupStrategy : public ClickedStrategy{

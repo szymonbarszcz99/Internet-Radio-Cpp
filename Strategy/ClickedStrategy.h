@@ -1,10 +1,11 @@
 #ifndef UNTITLED2_CLICKEDSTRATEGY_H
 #define UNTITLED2_CLICKEDSTRATEGY_H
+#pragma once
 #include "../gtk/AppWindowInterface.h"
 #include "../gst/PlayerInterface.h"
 #include "../gtk/widgets/Events/Enums.h"
 #include <iostream>
-#include "memory"
+#include <memory>
 
 class ClickedStrategy {
 

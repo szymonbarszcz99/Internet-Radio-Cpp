@@ -11,7 +11,8 @@ enum Actions{
     VIEW_ALL,
     HELP_TUNEIN,
     HELP_FILE,
-    BT_SCAN
+    BT_SCAN,
+    BT_DISC
 };
 
 #endif //UNTITLED2_ENUMS_H

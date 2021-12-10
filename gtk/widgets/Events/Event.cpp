@@ -26,7 +26,7 @@ template<> void Event::eventPassArg<std::string, std::string, Actions>(std::stri
     std::cout<<"PopUpWindow strategy"<<std::endl;
     this->eventHandler.setStrategy(popUpWindowStrategy);
     this->popUpWindowStrategy->link = newLink;
-    this->popUpWindowStrategy->name = newName;
+    this->popUpWindowStrategy->name = std::move(newName);
     this->popUpWindowStrategy->actionToDo = actions;
     this->eventHandler.executeStrategy();
 }

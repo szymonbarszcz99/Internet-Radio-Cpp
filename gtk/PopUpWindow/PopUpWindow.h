@@ -1,9 +1,12 @@
 #ifndef UNTITLED2_POPUPWINDOW_H
 #define UNTITLED2_POPUPWINDOW_H
+#pragma once
 #include <gtkmm/window.h>
 #include <gtkmm/grid.h>
 #include <gtkmm/label.h>
 #include <iostream>
+#include "../widgets/Events/Event.h"
+
 
 class PopUpWindow : public Gtk::Window{
 protected:

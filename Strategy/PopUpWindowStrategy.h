@@ -1,11 +1,11 @@
 #ifndef UNTITLED2_POPUPWINDOWSTRATEGY_H
 #define UNTITLED2_POPUPWINDOWSTRATEGY_H
 
-
+#pragma once
 #include "ClickedStrategy.h"
 
 class PopUpWindowStrategy : public ClickedStrategy{
-
+    void throwModalOnAppWindow(possibleErrors error) const;
 public:
     Actions actionToDo;
     std::string name;

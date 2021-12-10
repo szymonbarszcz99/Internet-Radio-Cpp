@@ -1,4 +1,3 @@
-#include <iostream>
 #include "RadioApp.h"
 
 RadioApp::RadioApp(const Event& event): Gtk::Application("org.radio") {

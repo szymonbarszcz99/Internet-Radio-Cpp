@@ -1,8 +1,9 @@
 #ifndef UNTITLED2_APPBUTTON_H
 #define UNTITLED2_APPBUTTON_H
+#pragma once
 #include <gtkmm/button.h>
-#include "../Events/Event.h"
 #include <memory>
+#include "../Events/Event.h"
 
 class AppButton : public Gtk::Button{
     const Event& properEvent;

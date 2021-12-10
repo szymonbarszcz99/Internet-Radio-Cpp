@@ -1,16 +1,12 @@
 #ifndef UNTITLED2_EVENT_H
 #define UNTITLED2_EVENT_H
-#include <memory>
+#pragma once
 #include "../../../EventHandler.h"
-#include "../../../Strategy/ClickedStrategy.h"
 #include "../../../Strategy/PlayerClickedStrategy.h"
-#include "Enums.h"
 #include "../../../Strategy/MenubarClickedStrategy.h"
 #include "../../../Strategy/PopUpWindowStrategy.h"
 #include "../../../Strategy/SliderStrategy.h"
 #include "../../../Strategy/StartupStrategy.h"
-#include "../../../Strategy/BusMessageStrategy.h"
-#include "../../../Strategy/ClickedStrategy.h"
 
 class Event {
     EventHandler& eventHandler;

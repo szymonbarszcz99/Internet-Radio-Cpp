@@ -1,5 +1,6 @@
 #ifndef UNTITLED2_BUSMESSAGESTRATEGY_H
 #define UNTITLED2_BUSMESSAGESTRATEGY_H
+#pragma once
 #include "ClickedStrategy.h"
 
 class BusMessageStrategy : public ClickedStrategy{

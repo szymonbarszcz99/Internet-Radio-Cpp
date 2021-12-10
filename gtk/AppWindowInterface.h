@@ -1,5 +1,6 @@
 #ifndef UNTITLED2_APPWINDOWINTERFACE_H
 #define UNTITLED2_APPWINDOWINTERFACE_H
+#pragma once
 #include <string>
 #include "../links/LinksInterface.h"
 #include <memory>
@@ -15,6 +16,7 @@ public:
     virtual ~AppWindowInterface(){};
     virtual void throwModal(int lineNumber, std::string text) = 0;
     virtual void showWindow(std::shared_ptr<Gtk::Window> windowToShow) = 0;
+    virtual void closeWindow() = 0;
 };
 
 

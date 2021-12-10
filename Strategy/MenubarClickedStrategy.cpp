@@ -1,5 +1,4 @@
 #include "MenubarClickedStrategy.h"
-#include "../gtk/PopUpWindow/HelpWindow.h"
 
 void MenubarClickedStrategy::onClickedEvent() {
     std::cout<<"Menubar value: "<<actionToDo<<std::endl;
@@ -7,7 +6,9 @@ void MenubarClickedStrategy::onClickedEvent() {
     auto lsp = this->linksInterface.lock();
     auto psp = this->playerInterface.lock();
 
-    if(actionToDo == ADD_STATION)wsp->createPopUpWindowWrite("Add");
+    if(actionToDo == ADD_STATION){
+        wsp->createPopUpWindowWrite("Add");
+    }
     else if(actionToDo == DELETE_STATION) {
         lsp->deleteStation();
         lsp->setPreviousStation();
@@ -37,6 +38,10 @@ void MenubarClickedStrategy::onClickedEvent() {
         std::thread btScan([&]{Bluetooth bluetooth;
                                         btWindow->addList(bluetooth.scan());});
 
-    btScan.detach();
+        btScan.detach();
+    }
+    else if(actionToDo == BT_DISC){
+        std::thread btDisc ([&]{BtWindow::disconnect();});
+        btDisc.detach();
     }
 }
