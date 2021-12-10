@@ -17,31 +17,40 @@ static gboolean bus_callback(GstBus * bus, GstMessage * message, gpointer data)
 }
 
 Player::Player(const std::string& link, std::unique_ptr<PlayerEvent> playerEvent){
+    std::cout<<"Player constructor"<<std::endl;
+
     this->playerEvent = std::move(playerEvent);
 
     gst_init(nullptr, nullptr);
     GstStateChangeReturn ret;
     GstBus* bus;
+    std::string uri("playbin uri=");
 
-    if(!link.empty()){
-        std::cout<<"Player constructor"<<std::endl;
-        std::string uri("playbin uri=");
+    if(!link.empty()) {
         uri.append(link);
+        this->pipeline = gst_parse_launch(uri.c_str(), &this->error);
+    }
+    else{
+        this->pipeline = gst_parse_launch(uri.c_str(), &this->error);
+    }
 
-        this->pipeline = gst_parse_launch(uri.c_str(),&this->error);
-
-        if(!this->pipeline){
+    if(!this->pipeline){
             std::cout<<"Pipeline creation error\n";
             g_print("%s\n",error->message);
-        }
-        ret = gst_element_set_state(this->pipeline, GST_STATE_PLAYING);
-        if(ret == 0){
-            printf("State change failed\n");
-        }
+    }
+    else{
+        std::cout<<"Pipeline created!"<<std::endl;
         bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
         gst_bus_add_watch (bus, bus_callback,this->playerEvent.get());
-
     }
+
+    if(!link.empty()){
+        ret = gst_element_set_state(this->pipeline, GST_STATE_PLAYING);
+        if(ret == 0) {
+            printf("State change failed\n");
+        }
+    }
+
 }
 
 void Player::changeStation(const std::string& newLink) {
