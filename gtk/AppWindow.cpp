@@ -32,9 +32,9 @@ AppWindow *AppWindow::createButtons() {
 
 AppWindow *AppWindow::createLabel() {
 
-    this->label = std::make_unique<Gtk::Label>("Station Name");
+    this->label = std::make_unique<Gtk::Label>("");
     this->label->property_margin() = 10;
-    this->songNameLabel = std::make_unique<Gtk::Label>("Song name");
+    this->songNameLabel = std::make_unique<Gtk::Label>("");
     this->songNameLabel->property_margin() = 10;
     return this;
 }

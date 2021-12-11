@@ -5,12 +5,14 @@
 #include <gtkmm/label.h>
 #include <gtkmm/listviewtext.h>
 #include <iostream>
+#include <gtkmm/box.h>
 
 static std::string currentSpeaker;
 
 class BtWindow : public Gtk::Window{
     Gtk::Label label;
     Gtk::ListViewText list{2};
+    Gtk::Box box;
     void on_my_row_activated(const Gtk::TreeModel::Path& path, Gtk::TreeViewColumn* column);
 
 

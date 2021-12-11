@@ -10,7 +10,11 @@ void BtWindow::addList(std::map<std::string, std::string> devices) {
     this->list.signal_row_activated().connect(sigc::mem_fun(*this,&BtWindow::on_my_row_activated));
 
     this->remove();
-    this->add(this->list);
+    this->box = Gtk::Box(Gtk::ORIENTATION_VERTICAL);
+    this->box.pack_start(list);
+    this->label.set_text("");
+    this->box.pack_end(this->label);
+    this->add(this->box);
 
     this->property_deletable() = true;
     this->property_resizable() = true;
@@ -27,7 +31,14 @@ void BtWindow::on_my_row_activated(const Gtk::TreeModel::Path& path, Gtk::TreeVi
     while(fgets(stdoutBuff,512,cmd)){
         outString += stdoutBuff;
     }
-    currentSpeaker = selection;
+    if(outString.find("success") != std::string::npos){
+        currentSpeaker = selection;
+        this->close();
+    }
+    else{
+        this->label.set_text("Unable to connect");
+    }
+
     pclose(cmd);
     std::cout<<outString<<std::endl;
 }
