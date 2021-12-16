@@ -1,6 +1,6 @@
 #include "BtWindow.h"
 
-void BtWindow::addList(std::map<std::string, std::string> devices) {
+void BtWindow::addList() {
     int i = 0;
     for(auto it: devices){
         this->list.append(it.first);
@@ -54,4 +54,8 @@ void BtWindow::disconnect() {
         currentSpeaker = "";
         pclose(cmd);
     }
+}
+
+void BtWindow::stopScanning() {
+    this->dispatcher.emit();
 }

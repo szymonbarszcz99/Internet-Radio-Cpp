@@ -1,11 +1,8 @@
 #ifndef UNTITLED2_BTWINDOW_H
 #define UNTITLED2_BTWINDOW_H
 #pragma once
-#include <gtkmm/window.h>
-#include <gtkmm/label.h>
-#include <gtkmm/listviewtext.h>
 #include <iostream>
-#include <gtkmm/box.h>
+#include <gtkmm.h>
 
 static std::string currentSpeaker;
 
@@ -14,9 +11,12 @@ class BtWindow : public Gtk::Window{
     Gtk::ListViewText list{2};
     Gtk::Box box;
     void on_my_row_activated(const Gtk::TreeModel::Path& path, Gtk::TreeViewColumn* column);
-
+    Glib::Dispatcher dispatcher;
 
 public:
+    std::map<std::string, std::string> devices;
+    void stopScanning();
+
     BtWindow(): Gtk::Window(){
         set_title("Bluetooth devices");
         property_deletable() = false;
@@ -30,11 +30,13 @@ public:
         this->list.set_column_title(1,"Address");
         this->list.property_margin() = 10;
 
+        this->dispatcher.connect(sigc::mem_fun(*this,&BtWindow::addList));
+
         add(label);
         this->show_all();
     }
 
-    void addList(std::map<std::string, std::string> devices);
+    void addList();
 
     static void disconnect();
 

@@ -1,9 +1,8 @@
 #include <map>
 #include "Bluetooth.h"
 
-std::map<std::string, std::string> Bluetooth::scan() {
-    std::map<std::string, std::string> devices;
-
+void Bluetooth::scan(std::map<std::string, std::string>& devices) {
+    devices.clear();
     int sockId, devId;
     std::cout<<"Scanning"<<std::endl;
     devId = hci_get_route(NULL);
@@ -13,7 +12,6 @@ std::map<std::string, std::string> Bluetooth::scan() {
         std::cout<<""<<std::endl;
         std::cout<<"Exiting..."<<std::endl;
         devices["Error"] = "Error opening socket";
-        return devices;
     }
 
     inquiry_info *ii = NULL;
@@ -22,7 +20,6 @@ std::map<std::string, std::string> Bluetooth::scan() {
     if(numDev < 0){
         std::cout<<"Inquiry error. Exiting..."<<std::endl;
         devices["Error"] = "Inquiry error";
-        return devices;
     }
     std::cout<<"Found "<<numDev<<" devices. Asking them for names..."<<std::endl;
 
@@ -42,8 +39,6 @@ std::map<std::string, std::string> Bluetooth::scan() {
 
     free( ii );
     close( sockId );
-    return devices;
-
 }
 
 void Bluetooth::connectToDevice(std::string addr) {

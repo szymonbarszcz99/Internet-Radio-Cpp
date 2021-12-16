@@ -35,10 +35,12 @@ void MenubarClickedStrategy::onClickedEvent() {
     else if(actionToDo == BT_SCAN){
         auto btWindow = std::make_shared<BtWindow>();
         wsp->showWindow(btWindow);
-        std::thread btScan([&]{Bluetooth bluetooth;
-                                        btWindow->addList(bluetooth.scan());});
-
-        btScan.detach();
+        std::thread scanningThread([=]{
+            Bluetooth bluetooth;
+            bluetooth.scan(btWindow->devices);
+            btWindow->stopScanning();
+        });
+        scanningThread.detach();
     }
     else if(actionToDo == BT_DISC){
         std::thread btDisc ([&]{BtWindow::disconnect();});
