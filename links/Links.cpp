@@ -76,9 +76,9 @@ void Links::deleteStation() {
     printStations();
 }
 
-const Stations Links::getCurrentStation() {
+Stations Links::getCurrentStation() {
     if(!this->StationsVector.empty()){
         return *this->StationsIterator;
     }
-    else return Stations("","");
+    else return {"",""};
 }

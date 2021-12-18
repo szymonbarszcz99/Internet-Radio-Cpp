@@ -18,6 +18,8 @@ AppButton::AppButton(const Event& properEvent,Actions action):properEvent(proper
         case NEXT:
             this->set_image_from_icon_name("media-seek-forward");
             break;
+        default:
+            break;
     }
 }
 

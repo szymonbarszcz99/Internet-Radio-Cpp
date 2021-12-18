@@ -12,7 +12,7 @@ class BluetoothMenuButton : public Gtk::MenuItem{
     void onValueChosen(Actions actionId);
     std::array<Gtk::MenuItem,2> optionsVector;
 public:
-    BluetoothMenuButton(const Event& eventValueChanged);
+    explicit BluetoothMenuButton(const Event& eventValueChanged);
     ~BluetoothMenuButton() override{
         std::cout<<"BluetoothMenuButton destructor"<<std::endl;
     }

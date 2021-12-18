@@ -10,7 +10,7 @@ class BtWindow : public Gtk::Window{
     Gtk::Label label;
     Gtk::ListViewText list{2};
     Gtk::Box box;
-    void on_my_row_activated(const Gtk::TreeModel::Path& path, Gtk::TreeViewColumn* column);
+    void on_my_row_activated(const Gtk::TreeModel::Path& path, [[maybe_unused]] Gtk::TreeViewColumn* column);
     Glib::Dispatcher dispatcher;
 
 public:
@@ -33,6 +33,7 @@ public:
         this->dispatcher.connect(sigc::mem_fun(*this,&BtWindow::addList));
 
         add(label);
+        this->maximize();
         this->show_all();
     }
 

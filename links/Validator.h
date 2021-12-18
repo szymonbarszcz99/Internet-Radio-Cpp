@@ -5,7 +5,6 @@
 
 enum possibleErrors {
     COMMA,
-    NON_ASCII,
     EMPTY,
     VALID
 };
@@ -15,7 +14,6 @@ class Validator {
 private:
     static void clearWhitespaces(std::string& stringToAnalyze);
     static bool checkCommas(const std::string& stringToAnalyze);
-    static bool checkASCII(const std::string& stringToAnalyze);
     static bool checkContent(const std::string& stringToAnalyze);
 public:
     Validator(){

@@ -12,7 +12,7 @@ class HelpMenuButton : public Gtk::MenuItem{
     void onValueChosen(Actions actionId);
     std::array<Gtk::MenuItem,2> optionsVector;
 public:
-    HelpMenuButton(const Event& eventValueChanged);
+    explicit HelpMenuButton(const Event& eventValueChanged);
     ~HelpMenuButton() override{
         std::cout<<"HelpMenuButton destructor"<<std::endl;
     }

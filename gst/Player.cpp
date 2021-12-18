@@ -1,15 +1,15 @@
 #include "Player.h"
 
-static gboolean bus_callback(GstBus * bus, GstMessage * message, gpointer data)
+static gboolean bus_callback([[maybe_unused]] GstBus * bus, GstMessage * message, gpointer data)
 {
-    PlayerEvent* playerEvent = static_cast<PlayerEvent*>(data);
+    auto playerEvent = static_cast<PlayerEvent*>(data);
     if(GST_MESSAGE_TYPE(message) == GST_MESSAGE_TAG){
         GstTagList* tags = nullptr;
         gst_message_parse_tag (message, &tags);
         printf("%s\n",gst_tag_list_to_string(tags));
         gchar* value;
         if(gst_tag_list_get_string(tags,"title",&value)){
-            playerEvent->playerEventPassArg(std::string(value));
+            playerEvent->playerEventPassArg<const std::string&>((std::string)value);
         }
         gst_tag_list_unref (tags);
     }

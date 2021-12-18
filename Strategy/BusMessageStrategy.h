@@ -6,7 +6,7 @@
 class BusMessageStrategy : public ClickedStrategy{
 public:
     void onClickedEvent() override;
-    ~BusMessageStrategy(){
+    ~BusMessageStrategy() override{
         std::cout<<"BusMessageStrategy destructor"<<std::endl;
     }
     BusMessageStrategy(){

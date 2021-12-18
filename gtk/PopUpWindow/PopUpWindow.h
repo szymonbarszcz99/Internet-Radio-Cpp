@@ -12,18 +12,22 @@ class PopUpWindow : public Gtk::Window{
 protected:
     std::unique_ptr<Gtk::Grid> grid;
     std::vector<std::unique_ptr<Gtk::Widget>> widgetVec;
+    Gtk::ScrolledWindow scrolledWindow;
 public:
     void populate(Gtk::Widget* widget, int left, int top, int width = 1);
-    PopUpWindow(std::string title): Gtk::Window(){
+    explicit PopUpWindow(const std::string& title): Gtk::Window(){
         this->set_title(title);
 
         this->grid = std::make_unique<Gtk::Grid>();
         this->grid->set_column_spacing(10);
         this->grid->set_row_spacing(10);
         this->grid->property_margin()=10;
-        this->add(*grid);
+
+        scrolledWindow.add(*grid);
+        scrolledWindow.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+        this->add(scrolledWindow);
     }
-    virtual ~PopUpWindow(){
+    ~PopUpWindow() override{
         std::cout<<"Pop Up Window destructor"<<std::endl;
     };
 };

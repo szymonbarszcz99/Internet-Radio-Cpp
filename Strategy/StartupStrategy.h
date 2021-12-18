@@ -6,7 +6,7 @@
 class StartupStrategy : public ClickedStrategy{
 public:
     void onClickedEvent() override;
-    ~StartupStrategy() {
+    ~StartupStrategy() override {
         std::cout << "Startup Strategy destructor" << std::endl;
     }
 };

@@ -15,7 +15,7 @@ public:
     inline static std::weak_ptr<PlayerInterface> playerInterface;
     inline static std::weak_ptr<LinksInterface> linksInterface;
     virtual void onClickedEvent() = 0;
-    virtual ~ClickedStrategy(){}
+    virtual ~ClickedStrategy()= default;
 };
 
 

@@ -10,7 +10,6 @@ public:
     void writeFromVector(std::vector<Stations>& StationsVector);
     void readToVector(std::vector<Stations>& StationsVector,
                       std::vector<std::pair<int,std::string>>& errorVector);
-    void throwModal();
 };
 
 

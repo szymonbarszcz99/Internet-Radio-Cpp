@@ -1,13 +1,15 @@
 #ifndef UNTITLED2_POPUPWINDOWVIEW_H
 #define UNTITLED2_POPUPWINDOWVIEW_H
 #pragma once
-#include "PopUpWindow.h"
+#include <utility>
 
+#include "PopUpWindow.h"
+        
 class PopUpWindowView : public PopUpWindow{
     int top = 0;
 public:
-    PopUpWindowView(std::string name): PopUpWindow(name){}
-    void populate(std::string name, std::string link);
+    explicit PopUpWindowView(const std::string& name): PopUpWindow(name){this->maximize();};
+    void populate(const std::string& name, const std::string& link);
     ~PopUpWindowView() override{
         std::cout<<"Pop Up Window View destructor"<<std::endl;
     }

@@ -1,33 +1,35 @@
 #include "Event.h"
 
-template<> void Event::eventPassArg<Actions>(Actions action) const{
+#include <utility>
 
-    if(action >= 0 && action <= 3){
+template<> void Event::eventPassArg<Actions>(Actions arg) const{
+
+    if(arg >= 0 && arg <= 3){
         std::cout<<"Player strategy"<<std::endl;
-        this->playerClickedStrategy->actionToDo = action;
+        this->playerClickedStrategy->actionToDo = arg;
         this->eventHandler.setStrategy(this->playerClickedStrategy);
         this->eventHandler.executeStrategy();
     } else{
         std::cout<<"Menubar strategy"<<std::endl;
-        this->menubarClickedStrategy->actionToDo = action;
+        this->menubarClickedStrategy->actionToDo = arg;
         this->eventHandler.setStrategy(this->menubarClickedStrategy);
         this->eventHandler.executeStrategy();
     }
 }
 
-template<> void Event::eventPassArg<double>(double volumeChanged)const{
+template<> void Event::eventPassArg<double>(double arg)const{
     std::cout<<"Slider strategy"<<std::endl;
-    this->sliderStrategy->volumeValue = volumeChanged;
+    this->sliderStrategy->volumeValue = arg;
     this->eventHandler.setStrategy(this->sliderStrategy);
     this->eventHandler.executeStrategy();
 }
 
-template<> void Event::eventPassArg<std::string, std::string, Actions>(std::string newName, std::string newLink, Actions actions) const{
+template<> void Event::eventPassArg<std::string, std::string, Actions>(std::string newName, std::string newLink, Actions arg) const{
     std::cout<<"PopUpWindow strategy"<<std::endl;
     this->eventHandler.setStrategy(popUpWindowStrategy);
-    this->popUpWindowStrategy->link = newLink;
+    this->popUpWindowStrategy->link = std::move(newLink);
     this->popUpWindowStrategy->name = std::move(newName);
-    this->popUpWindowStrategy->actionToDo = actions;
+    this->popUpWindowStrategy->actionToDo = arg;
     this->eventHandler.executeStrategy();
 }
 

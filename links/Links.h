@@ -15,7 +15,7 @@ class Links : public LinksInterface{
 public:
     Links();
     void printStations() override;
-    const Stations getCurrentStation() override;
+    Stations getCurrentStation() override;
     void setNextStation() override;
     void setPreviousStation() override;
     const std::vector<Stations>& getAllStations() override;
@@ -25,7 +25,7 @@ public:
     ~Links() override{
         std::cout<<"Links destructor"<<std::endl;
     }
-    const std::vector<std::pair<int,std::string>>& getErrorVector();
+    const std::vector<std::pair<int,std::string>>& getErrorVector() override;
 };
 
 

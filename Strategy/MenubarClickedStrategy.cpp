@@ -2,12 +2,12 @@
 
 void MenubarClickedStrategy::onClickedEvent() {
     std::cout<<"Menubar value: "<<actionToDo<<std::endl;
-    auto wsp = this->appWindowInterface.lock();
-    auto lsp = this->linksInterface.lock();
-    auto psp = this->playerInterface.lock();
+    auto wsp = MenubarClickedStrategy::appWindowInterface.lock();
+    auto lsp = MenubarClickedStrategy::linksInterface.lock();
+    auto psp = MenubarClickedStrategy::playerInterface.lock();
 
     if(actionToDo == ADD_STATION){
-        wsp->createPopUpWindowWrite("Add");
+        wsp->createPopUpWindowWrite("Add","","");
     }
     else if(actionToDo == DELETE_STATION) {
         lsp->deleteStation();

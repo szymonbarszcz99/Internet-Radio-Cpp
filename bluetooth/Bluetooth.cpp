@@ -5,7 +5,7 @@ void Bluetooth::scan(std::map<std::string, std::string>& devices) {
     devices.clear();
     int sockId, devId;
     std::cout<<"Scanning"<<std::endl;
-    devId = hci_get_route(NULL);
+    devId = hci_get_route(nullptr);
     sockId = hci_open_dev(devId);
 
     if(sockId < 0 || devId < 0){
@@ -14,9 +14,9 @@ void Bluetooth::scan(std::map<std::string, std::string>& devices) {
         devices["Error"] = "Error opening socket";
     }
 
-    inquiry_info *ii = NULL;
+    inquiry_info *ii = nullptr;
     ii = (inquiry_info*)malloc(255 * sizeof(inquiry_info));
-    int numDev = hci_inquiry(devId, 8, 255, NULL, &ii, IREQ_CACHE_FLUSH);
+    int numDev = hci_inquiry(devId, 8, 255, nullptr, &ii, IREQ_CACHE_FLUSH);
     if(numDev < 0){
         std::cout<<"Inquiry error. Exiting..."<<std::endl;
         devices["Error"] = "Inquiry error";
@@ -41,6 +41,3 @@ void Bluetooth::scan(std::map<std::string, std::string>& devices) {
     close( sockId );
 }
 
-void Bluetooth::connectToDevice(std::string addr) {
-    std::cout<<"I should connect to "<<addr<<" device"<<std::endl;
-}

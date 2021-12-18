@@ -17,9 +17,9 @@ class Event {
     std::shared_ptr<StartupStrategy> startupStrategy;
 
 public:
-    Event(EventHandler& eventHandler);
+    explicit Event(EventHandler& eventHandler);
 
-    template<typename ... name> void eventPassArg(name ...arg) const {
+    template<typename ... name> void eventPassArg([[maybe_unused]] name ...arg) const {
         std::cout<<"Unknown value type"<<std::endl;
     }
 

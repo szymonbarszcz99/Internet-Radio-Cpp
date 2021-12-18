@@ -21,7 +21,7 @@ class AppWindow : public AppWindowInterface, public Gtk::ApplicationWindow{
     std::shared_ptr<Gtk::Window> windowToShow;
 
 public:
-    AppWindow(const Event& event);
+    explicit AppWindow(const Event& event);
     void updateSongNameLabel(const std::string& songName) override;
     void updateLabel(const std::string& text) override;
     AppWindow* createButtons();
@@ -30,7 +30,7 @@ public:
     AppWindow* createSlider();
     AppWindow* createMenubar();
     void createPopUpWindowView(const std::vector<Stations>& stations) override;
-    void createPopUpWindowWrite(std::string windowName,std::string nameEntry = "", std::string linkEntry = "") override;
+    void createPopUpWindowWrite(std::string windowName,std::string nameEntry, std::string linkEntry) override;
     ~AppWindow() override;
     void throwModal(int lineNumber,std::string text) override;
     void startupCheckLinks();

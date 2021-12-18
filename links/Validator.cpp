@@ -1,11 +1,5 @@
 #include "Validator.h"
 
-bool Validator::checkASCII(const std::string &stringToAnalyze) {
-    return !std::any_of(stringToAnalyze.begin(), stringToAnalyze.end(), [](char c) {
-        return static_cast<unsigned char>(c) > 127;
-    });
-}
-
 bool Validator::checkCommas(const std::string &stringToAnalyze) {
         std::size_t commaPos = stringToAnalyze.find(',');
         if(commaPos == std::string::npos){
@@ -31,8 +25,7 @@ bool Validator::checkContent(const std::string &stringToAnalyze) {
 }
 
 possibleErrors Validator::validate(std::string &stringToAnalyze) {
-    if(!checkASCII(stringToAnalyze))return NON_ASCII;
-    else if(!checkCommas(stringToAnalyze)) return COMMA;
+    if(!checkCommas(stringToAnalyze)) return COMMA;
     else if(!checkContent(stringToAnalyze)) return EMPTY;
     else{
         clearWhitespaces(stringToAnalyze);

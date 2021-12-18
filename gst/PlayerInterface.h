@@ -8,7 +8,7 @@ public:
     virtual void pause()=0;
     virtual void play()=0;
     virtual void setVolume(double volume)=0;
-    virtual ~PlayerInterface(){};
+    virtual ~PlayerInterface()= default;
 };
 
 #endif //UNTITLED2_PLAYERINTERFACE_H

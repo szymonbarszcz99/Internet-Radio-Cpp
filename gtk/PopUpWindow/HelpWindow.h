@@ -24,7 +24,7 @@ public:
         textView.set_editable(false);
 
         this->add(scrolledWindow);
-
+        this->maximize();
         show_all();
     }
 

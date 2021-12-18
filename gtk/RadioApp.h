@@ -7,7 +7,7 @@
 
 class RadioApp : public Gtk::Application{
 private:
-    RadioApp(const Event& event);
+    explicit RadioApp(const Event& event);
     void on_activate() override;
     void on_hide_window();
     std::shared_ptr<AppWindow> appWindow;

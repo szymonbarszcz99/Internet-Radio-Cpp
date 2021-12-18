@@ -24,17 +24,16 @@ void PopUpWindowStrategy::onClickedEvent() {
     }
 }
 
-void PopUpWindowStrategy::throwModalOnAppWindow(possibleErrors error) const{
+void PopUpWindowStrategy::throwModalOnAppWindow(possibleErrors error) {
     auto wsp = appWindowInterface.lock();
     switch (error) {
         case COMMA:
             wsp->throwModal(-1, "Text should not contain commas");
             break;
-        case NON_ASCII:
-            wsp->throwModal(-1, "Text should not contain\nnon ASCII characters");
-            break;
         case EMPTY:
             wsp->throwModal(-1, "Text should not be empty");
+            break;
+        default:
             break;
     }
 }

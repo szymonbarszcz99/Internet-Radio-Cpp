@@ -5,10 +5,10 @@
 #include <iostream>
 
 class PlayerClickedStrategy : public ClickedStrategy{
-    void playEventClicked();
-    void pauseEventClicked();
-    void nextEventClicked();
-    void previousEventClicked();
+    static void playEventClicked() ;
+    static void pauseEventClicked() ;
+    static void nextEventClicked() ;
+    static void previousEventClicked() ;
 
 public:
 

@@ -35,24 +35,24 @@ void FileOperations::readToVector(std::vector<Stations> &StationsVector,
             }
             else{
                 switch(nameError){
-                    case NON_ASCII:
-                        errorVector.emplace_back(std::make_pair(i, "File cannot contain nonASCII cahracters"));
-                        break;
                     case COMMA:
                         errorVector.emplace_back(std::make_pair(i, "Commas in text may cause wrong parsing"));
                         break;
                     case EMPTY:
                         errorVector.emplace_back(std::make_pair(i, "Text entry should not be empty"));
+                        break;
+                    default:
+                        break;
                 }
                 switch(linkError){
-                    case NON_ASCII:
-                        errorVector.emplace_back(std::make_pair(i, "File cannot contain nonASCII cahracters"));
-                        break;
                     case COMMA:
                         errorVector.emplace_back(std::make_pair(i, "Commas in text may cause wrong parsing"));
                         break;
                     case EMPTY:
                         errorVector.emplace_back(std::make_pair(i, "Text entry should not be empty"));
+                        break;
+                    default:
+                        break;
                 }
             }
             i++;

@@ -2,7 +2,7 @@
 
 void BtWindow::addList() {
     int i = 0;
-    for(auto it: devices){
+    for(const auto& it: devices){
         this->list.append(it.first);
         this->list.set_text(i,1,it.second);
         i++;
@@ -21,7 +21,7 @@ void BtWindow::addList() {
     this->show_all();
 }
 
-void BtWindow::on_my_row_activated(const Gtk::TreeModel::Path& path, Gtk::TreeViewColumn* column) {
+void BtWindow::on_my_row_activated(const Gtk::TreeModel::Path& path, [[maybe_unused]] Gtk::TreeViewColumn* column) {
     auto selection = this->list.get_text(this->list.get_selected()[0],1);
     std::cout<<"Addr: "<<selection<<std::endl;
 

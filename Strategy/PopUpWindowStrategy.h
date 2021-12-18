@@ -5,7 +5,7 @@
 #include "ClickedStrategy.h"
 
 class PopUpWindowStrategy : public ClickedStrategy{
-    void throwModalOnAppWindow(possibleErrors error) const;
+    static void throwModalOnAppWindow(possibleErrors error) ;
 public:
     Actions actionToDo;
     std::string name;

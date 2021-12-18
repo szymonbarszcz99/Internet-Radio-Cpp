@@ -13,11 +13,11 @@ class Player : public PlayerInterface{
     std::unique_ptr<PlayerEvent> playerEvent;
 public:
     Player(const std::string& link,std::unique_ptr<PlayerEvent> playerEvent);
-    void changeStation(const std::string& newLink);
-    void pause();
-    void play();
+    void changeStation(const std::string& newLink) override;
+    void pause() override;
+    void play() override;
     void setVolume(double volume) override;
-    ~Player(){
+    ~Player() override{
         std::cout<<"Player destructor"<<std::endl;
         if(this->pipeline != nullptr) {
             gst_element_set_state(this->pipeline,GST_STATE_NULL);

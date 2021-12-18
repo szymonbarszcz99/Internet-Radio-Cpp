@@ -7,13 +7,13 @@ class PlayerEvent {
     std::shared_ptr<BusMessageStrategy> busMessageStrategy;
     EventHandler& eventHandler;
 public:
-    PlayerEvent(EventHandler& eventHandler):
+    explicit PlayerEvent(EventHandler& eventHandler):
     eventHandler(eventHandler){
         this->busMessageStrategy = std::make_shared<BusMessageStrategy>();
     }
 
-    template<typename ... name> void playerEventPassArg(name ...arg) {
-        std::cout<<"Unknown value type"<<std::endl;
+    template<typename  name> void playerEventPassArg([[maybe_unused]] name arg) {
+        std::cout<<"Unknown value type"<<typeid(arg).name()<<std::endl;
     }
 
 };

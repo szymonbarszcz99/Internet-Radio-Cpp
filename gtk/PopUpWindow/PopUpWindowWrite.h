@@ -4,6 +4,7 @@
 #include <gtkmm/entry.h>
 #include <gtkmm/button.h>
 #include <iostream>
+#include <utility>
 #include "PopUpWindow.h"
 
 class PopUpWindowWrite : public PopUpWindow{
@@ -13,7 +14,7 @@ class PopUpWindowWrite : public PopUpWindow{
     Actions windowAction;
     std::array<std::unique_ptr<Gtk::Entry>,2> entryArr;
 public:
-    PopUpWindowWrite(std::string windowName,std::string nameEntry, std::string linkEntry, const Event& event,
+    PopUpWindowWrite(const std::string& windowName,const std::string& nameEntry, const std::string& linkEntry, const Event& event,
                      Actions action):
     PopUpWindow(windowName), event(event), windowAction(action){
 
@@ -27,6 +28,7 @@ public:
         else this->addButton->set_label("Add");
         this->addButton->signal_clicked().connect(sigc::mem_fun(*this, &PopUpWindowWrite::onAddClicked));
 
+        this->maximize();
         populate();
     };
     void populate();

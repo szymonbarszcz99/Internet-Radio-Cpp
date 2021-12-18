@@ -3,8 +3,7 @@
 AppWindow::AppWindow(const Event& event)
 :Gtk::ApplicationWindow(), eventForWidgets(event) {
     set_title("Internet Radio");
-    //this->maximize();
-    this->set_default_size(320, 240);
+    this->maximize();
 
     this->grid =  std::make_unique<Gtk::Grid>();
     //this->grid->property_expand() = true;
@@ -109,9 +108,9 @@ void AppWindow::updateSongNameLabel(const std::string &songName) {
     this->songNameLabel->set_label(songName);
 }
 
-void AppWindow::showWindow(std::shared_ptr<Gtk::Window> windowToShow) {
-    this->windowToShow = windowToShow;
-    this->windowToShow->present();
+void AppWindow::showWindow(std::shared_ptr<Gtk::Window> windowToShowArg) {
+    windowToShow = windowToShowArg;
+    windowToShow->present();
 }
 
 void AppWindow::closeWindow() {
